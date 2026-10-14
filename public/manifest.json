@@ -1,0 +1,17 @@
+{
+  "name": "DORPON (দর্পণ) — Cinematic Wedding Studio",
+  "short_name": "DORPON",
+  "description": "Independent cinematic wedding filmmaking, photography, and visual storytelling brand based in Bangladesh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

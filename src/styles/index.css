@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #101010;
+  --canvas-elevated: #161616;
+  --text-primary: #F3F0E9;
+  --text-muted: #A5A29C;
+  --text-dim: #6E6B65;
+  --champagne: #C6A66B;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: #101010;
+    color: #F3F0E9;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: #101010;
+    overflow-x: hidden;
+  }
+
+  /* Fluid typography utilities */
+  h1, .font-editorial-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  h2, .font-editorial-h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  h3, .font-editorial-h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Subtle Film Texture / Letterbox Bars */
+.cinema-aspect {
+  aspect-ratio: 2.39 / 1;
+}
+
+.portrait-aspect {
+  aspect-ratio: 4 / 5;
+}
+
+.classic-aspect {
+  aspect-ratio: 16 / 9;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101010;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A66B;
+}
+
+/* Accessible focus visible */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #C6A66B;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
