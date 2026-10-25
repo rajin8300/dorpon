@@ -50,7 +50,7 @@ export interface GalleryManifest {
 const gallery = raw as GalleryManifest
 
 /**
- * Vite exposes the deploy base path here ('/' in dev, '/dorpon-website/' on
+ * Vite exposes the deploy base path here ('/' in dev, '/dorpon/' on
  * GitHub Pages). Prefixing the generated `/photos/...` paths keeps every image
  * working no matter which sub-path the site is hosted under.
  */
