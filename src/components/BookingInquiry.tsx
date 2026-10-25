@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageSquare, Mail, Phone, ExternalLink, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import { buildWhatsAppLink, buildMailtoLink } from '../utils/whatsapp';
@@ -22,6 +22,29 @@ export const BookingInquiry: React.FC<BookingInquiryProps> = ({
     notes: initialPackage ? `Inquiring about package: ${initialPackage}` : '',
   });
 
+  // Keep form in sync when user clicks packages, calculator prefill, or service inquiry
+  useEffect(() => {
+    if (initialService) {
+      setFormData((prev) => ({
+        ...prev,
+        services: prev.services.includes(initialService)
+          ? prev.services
+          : [...prev.services, initialService],
+      }));
+    }
+  }, [initialService]);
+
+  useEffect(() => {
+    if (initialPackage) {
+      setFormData((prev) => ({
+        ...prev,
+        notes: prev.notes
+          ? `${prev.notes}\n\nSelected Package / Scope:\n${initialPackage}`
+          : `Inquiring about package: ${initialPackage}`,
+      }));
+    }
+  }, [initialPackage]);
+
   const [validationError, setValidationError] = useState<string | null>(null);
   const [dispatchStatus, setDispatchStatus] = useState<{
     type: 'whatsapp' | 'email';
@@ -43,11 +66,12 @@ export const BookingInquiry: React.FC<BookingInquiryProps> = ({
   const serviceOptions = [
     'Wedding Cinematography',
     'Wedding Photography',
-    'Holud & Event Films',
+    'Gaye Holud & Event Films',
     'Cinematic Wedding Trailers',
     'Bridal Portrait Films',
     'Outdoor Portrait Cinematography',
-    'Commercial Brand Production',
+    'Brand & Commercial Video Production',
+    'Select Cultural & Private Event Coverage',
   ];
 
   const handleServiceToggle = (service: string) => {
@@ -305,7 +329,7 @@ Sent from dorponcinema.com inquiry portal`;
                   If your browser blocked the popup, please{' '}
                   <a
                     href={dispatchStatus.url}
-                    target="_blank"
+                    target={dispatchStatus.type === 'email' ? '_self' : '_blank'}
                     rel="noopener noreferrer"
                     className="text-[#C6A66B] underline font-medium"
                   >
@@ -316,7 +340,13 @@ Sent from dorponcinema.com inquiry portal`;
               </div>
             )}
 
-            <form className="space-y-6">
+            <form
+              className="space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleWhatsAppSubmit(e);
+              }}
+            >
               {/* Name & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>

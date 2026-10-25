@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({
         />
         {/* Soft Vignette and Cinematic Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#101010] via-[#101010]/50 to-[#101010]/80" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#101010]/40 to-[#101010]/90" />
+        <div className="absolute inset-0 [background:radial-gradient(circle,transparent_20%,rgba(16,16,16,0.4)_60%,rgba(16,16,16,0.9)_100%)]" />
       </div>
 
       {/* Decorative Subtle Film Letterbox Border Overlay */}

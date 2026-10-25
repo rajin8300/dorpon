@@ -74,15 +74,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#101010]/90 backdrop-blur-md border-b border-[#F3F0E9]/10 py-3.5 shadow-lg shadow-black/20'
+        isScrolled || mobileMenuOpen
+          ? 'bg-[#101010]/95 backdrop-blur-md border-b border-[#F3F0E9]/10 py-3.5 shadow-lg shadow-black/20'
           : 'bg-transparent py-5 lg:py-7'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
         {/* Brand Wordmark */}
         <a
-          href="#"
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            setMobileMenuOpen(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           className="group flex items-baseline gap-2.5 focus:outline-none"
           aria-label="DORPON Home"
         >

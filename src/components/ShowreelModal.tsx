@@ -91,7 +91,7 @@ export const ShowreelModal: React.FC<ShowreelModalProps> = ({
               <img
                 src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80"
                 alt="DORPON Showreel Poster"
-                className="w-full h-full object-cover brightness-[0.55] transition-transform duration-700 group-hover:scale-102"
+                className="w-full h-full object-cover brightness-[0.55] transition-transform duration-700 group-hover:scale-[1.02]"
               />
 
               <button

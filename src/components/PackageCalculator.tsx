@@ -82,14 +82,17 @@ export const PackageCalculator: React.FC<PackageCalculatorProps> = ({
     return 'Harmonized Film & Fine-Art Stills';
   };
 
+  const getAddOnNames = () =>
+    addOns.map((id) => addOnOptions.find((o) => o.id === id)?.name || id).join(', ');
+
   const generatedSummary = `${getDaysLabel()} | ${getMediumLabel()}${
-    addOns.length > 0 ? ` | Add-ons: ${addOns.join(', ')}` : ''
+    addOns.length > 0 ? ` | Add-ons: ${getAddOnNames()}` : ''
   } (Est. starting from ৳${estimatedTotal.toLocaleString()})`;
 
   const whatsappMessage = `Hello DORPON, I configured a custom coverage framework on your website:
 • Schedule: ${getDaysLabel()}
 • Coverage: ${getMediumLabel()}
-• Add-ons: ${addOns.length > 0 ? addOns.join(', ') : 'None'}
+• Add-ons: ${addOns.length > 0 ? getAddOnNames() : 'None'}
 • Estimated Starting: ৳${estimatedTotal.toLocaleString()}
 
 Could we check availability and discuss a formal proposal for our dates?`;

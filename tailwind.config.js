@@ -30,8 +30,8 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Playfair Display', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', '"Hind Siliguri"', 'Playfair Display', 'serif'],
+        sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'Inter', 'sans-serif'],
         bengali: ['"Hind Siliguri"', '"Noto Serif Bengali"', 'serif'],
       },
       letterSpacing: {

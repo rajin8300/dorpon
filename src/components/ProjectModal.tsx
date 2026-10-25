@@ -24,10 +24,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const modalContainerRef = React.useRef<HTMLDivElement>(null);
 
-  // Reset video state when project changes
+  // Helper to safely enable autoplay without parameter conflicts
+  const getAutoplayEmbedUrl = (url?: string) => {
+    if (!url) return '';
+    if (url.includes('autoplay=0')) {
+      return url.replace('autoplay=0', 'autoplay=1');
+    }
+    return url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
+  };
+
+  // Reset video state and scroll position when project changes
   useEffect(() => {
     setIsPlayingVideo(false);
+    if (modalContainerRef.current) {
+      modalContainerRef.current.scrollTop = 0;
+    }
   }, [project?.id]);
 
   // Handle ESC key and scroll locking
@@ -77,7 +90,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           if (e.target === e.currentTarget) onClose();
         }}
       >
-        <div className="relative w-full max-w-5xl bg-[#141414] border border-[#F3F0E9]/10 shadow-2xl text-[#F3F0E9] min-h-screen sm:min-h-0 sm:max-h-[92vh] sm:overflow-y-auto sm:my-auto my-0">
+        <div
+          ref={modalContainerRef}
+          className="relative w-full max-w-5xl bg-[#141414] border border-[#F3F0E9]/10 shadow-2xl text-[#F3F0E9] min-h-screen sm:min-h-0 sm:max-h-[92vh] sm:overflow-y-auto sm:my-auto my-0"
+        >
           {/* Top Sticky Header */}
           <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-[#141414]/95 backdrop-blur-md border-b border-[#F3F0E9]/10">
             <div className="flex items-center gap-3">
@@ -100,7 +116,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           <div className="relative bg-[#0A0A0A] aspect-video w-full overflow-hidden">
             {project.videoEmbedUrl && isPlayingVideo ? (
               <iframe
-                src={`${project.videoEmbedUrl}&autoplay=1`}
+                src={getAutoplayEmbedUrl(project.videoEmbedUrl)}
                 title={`Cinematic film: ${project.title}`}
                 className="w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -111,7 +127,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <img
                   src={project.videoPoster || project.coverImage}
                   alt={project.title}
-                  className="w-full h-full object-cover object-center brightness-90 transition-transform duration-700 group-hover:scale-102"
+                  className="w-full h-full object-cover object-center brightness-90 transition-transform duration-700 group-hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-black/30" />
 
