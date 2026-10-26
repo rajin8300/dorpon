@@ -284,12 +284,13 @@
         /* Brightness lowered (neutral darkening only — no colour tint)
            so the hero text on top stands out and stays easy to read,
            while the photos keep their original colours and hues. */
-        filter: brightness(0.58);
+        filter: brightness(0.50);
       }
       .hero-slides img.active { opacity: 1; }
       .hero-content { position: relative; width: 100%; }
       .hero-eyebrow {
         display: inline-flex; align-items: center; gap: 0.6rem;
+        margin-top: 1.5rem;
         border: 1px solid rgba(251, 246, 238, 0.35);
         border-radius: 999px;
         padding: 0.45rem 1rem;
@@ -308,7 +309,7 @@
         filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
       }
       .hero h1 {
-        margin-top: 1.5rem;
+        margin-top: 0;
         max-width: 46rem;
         font-size: 2.6rem; font-weight: 450;
         line-height: 1.05; letter-spacing: -0.02em;
@@ -617,8 +618,8 @@
         <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
 
         <div class="wrap hero-content" style="padding-top:8rem; padding-bottom:5rem;">
-          <p class="hero-eyebrow"><img class="hero-pin" src="assets/location-pin.png" alt="" width="256" height="256" aria-hidden="true" /> Photography &amp; Videography · Rajbari</p>
           <h1 class="font-display">Every Frame Tells a <span class="grad-word">Story.</span></h1>
+          <p class="hero-eyebrow"><img class="hero-pin" src="assets/location-pin.png" alt="" width="256" height="256" aria-hidden="true" /> Photography &amp; Videography · Rajbari</p>
           <p class="hero-sub">Capturing meaningful moments through photography and cinematic storytelling.</p>
           <div class="hero-actions">
             <a class="btn btn-gradient" href="#portfolio">Explore Our Work</a>
@@ -878,11 +879,21 @@
 
         function isWide(p) { return p.w > p.h; }
 
+        /* Photos whose logo sits at the top left would sit exactly under
+           the header logo in the hero, so they are never used as hero
+           slides. They stay in the portfolio and lightbox. */
+        var TOP_LEFT_LOGOS = ["fb-img-1792035302547", "fb-img-1792035324417", "fb-img-1792035408425", "fb-img-1792035421088"];
+        function isTopLeftLogo(p) { return TOP_LEFT_LOGOS.indexOf(p.slug) !== -1; }
+
         function buildHero() {
           var wantWide = desktopMq.matches;
           heroSet = [];
-          PHOTOS.forEach(function (p, i) { if (isWide(p) === wantWide) heroSet.push(i); });
-          if (!heroSet.length) heroSet = PHOTOS.map(function (_, i) { return i; });
+          PHOTOS.forEach(function (p, i) { if (!isTopLeftLogo(p) && isWide(p) === wantWide) heroSet.push(i); });
+          if (!heroSet.length) {
+            /* Both wide photos have top-left logos, so on desktop fall back
+               to the remaining photos instead of re-adding the excluded ones. */
+            PHOTOS.forEach(function (p, i) { if (!isTopLeftLogo(p)) heroSet.push(i); });
+          }
 
           slidesWrap.innerHTML = "";
           dotsWrap.innerHTML = "";
