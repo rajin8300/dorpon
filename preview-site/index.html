@@ -313,6 +313,12 @@
         text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.45);
       }
       @media (min-width: 640px) { .hero h1 { font-size: 3.9rem; } }
+      /* Mobile only: title a bit smaller and moved up, so the model's
+         face stays visible. Desktop and tablet sizes are unchanged. */
+      @media (max-width: 639px) {
+        .hero h1 { font-size: 2.2rem; }
+        .hero-content { padding-bottom: 7rem !important; }
+      }
       @media (min-width: 1024px) { .hero h1 { font-size: 4.6rem; } }
       .hero h1 .grad-word {
         font-style: italic;
