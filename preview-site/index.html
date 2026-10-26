@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="দর্পণ – Dorpon is a photography and videography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling."
+    />
+    <link rel="icon" href="data:," />
+    <title>দর্পণ – Dorpon | Photography &amp; Videography in Rajbari</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cream: #fbf6ee;
+        --cream-deep: #f4ecdf;
+        --paper: #fffdf8;
+        --ink: #221a14;
+        --ink-soft: #4c4338;
+        --muted: #8a7d6c;
+        --line: #e7dcc9;
+        --marigold: #f59e0b;
+        --orange: #ea580c;
+        --rose: #e11d48;
+        --rose-soft: #ffe4e6;
+        --violet: #7c3aed;
+        --violet-soft: #ede9fe;
+        --teal: #0d9488;
+        --teal-soft: #ccfbf1;
+        --blush-bg: #fff3f0;
+        --lilac-bg: #f4f0ff;
+        --mint-bg: #effaf6;
+        --header-bg: rgba(251, 246, 238, 0.88);
+        --card-bg: #fffdf8;
+        --shadow-color: 225, 29, 72;
+        --grad: linear-gradient(92deg, #f59e0b, #e11d48 52%, #7c3aed);
+        --grad-soft: linear-gradient(92deg, #f59e0b, #e11d48, #7c3aed, #0d9488);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --cream: #17120e;
+          --cream-deep: #1f1813;
+          --paper: #201913;
+          --ink: #f5ecdf;
+          --ink-soft: #d8cbb8;
+          --muted: #a2937f;
+          --line: #3a2f24;
+          --rose-soft: #3d1520;
+          --violet-soft: #2a1d47;
+          --teal-soft: #0d2f2a;
+          --blush-bg: #221310;
+          --lilac-bg: #1b1526;
+          --mint-bg: #101d18;
+          --header-bg: rgba(23, 18, 14, 0.88);
+          --card-bg: #201913;
+        }
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5.5rem;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Hind Siliguri", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Noto Sans Bengali", sans-serif;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+      }
+
+      h1, h2, h3, p, figure { margin: 0; }
+      h1, h2 { text-wrap: balance; }
+      p { text-wrap: pretty; }
+      img, iframe { max-width: 100%; }
+      a { color: inherit; }
+      button { font: inherit; }
+
+      ::selection { background: var(--rose); color: #fff; }
+
+      :focus-visible {
+        outline: 2px solid var(--rose);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .font-display {
+        font-family: "Fraunces", "Hind Siliguri", Georgia, serif;
+      }
+
+      .label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .gradient-text {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 1400px;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+      }
+      @media (min-width: 640px) { .wrap { padding-inline: 2rem; } }
+      @media (min-width: 1024px) { .wrap { padding-inline: 3rem; } }
+
+      section { padding-block: 5rem; }
+      @media (min-width: 640px) { section { padding-block: 7rem; } }
+      @media (min-width: 1024px) { section { padding-block: 9rem; } }
+
+      /* ---------- reveal on scroll ----------
+         Content is visible by default; the entrance animation only plays
+         when a block scrolls into view, so nothing is ever hidden if
+         JavaScript or the observer does not run. */
+      .reveal.is-visible { animation: rise 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      /* ---------- header ---------- */
+      header.site-header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 50;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+      }
+      header.site-header.scrolled {
+        background: var(--header-bg);
+        border-bottom-color: var(--line);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4rem;
+      }
+      @media (min-width: 768px) { .header-inner { height: 5rem; } }
+
+      .logo-stack { position: relative; display: block; height: 2.25rem; aspect-ratio: 640 / 367; }
+      @media (min-width: 640px) { .logo-stack { height: 2.75rem; } }
+      .logo-stack img {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: contain; transition: opacity 0.5s ease;
+      }
+      .logo-stack .logo-dark { opacity: 0; }
+      header.site-header.scrolled .logo-stack .logo-light { opacity: 0; }
+      header.site-header.scrolled .logo-stack .logo-dark { opacity: 1; }
+      @media (prefers-color-scheme: dark) {
+        header.site-header.scrolled .logo-stack .logo-light { opacity: 1; }
+        header.site-header.scrolled .logo-stack .logo-dark { opacity: 0; }
+      }
+
+      nav.primary { display: none; align-items: center; gap: 2.25rem; }
+      @media (min-width: 768px) { nav.primary { display: flex; } }
+      nav.primary a {
+        position: relative;
+        padding-block: 0.25rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: rgba(251, 246, 238, 0.88);
+        transition: color 0.3s ease;
+      }
+      nav.primary a::after {
+        content: "";
+        position: absolute; left: 0; bottom: -2px;
+        height: 2px; width: 0;
+        background: var(--grad);
+        border-radius: 2px;
+        transition: width 0.35s ease;
+      }
+      nav.primary a:hover::after { width: 100%; }
+      header.site-header.scrolled nav.primary a { color: var(--ink-soft); }
+      header.site-header.scrolled nav.primary a:hover { color: var(--ink); }
+
+      .header-cta {
+        display: none;
+        align-items: center;
+        border: 1px solid rgba(251, 246, 238, 0.5);
+        border-radius: 999px;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.72rem; font-weight: 600;
+        letter-spacing: 0.24em; text-transform: uppercase;
+        text-decoration: none; color: #fbf6ee;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+      @media (min-width: 768px) { .header-cta { display: inline-flex; } }
+      .header-cta:hover { background: #fbf6ee; color: #221a14; }
+      header.site-header.scrolled .header-cta { border-color: var(--ink); color: var(--ink); }
+      header.site-header.scrolled .header-cta:hover { background: var(--ink); color: var(--cream); }
+
+      /* While the header floats transparent over the hero photo, a soft
+         shadow on the header's own text/logo keeps it readable — the
+         shadow sits on the header elements only, never on the photo. */
+      header.site-header:not(.scrolled) .logo-stack {
+        filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
+      }
+      header.site-header:not(.scrolled) nav.primary a,
+      header.site-header:not(.scrolled) .header-cta,
+      header.site-header:not(.scrolled) .menu-btn {
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+      }
+
+      .menu-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 2.5rem; height: 2.5rem;
+        border: 0; border-radius: 999px; background: transparent;
+        color: #fbf6ee; cursor: pointer;
+      }
+      header.site-header.scrolled .menu-btn { color: var(--ink); }
+      @media (min-width: 768px) { .menu-btn { display: none; } }
+
+      .mobile-menu {
+        position: fixed; inset: 0; z-index: 60;
+        display: flex; flex-direction: column;
+        background: var(--cream);
+        overflow-y: auto;
+      }
+      .mobile-menu[hidden] { display: none; }
+      .mobile-menu .mm-top {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 4rem; padding-inline: 1.25rem;
+      }
+      .mobile-menu nav { display: flex; flex-direction: column; padding: 1.5rem 1.25rem 0; }
+      .mobile-menu nav a {
+        border-bottom: 1px solid var(--line);
+        padding-block: 1.25rem;
+        font-family: "Fraunces", "Hind Siliguri", Georgia, serif;
+        font-size: 1.875rem; color: var(--ink); text-decoration: none;
+      }
+      .mobile-menu nav a:hover { color: var(--rose); }
+      .mm-logo-light { display: none; }
+      @media (prefers-color-scheme: dark) {
+        .mm-logo-dark { display: none; }
+        .mm-logo-light { display: block; }
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative;
+        display: flex; align-items: flex-end;
+        min-height: 94svh;
+        padding: 8rem 0 4.5rem;
+        background: #17110c;
+        overflow: hidden;
+        color: #fbf6ee;
+      }
+      @media (min-width: 640px) { .hero { padding-bottom: 5.5rem; } }
+      .hero-slides { position: absolute; inset: 0; }
+      .hero-slides img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1.1s ease-in-out;
+        /* Brightness lowered (neutral darkening only — no colour tint)
+           so the hero text on top stands out and stays easy to read,
+           while the photos keep their original colours and hues. */
+        filter: brightness(0.58);
+      }
+      .hero-slides img.active { opacity: 1; }
+      .hero-content { position: relative; width: 100%; }
+      .hero-eyebrow {
+        display: inline-flex; align-items: center; gap: 0.6rem;
+        border: 1px solid rgba(251, 246, 238, 0.35);
+        border-radius: 999px;
+        padding: 0.45rem 1rem;
+        background: rgba(20, 10, 5, 0.35);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        font-size: 0.68rem; font-weight: 600;
+        letter-spacing: 0.24em; text-transform: uppercase;
+        color: rgba(251, 246, 238, 0.95);
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+      }
+      .hero-eyebrow .dot { width: 0.45rem; height: 0.45rem; border-radius: 999px; background: var(--grad); flex: none; }
+      .hero-eyebrow .hero-pin {
+        width: 1.05rem; height: 1.05rem; flex: none;
+        object-fit: contain; display: block;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+      }
+      .hero h1 {
+        margin-top: 1.5rem;
+        max-width: 46rem;
+        font-size: 2.6rem; font-weight: 450;
+        line-height: 1.05; letter-spacing: -0.02em;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.45);
+      }
+      @media (min-width: 640px) { .hero h1 { font-size: 3.9rem; } }
+      @media (min-width: 1024px) { .hero h1 { font-size: 4.6rem; } }
+      .hero h1 .grad-word {
+        font-style: italic;
+        background: linear-gradient(92deg, #fbbf24, #fb7185 55%, #c4b5fd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: none;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+      }
+      .hero-sub {
+        margin-top: 1.6rem; max-width: 34rem;
+        font-size: 1rem; line-height: 1.7;
+        color: rgba(251, 246, 238, 0.92);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.45);
+      }
+      @media (min-width: 640px) { .hero-sub { font-size: 1.125rem; } }
+      .hero-actions { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+      @media (min-width: 640px) { .hero-actions { flex-direction: row; align-items: center; gap: 1rem; } }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+        border-radius: 999px;
+        padding: 0.9rem 1.75rem;
+        font-size: 0.75rem; font-weight: 600;
+        letter-spacing: 0.24em; text-transform: uppercase;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+      }
+      .btn-gradient {
+        background: var(--grad); color: #fff;
+        box-shadow: 0 12px 32px rgba(var(--shadow-color), 0.38);
+      }
+      .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(124, 58, 237, 0.42); }
+      .btn-whatsapp {
+        background: #25d366; color: #fff;
+        box-shadow: 0 12px 28px rgba(37, 211, 102, 0.38);
+      }
+      .btn-whatsapp:hover { background: #128c7e; transform: translateY(-2px); box-shadow: 0 16px 34px rgba(18, 140, 126, 0.4); }
+      .btn-ghost-light { border: 1px solid rgba(251, 246, 238, 0.55); color: #fbf6ee; }
+      .btn-ghost-light:hover { background: #fbf6ee; color: #221a14; }
+      .btn-ghost-dark { border: 1px solid var(--ink); color: var(--ink); }
+      .btn-ghost-dark:hover { background: var(--ink); color: var(--cream); }
+
+      .hero-dots {
+        position: absolute; inset-inline: 0; bottom: 1.4rem; z-index: 2;
+        display: flex; justify-content: center; gap: 0.22rem;
+        padding-inline: 0.75rem;
+      }
+      .hero-dots button {
+        border: 0; background: transparent; cursor: pointer; padding: 0.45rem 0.1rem;
+      }
+      .hero-dots span {
+        display: block; width: 0.95rem; height: 0.35rem; border-radius: 999px;
+        background: rgba(251, 246, 238, 0.35);
+        transition: background-color 0.3s ease, width 0.3s ease;
+      }
+      .hero-dots button.active span { width: 1.6rem; background: var(--grad); }
+      @media (min-width: 640px) {
+        .hero-dots { gap: 0.4rem; }
+        .hero-dots button { padding: 0.45rem 0.2rem; }
+        .hero-dots span { width: 1.6rem; }
+        .hero-dots button.active span { width: 2.4rem; }
+      }
+
+      .color-bar { height: 5px; background: var(--grad-soft); }
+
+      /* ---------- section intros ---------- */
+      .eyebrow { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
+      .eyebrow::before { content: ""; width: 1.8rem; height: 2px; border-radius: 2px; background: currentColor; }
+      .eyebrow.rose { color: var(--rose); }
+      .eyebrow.violet { color: var(--violet); }
+      .eyebrow.teal { color: var(--teal); }
+      .section-title {
+        margin-top: 1rem;
+        font-size: 1.8rem; font-weight: 450;
+        line-height: 1.15; letter-spacing: -0.01em;
+      }
+      @media (min-width: 640px) { .section-title { font-size: 2.3rem; } }
+      @media (min-width: 1024px) { .section-title { font-size: 2.8rem; } }
+      .section-desc { margin-top: 1.2rem; max-width: 38rem; font-size: 1rem; line-height: 1.7; color: var(--ink-soft); }
+      @media (min-width: 640px) { .section-desc { font-size: 1.06rem; } }
+
+      /* ---------- portfolio ---------- */
+      .gallery { margin-top: 3.5rem; columns: 1; column-gap: 1.1rem; }
+      @media (min-width: 640px) { .gallery { columns: 2; margin-top: 4rem; } }
+      @media (min-width: 1024px) { .gallery { columns: 3; } }
+      .tile { margin: 0 0 1.1rem; break-inside: avoid; }
+      .tile button {
+        position: relative; display: block; width: 100%;
+        padding: 0; border: 0; background: none;
+        border-radius: 18px; overflow: hidden; cursor: zoom-in;
+        box-shadow: 0 6px 22px rgba(34, 26, 20, 0.12);
+        transition: box-shadow 0.5s ease, transform 0.5s ease;
+      }
+      .tile button:hover, .tile button:focus-visible {
+        box-shadow: 0 18px 40px rgba(var(--shadow-color), 0.28);
+        transform: translateY(-4px);
+      }
+      .tile img {
+        display: block; width: 100%; height: auto;
+        transition: transform 0.7s ease;
+      }
+      .tile button:hover img, .tile button:focus-visible img { transform: scale(1.04); }
+      .tile .tile-shade {
+        position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(to top, rgba(124, 58, 237, 0.45), rgba(225, 29, 72, 0.12) 55%, transparent);
+        opacity: 0; transition: opacity 0.5s ease;
+      }
+      .tile button:hover .tile-shade, .tile button:focus-visible .tile-shade { opacity: 1; }
+      .tile .tile-zoom {
+        position: absolute; right: 0.9rem; bottom: 0.9rem;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 2.4rem; height: 2.4rem; border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92); color: #7c3aed;
+        opacity: 0; transform: translateY(6px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+      .tile button:hover .tile-zoom, .tile button:focus-visible .tile-zoom { opacity: 1; transform: none; }
+
+      /* ---------- videos ---------- */
+      .videos-section { background: linear-gradient(180deg, var(--lilac-bg), var(--cream)); border-block: 1px solid var(--violet-soft); }
+      .video-grid { margin-top: 3.5rem; display: grid; gap: 1.5rem; }
+      @media (min-width: 640px) { .video-grid { margin-top: 4rem; } }
+      @media (min-width: 1024px) { .video-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+      .video-frame {
+        position: relative; aspect-ratio: 16 / 9; width: 100%;
+        overflow: hidden; border-radius: 18px;
+        background: #17110c;
+        box-shadow: 0 16px 40px rgba(124, 58, 237, 0.22);
+        border: 1px solid var(--violet-soft);
+      }
+      .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .video-cap { margin-top: 0.8rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+
+      /* ---------- about ---------- */
+      .about-grid { display: grid; gap: 2.5rem; }
+      @media (min-width: 1024px) { .about-grid { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+      .about-text { font-size: 1.125rem; line-height: 1.75; color: var(--ink-soft); }
+      @media (min-width: 640px) { .about-text { font-size: 1.25rem; } }
+      .about-text .brand-name { color: var(--ink); font-weight: 600; }
+      .about-dots { display: flex; gap: 0.5rem; margin-top: 2rem; }
+      .about-dots span { width: 0.7rem; height: 0.7rem; border-radius: 999px; }
+
+      /* ---------- contact ---------- */
+      .contact-section { background: linear-gradient(180deg, var(--blush-bg), var(--cream)); border-top: 1px solid var(--rose-soft); }
+      .contact-grid { margin-top: 3.5rem; display: grid; gap: 1rem; }
+      @media (min-width: 640px) { .contact-grid { margin-top: 4rem; grid-template-columns: repeat(3, 1fr); } }
+      .contact-grid .wide-row { display: grid; gap: 1rem; }
+      @media (min-width: 640px) { .contact-grid .wide-row { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; } }
+      .contact-card {
+        display: block;
+        background: var(--card-bg);
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--card-accent, var(--rose));
+        border-radius: 14px;
+        padding: 1.75rem;
+        text-decoration: none;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      a.contact-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(34, 26, 20, 0.13); }
+      .icon-chip {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 2.75rem; height: 2.75rem; border-radius: 12px;
+        background: var(--chip-bg, var(--rose-soft));
+        color: var(--card-accent, var(--rose));
+      }
+      .icon-chip svg { width: 1.3rem; height: 1.3rem; }
+      .icon-chip.brand-chip {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        box-shadow: 0 2px 8px rgba(34, 26, 20, 0.08);
+      }
+      .icon-chip.brand-chip svg { width: 1.55rem; height: 1.55rem; }
+      @media (prefers-color-scheme: dark) {
+        .icon-chip.brand-chip { background: #ffffff; }
+      }
+      .contact-card .c-label { margin-top: 1.1rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+      .contact-card .c-value { margin-top: 0.4rem; font-size: 1.125rem; color: var(--ink); overflow-wrap: anywhere; }
+      .contact-actions { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+      @media (min-width: 640px) { .contact-actions { flex-direction: row; align-items: center; gap: 1rem; } }
+
+      /* ---------- footer ---------- */
+      footer.site-footer {
+        background: #17110c; color: #fbf6ee;
+        border-top: 4px solid transparent;
+        border-image: linear-gradient(90deg, #f59e0b, #e11d48, #7c3aed, #0d9488) 1;
+        padding-block: 2.75rem;
+      }
+      .footer-inner { display: flex; flex-direction: column; gap: 1.5rem; }
+      @media (min-width: 1024px) { .footer-inner { flex-direction: row; align-items: center; justify-content: space-between; } }
+      footer.site-footer p { font-size: 0.9rem; color: rgba(251, 246, 238, 0.65); }
+      footer.site-footer img { height: 2.4rem; width: auto; display: block; }
+
+      /* ---------- lightbox ---------- */
+      .lightbox {
+        position: fixed; inset: 0; z-index: 80;
+        display: flex; flex-direction: column;
+        background: rgba(12, 8, 5, 0.96);
+        color: #fbf6ee;
+      }
+      .lightbox[hidden] { display: none; }
+      .lb-top {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1rem 1.25rem;
+      }
+      .lb-count { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.24em; }
+      .lb-stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 0 1rem 1rem; }
+      .lb-stage img { max-height: 100%; max-width: 100%; width: auto; height: auto; border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5); }
+      .lb-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 2.75rem; height: 2.75rem; border-radius: 999px;
+        border: 1px solid rgba(251, 246, 238, 0.3);
+        background: rgba(251, 246, 238, 0.08);
+        color: #fbf6ee; cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .lb-btn:hover { background: rgba(251, 246, 238, 0.2); }
+      .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); }
+      .lb-prev { left: 0.9rem; }
+      .lb-next { right: 0.9rem; }
+
+      /* ---------- preview note ---------- */
+      .preview-note {
+        position: fixed; left: 1rem; bottom: 1rem; z-index: 40;
+        display: flex; align-items: center; gap: 0.7rem;
+        max-width: min(92vw, 26rem);
+        background: #221a14; color: #fbf6ee;
+        border-radius: 999px;
+        padding: 0.55rem 0.6rem 0.55rem 1.1rem;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+        font-size: 0.85rem; line-height: 1.4;
+      }
+      .preview-note .pn-dot { width: 0.55rem; height: 0.55rem; border-radius: 999px; background: var(--grad); flex: none; }
+      .preview-note button {
+        flex: none; border: 0; cursor: pointer;
+        width: 1.9rem; height: 1.9rem; border-radius: 999px;
+        background: rgba(251, 246, 238, 0.14); color: #fbf6ee;
+        display: inline-flex; align-items: center; justify-content: center;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal.is-visible { animation: none; }
+        .hero-slides img { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+      <div class="wrap header-inner">
+        <a href="#home" aria-label="দর্পণ – Dorpon — home">
+          <span class="logo-stack">
+            <img class="logo-light" src="assets/logo/logo-cream.webp" alt="" width="640" height="367" />
+            <img class="logo-dark" src="assets/logo/logo-black.webp" alt="" width="640" height="367" />
+          </span>
+        </a>
+
+        <nav class="primary" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <a class="header-cta" href="#contact">Contact Us</a>
+          <button class="menu-btn" id="menuOpenBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="mm-top">
+        <img class="mm-logo-dark" src="assets/logo/logo-black.webp" alt="দর্পণ – Dorpon" width="640" height="367" style="height:2.25rem; width:auto;" />
+        <img class="mm-logo-light" src="assets/logo/logo-cream.webp" alt="দর্পণ – Dorpon" width="640" height="367" style="height:2.25rem; width:auto;" />
+        <button class="menu-btn" id="menuCloseBtn" type="button" aria-label="Close navigation menu" style="color:var(--ink);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <nav aria-label="Mobile">
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="padding:2rem 1.25rem 0;">
+        <a class="btn btn-gradient" href="#contact" style="display:flex;">Contact Us</a>
+        <p style="margin-top:2rem; font-size:0.9rem; color:var(--muted);">Photography &amp; Videography · Rajbari, Bangladesh</p>
+      </div>
+    </div>
+
+    <main>
+      <!-- ================= HERO ================= -->
+      <section class="hero" id="home" style="padding-block:0;">
+        <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
+
+        <div class="wrap hero-content" style="padding-top:8rem; padding-bottom:5rem;">
+          <p class="hero-eyebrow"><img class="hero-pin" src="assets/location-pin.png" alt="" width="256" height="256" aria-hidden="true" /> Photography &amp; Videography · Rajbari</p>
+          <h1 class="font-display">Every Frame Tells a <span class="grad-word">Story.</span></h1>
+          <p class="hero-sub">Capturing meaningful moments through photography and cinematic storytelling.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gradient" href="#portfolio">Explore Our Work</a>
+            <a class="btn btn-ghost-light" href="#contact">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero photos"></div>
+      </section>
+      <div class="color-bar" aria-hidden="true"></div>
+
+      <!-- ================= PORTFOLIO ================= -->
+      <section id="portfolio" aria-labelledby="portfolio-title">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow rose">Portfolio</p>
+            <h2 class="section-title font-display" id="portfolio-title">Our Selected Works</h2>
+            <p class="section-desc">A collection of moments, stories, and memories captured through our lens.</p>
+          </div>
+
+          <div class="gallery" id="gallery"></div>
+        </div>
+      </section>
+
+      <!-- ================= VIDEOS ================= -->
+      <section class="videos-section" id="videos" aria-labelledby="videos-title">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow violet">Film</p>
+            <h2 class="section-title font-display" id="videos-title">Behind the Lens</h2>
+            <p class="section-desc">Watch our stories come to life.</p>
+          </div>
+
+          <div class="video-grid reveal">
+            <figure>
+              <div class="video-frame">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/jSOv5qngcmE?rel=0&amp;modestbranding=1&amp;playsinline=1"
+                  title="Dorpon — Film 01"
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <figcaption class="video-cap">Dorpon — Film 01</figcaption>
+            </figure>
+            <figure>
+              <div class="video-frame">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/DwekfgRtHe8?rel=0&amp;modestbranding=1&amp;playsinline=1"
+                  title="Dorpon — Film 02"
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <figcaption class="video-cap">Dorpon — Film 02</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ABOUT ================= -->
+      <section id="about" aria-labelledby="about-title">
+        <div class="wrap about-grid">
+          <div class="reveal">
+            <p class="eyebrow teal">About</p>
+            <h2 class="section-title font-display gradient-text" id="about-title">A Little About Dorpon</h2>
+            <div class="about-dots" aria-hidden="true">
+              <span style="background:#f59e0b;"></span>
+              <span style="background:#e11d48;"></span>
+              <span style="background:#7c3aed;"></span>
+              <span style="background:#0d9488;"></span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="about-text">
+              <span class="brand-name" lang="bn">দর্পণ – Dorpon</span>
+              is a photography and videography brand based in Rajbari, Bangladesh. We focus on capturing
+              meaningful moments and turning them into timeless visual stories.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT ================= -->
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow rose">Contact</p>
+            <h2 class="section-title font-display" id="contact-title">Let&rsquo;s Create Something Meaningful</h2>
+            <p class="section-desc">Have a project in mind or want to discuss your photography or videography needs? We&rsquo;d love to hear from you.</p>
+          </div>
+
+          <div class="contact-grid reveal">
+            <div class="contact-card" style="--card-accent:#ea4335; --chip-bg:#ffffff;">
+              <span class="icon-chip brand-chip" role="img" aria-label="Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ea4335" d="M12 2a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 12.8 7.2 12.8s7.2-7.4 7.2-12.8A7.2 7.2 0 0 0 12 2z"/><circle cx="12" cy="9.2" r="2.9" fill="#ffffff"/><circle cx="12" cy="9.2" r="1.15" fill="#a50e0e" opacity="0.18"/></svg>
+              </span>
+              <p class="c-label">Location</p>
+              <p class="c-value">Rajbari, Bangladesh</p>
+            </div>
+
+            <a class="contact-card" href="tel:+8801740744170" style="--card-accent:#16a34a; --chip-bg:#dcfce7;">
+              <span class="icon-chip" style="color:#16a34a;">
+                <svg viewBox="0 0 24 24" fill="#16a34a" stroke="#16a34a" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+              </span>
+              <p class="c-label">Phone</p>
+              <p class="c-value">01740-744170</p>
+            </a>
+
+            <a class="contact-card" href="mailto:rajin8300@gmail.com" style="--card-accent:#ea4335; --chip-bg:#ffffff;">
+              <span class="icon-chip brand-chip" role="img" aria-label="Gmail">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 18.5v-12" stroke="#ea4335" stroke-width="3" stroke-linecap="round"/><path d="M4.8 6.8 12 12.2" stroke="#fbbc04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.2 6.8 12 12.2" stroke="#34a853" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.5 18.5v-12" stroke="#4285f4" stroke-width="3" stroke-linecap="round"/></svg>
+              </span>
+              <p class="c-label">Email</p>
+              <p class="c-value">rajin8300@gmail.com</p>
+            </a>
+
+            <div class="wide-row">
+              <a class="contact-card" href="https://www.facebook.com/dorpon830" target="_blank" rel="noopener noreferrer" style="--card-accent:#1877f2; --chip-bg:#ffffff;">
+                <span class="icon-chip brand-chip" role="img" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877f2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </span>
+                <p class="c-label">Facebook</p>
+                <p class="c-value">@dorpon830</p>
+              </a>
+
+              <a class="contact-card" href="https://www.instagram.com/rajin.830" target="_blank" rel="noopener noreferrer" style="--card-accent:#e1306c; --chip-bg:#ffffff;">
+                <span class="icon-chip brand-chip" role="img" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffdc80"/><stop offset="25%" stop-color="#fcaf45"/><stop offset="45%" stop-color="#f56040"/><stop offset="60%" stop-color="#fd1d1d"/><stop offset="75%" stop-color="#e1306c"/><stop offset="90%" stop-color="#833ab4"/><stop offset="100%" stop-color="#405de6"/></linearGradient></defs><rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.6" fill="url(#ig-grad)"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="#ffffff" stroke-width="1.7"/><circle cx="17.4" cy="6.6" r="1.2" fill="#ffffff"/></svg>
+                </span>
+                <p class="c-label">Instagram</p>
+                <p class="c-value">@rajin.830</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-actions reveal">
+            <a class="btn btn-whatsapp" href="https://wa.me/8801740744170" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.9L3.5 20.5l4.2-1.1A8.5 8.5 0 1 0 12 3.5zm4.4 11.9c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a class="btn btn-ghost-dark" href="tel:+8801740744170">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+              Call Now
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <img src="assets/logo/logo-cream.webp" alt="দর্পণ – Dorpon" width="640" height="367" />
+          <p style="margin-top:0.8rem;">Rajbari, Bangladesh · Photography &amp; Videography</p>
+        </div>
+        <p>&copy; <span id="year">2026</span> দর্পণ – Dorpon. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Preview note (this page only — not part of the live site) -->
+    <div class="preview-note" id="previewNote" role="note">
+      <span class="pn-dot" aria-hidden="true"></span>
+      <span>New colorful theme — preview only. The live site still has the old design.</span>
+      <button type="button" id="previewNoteClose" aria-label="Dismiss preview note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <!-- ================= LIGHTBOX ================= -->
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <div class="lb-top">
+        <span class="lb-count" id="lbCount">1 / 12</span>
+        <button class="lb-btn" id="lbClose" type="button" aria-label="Close photo viewer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="lb-stage">
+        <img id="lbImg" alt="" />
+      </div>
+      <button class="lb-btn lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous photo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+      </button>
+      <button class="lb-btn lb-nav lb-next" id="lbNext" type="button" aria-label="Next photo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var PHOTOS = [
+          { slug: "fb-img-1792035302547", w: 1800, h: 1200 },
+          { slug: "fb-img-1792035324417", w: 1350, h: 1800 },
+          { slug: "fb-img-1792035342962", w: 1350, h: 1800 },
+          { slug: "fb-img-1792035353243", w: 1200, h: 1800 },
+          { slug: "fb-img-1792035364065", w: 1200, h: 1800 },
+          { slug: "fb-img-1792035372641", w: 1350, h: 1800 },
+          { slug: "fb-img-1792035377928", w: 1200, h: 1800 },
+          { slug: "fb-img-1792035384405", w: 1350, h: 1800 },
+          { slug: "fb-img-1792035408425", w: 1200, h: 1800 },
+          { slug: "fb-img-1792035421088", w: 1800, h: 1200 },
+          { slug: "fb-img-1792035452690", w: 1352, h: 1800 },
+          { slug: "fb-img-bride", w: 1200, h: 1800 }
+        ];
+        function alt(i) { return "Photograph " + (i + 1) + " from the Dorpon photography portfolio."; }
+        function fullSrc(p) { return "assets/photos/" + p.slug + ".webp"; }
+        function thumbSrc(p) { return "assets/photos/thumbs/" + p.slug + ".webp"; }
+
+        var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* ---------- header scroll state ---------- */
+        var header = document.getElementById("siteHeader");
+        function onScroll() { header.classList.toggle("scrolled", window.scrollY > 32); }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        /* ---------- mobile menu ---------- */
+        var menu = document.getElementById("mobileMenu");
+        var openBtn = document.getElementById("menuOpenBtn");
+        var closeBtn = document.getElementById("menuCloseBtn");
+        function setMenu(open) {
+          menu.hidden = !open;
+          openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          document.body.style.overflow = open ? "hidden" : "";
+          if (open) closeBtn.focus(); else openBtn.focus();
+        }
+        openBtn.addEventListener("click", function () { setMenu(true); });
+        closeBtn.addEventListener("click", function () { setMenu(false); });
+        menu.querySelectorAll("nav a, .btn").forEach(function (a) {
+          a.addEventListener("click", function () { setMenu(false); });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !menu.hidden) setMenu(false);
+        });
+
+        /* ---------- hero slideshow ----------
+           Responsive split: on desktop-width screens the hero cycles only
+           the wide (landscape, 16:9-style) photos; on smaller screens it
+           cycles every photo except the wide ones. The slide set is
+           rebuilt whenever the viewport crosses the breakpoint, so the
+           dots always match the photos actually showing. */
+        var slidesWrap = document.getElementById("heroSlides");
+        var dotsWrap = document.getElementById("heroDots");
+        var slideImgs = [];
+        var dotBtns = [];
+        var heroSet = [];
+        var current = 0;
+        var timer = null;
+        var desktopMq = window.matchMedia("(min-width: 768px)");
+
+        function isWide(p) { return p.w > p.h; }
+
+        function buildHero() {
+          var wantWide = desktopMq.matches;
+          heroSet = [];
+          PHOTOS.forEach(function (p, i) { if (isWide(p) === wantWide) heroSet.push(i); });
+          if (!heroSet.length) heroSet = PHOTOS.map(function (_, i) { return i; });
+
+          slidesWrap.innerHTML = "";
+          dotsWrap.innerHTML = "";
+          slideImgs = [];
+          dotBtns = [];
+
+          heroSet.forEach(function (pi, j) {
+            var p = PHOTOS[pi];
+            var img = document.createElement("img");
+            img.src = fullSrc(p);
+            img.width = p.w;
+            img.height = p.h;
+            img.alt = "";
+            img.decoding = "async";
+            if (j > 1) img.loading = "lazy";
+            img.addEventListener("error", function () {
+              img.style.display = "none";
+              if (dotBtns[j]) dotBtns[j].style.display = "none";
+            });
+            slidesWrap.appendChild(img);
+            slideImgs.push(img);
+
+            var b = document.createElement("button");
+            b.type = "button";
+            b.setAttribute("role", "tab");
+            b.setAttribute("aria-label", "Show photo " + (pi + 1) + " of " + PHOTOS.length);
+            b.innerHTML = "<span></span>";
+            b.addEventListener("click", function () { goTo(j); restart(); });
+            dotsWrap.appendChild(b);
+            dotBtns.push(b);
+          });
+
+          current = 0;
+          goTo(0);
+          restart();
+        }
+
+        function goTo(i) {
+          if (!heroSet.length) return;
+          current = (i + heroSet.length) % heroSet.length;
+          slideImgs.forEach(function (img, j) { img.classList.toggle("active", j === current); });
+          dotBtns.forEach(function (b, j) {
+            b.classList.toggle("active", j === current);
+            if (j === current) b.setAttribute("aria-selected", "true"); else b.removeAttribute("aria-selected");
+          });
+        }
+        function restart() {
+          if (timer) window.clearInterval(timer);
+          timer = null;
+          if (reducedMotion || heroSet.length < 2) return;
+          timer = window.setInterval(function () { goTo(current + 1); }, 5000);
+        }
+        buildHero();
+        if (desktopMq.addEventListener) desktopMq.addEventListener("change", buildHero);
+        else if (desktopMq.addListener) desktopMq.addListener(buildHero);
+
+        /* ---------- portfolio gallery + lightbox ---------- */
+        var gallery = document.getElementById("gallery");
+        PHOTOS.forEach(function (p, i) {
+          var fig = document.createElement("figure");
+          fig.className = "tile reveal";
+          fig.style.animationDelay = Math.min(i, 5) * 70 + "ms";
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.setAttribute("aria-label", "View larger image: " + alt(i));
+          var img = document.createElement("img");
+          img.src = thumbSrc(p);
+          img.alt = alt(i);
+          img.width = p.w;
+          img.height = p.h;
+          img.loading = "eager";
+          img.decoding = "async";
+          var shade = document.createElement("span");
+          shade.className = "tile-shade";
+          shade.setAttribute("aria-hidden", "true");
+          var zoom = document.createElement("span");
+          zoom.className = "tile-zoom";
+          zoom.setAttribute("aria-hidden", "true");
+          zoom.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6M11 8.5v5M8.5 11h5"/></svg>';
+          btn.appendChild(img);
+          btn.appendChild(shade);
+          btn.appendChild(zoom);
+          btn.addEventListener("click", function () { openLightbox(i); });
+          fig.appendChild(btn);
+          gallery.appendChild(fig);
+        });
+
+        var lightbox = document.getElementById("lightbox");
+        var lbImg = document.getElementById("lbImg");
+        var lbCount = document.getElementById("lbCount");
+        var lbIndex = 0;
+        var lastFocus = null;
+
+        function showLb() {
+          lbImg.src = fullSrc(PHOTOS[lbIndex]);
+          lbImg.alt = alt(lbIndex);
+          lbCount.textContent = (lbIndex + 1) + " / " + PHOTOS.length;
+        }
+        function openLightbox(i) {
+          lbIndex = i;
+          lastFocus = document.activeElement;
+          showLb();
+          lightbox.hidden = false;
+          document.body.style.overflow = "hidden";
+          document.getElementById("lbClose").focus();
+        }
+        function closeLightbox() {
+          lightbox.hidden = true;
+          document.body.style.overflow = "";
+          if (lastFocus) lastFocus.focus();
+        }
+        function stepLb(d) { lbIndex = (lbIndex + d + PHOTOS.length) % PHOTOS.length; showLb(); }
+
+        document.getElementById("lbClose").addEventListener("click", closeLightbox);
+        document.getElementById("lbPrev").addEventListener("click", function () { stepLb(-1); });
+        document.getElementById("lbNext").addEventListener("click", function () { stepLb(1); });
+        lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener("keydown", function (e) {
+          if (lightbox.hidden) return;
+          if (e.key === "Escape") closeLightbox();
+          else if (e.key === "ArrowLeft") stepLb(-1);
+          else if (e.key === "ArrowRight") stepLb(1);
+        });
+
+        /* ---------- reveal on scroll ---------- */
+        var revealEls = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window && !reducedMotion) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
+            });
+          }, { threshold: 0.12 });
+          revealEls.forEach(function (el) { io.observe(el); });
+        } else {
+          revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+        }
+
+        /* ---------- preview note + year ---------- */
+        document.getElementById("previewNoteClose").addEventListener("click", function () {
+          document.getElementById("previewNote").style.display = "none";
+        });
+        document.getElementById("year").textContent = new Date().getFullYear();
+      })();
+    </script>
+  </body>
+</html>
