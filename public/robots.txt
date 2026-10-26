@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rajin8300.github.io/dorpon-website/sitemap.xml
+Sitemap: https://rajin8300.github.io/dorpon/sitemap.xml
