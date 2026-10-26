@@ -20,6 +20,19 @@
   --color-sand-soft: #e5dac7;
   --color-line: #e6dfd4;
 
+  /* Colourful accents — wedding marigold, rose, violet and teal.
+     Content and layout are untouched; these only restyle the theme. */
+  --color-marigold: #f59e0b;
+  --color-marigold-deep: #ea580c;
+  --color-rose: #e11d48;
+  --color-rose-soft: #ffe4e6;
+  --color-violet: #7c3aed;
+  --color-violet-soft: #ede9fe;
+  --color-teal: #0d9488;
+  --color-teal-soft: #ccfbf1;
+  --color-blush: #fff1f2;
+  --color-lilac: #f5f3ff;
+
   --tracking-label: 0.24em;
 }
 
@@ -54,8 +67,30 @@
   }
 
   ::selection {
-    background-color: var(--color-sand-soft);
-    color: var(--color-ink);
+    background-color: var(--color-rose);
+    color: #fff;
+  }
+
+  /* Gradient headline text and gradient buttons, used by the restyle. */
+  .gradient-text {
+    background: linear-gradient(92deg, #ea580c, #e11d48 45%, #7c3aed);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn-gradient {
+    background: linear-gradient(92deg, #f59e0b, #e11d48 55%, #7c3aed);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(225, 29, 72, 0.35);
+  }
+  .btn-gradient:hover {
+    box-shadow: 0 14px 34px rgba(124, 58, 237, 0.4);
+  }
+  .section-tint-rose {
+    background: linear-gradient(180deg, #fff1f2, #faf7f2);
+  }
+  .section-tint-violet {
+    background: linear-gradient(180deg, #f5f3ff, #faf7f2);
   }
 
   :focus-visible {
