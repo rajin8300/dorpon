@@ -24,7 +24,7 @@ export default function SectionIntro({
   return (
     <div className={`reveal max-w-2xl ${centered ? 'mx-auto text-center' : ''}`}>
       {eyebrow ? (
-        <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-label text-sand">{eyebrow}</p>
+        <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-label text-rose">{eyebrow}</p>
       ) : null}
       <h2
         id={titleId}

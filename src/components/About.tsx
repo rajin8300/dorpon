@@ -5,10 +5,10 @@ export default function About() {
     <section id="about" aria-labelledby="about-title" className="py-20 sm:py-28 lg:py-36">
       <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-12">
         <div className="reveal lg:col-span-5">
-          <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-label text-sand">About</p>
+          <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-label text-rose">About</p>
           <h2
             id="about-title"
-            className="font-display text-[1.75rem] font-normal leading-[1.15] tracking-[-0.01em] text-ink sm:text-4xl lg:text-[2.75rem]"
+            className="gradient-text font-display text-[1.75rem] font-normal leading-[1.15] tracking-[-0.01em] sm:text-4xl lg:text-[2.75rem]"
           >
             A Little About Dorpon
           </h2>

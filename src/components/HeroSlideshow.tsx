@@ -129,7 +129,7 @@ export default function HeroSlideshow({
                 return updated
               })
             }
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover brightness-[0.72]"
             style={{
               transition: reducedMotion ? 'none' : `opacity ${fadeMs}ms ease-in-out`,
               opacity: isActive ? 1 : 0,
@@ -138,12 +138,8 @@ export default function HeroSlideshow({
         )
       })}
 
-      {/* Subtle scrim so the heading and buttons stay legible over any photo. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/45 to-ink/35"
-      />
-
+      {/* No overlay over the photos: hero colours must stay true to the
+          original photos. Text legibility comes from text-shadow in Hero. */}
       {showIndicators && count > 1 && (
         <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center gap-1.5 sm:bottom-6 lg:bottom-8">
           {available.map((slide, i) => (

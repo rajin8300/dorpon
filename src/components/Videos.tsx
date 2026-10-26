@@ -19,7 +19,7 @@ export default function Videos() {
     <section
       id="videos"
       aria-labelledby="videos-title"
-      className="border-y border-line bg-cream-deep py-20 sm:py-28 lg:py-36"
+      className="section-tint-violet border-y border-violet-soft py-20 sm:py-28 lg:py-36"
     >
       <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
         <SectionIntro
@@ -32,7 +32,7 @@ export default function Videos() {
         <div className="reveal mt-14 grid gap-6 sm:mt-16 lg:grid-cols-2 lg:gap-8">
           {site.videos.map((video) => (
             <figure key={video.id}>
-              <div className="relative aspect-video w-full overflow-hidden bg-ink/5">
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink/5 shadow-lg ring-1 ring-violet-soft">
                 <iframe
                   src={embedUrl(video.id)}
                   title={video.title}

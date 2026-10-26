@@ -111,3 +111,72 @@ export function IconWhatsApp(props: IconProps) {
     </svg>
   )
 }
+
+/** Colourful Google Maps-style pin — used for the Location card. */
+export function IconGoogleMaps(props: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" {...props}>
+      <path
+        fill="#EA4335"
+        d="M24 4a12 12 0 0 0-12 12c0 9 12 22 12 22s12-13 12-22A12 12 0 0 0 24 4Z"
+      />
+      <path fill="#FBBC04" d="M24 4a12 12 0 0 0-12 12c0 4.5 3 10 6.5 14.5L24 28l5.5 2.5C33 26 36 20.5 36 16A12 12 0 0 0 24 4Z" opacity="0.35" />
+      <circle cx="24" cy="16" r="6" fill="#fff" />
+      <circle cx="24" cy="16" r="2.8" fill="#4285F4" />
+    </svg>
+  )
+}
+
+/** Gmail-style multicolour envelope — used for the Email card. */
+export function IconGmail(props: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" {...props}>
+      <path fill="#EA4335" d="M6 10h36v28H6z" opacity="0.12" />
+      <path fill="#EA4335" d="M6 10l18 14L6 38V10Z" />
+      <path fill="#4285F4" d="M42 10L24 24l18 14V10Z" />
+      <path fill="#FBBC04" d="M6 10l18 14-6 5L6 14V10Z" opacity="0.9" />
+      <path fill="#34A853" d="M42 10L24 24l6 5 12-15V10Z" opacity="0.9" />
+      <path
+        fill="none"
+        stroke="#fff"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        d="M6 10l18 14 18-14"
+      />
+    </svg>
+  )
+}
+
+/** Original Facebook logo: white f on the official blue circle. */
+export function IconFacebookOriginal(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <circle cx="12" cy="12" r="12" fill="#1877F2" />
+      <path
+        fill="#fff"
+        d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2.1-.1-2.1 0-3.6 1.3-3.6 3.7V11H8.3v3h2.4v7h2.8Z"
+      />
+    </svg>
+  )
+}
+
+/** Original Instagram logo: gradient rounded square, white camera outline. */
+export function IconInstagramOriginal(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <defs>
+        <linearGradient id="instagram-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#feda75" />
+          <stop offset="25%" stopColor="#fa7e1e" />
+          <stop offset="50%" stopColor="#d62976" />
+          <stop offset="75%" stopColor="#962fbf" />
+          <stop offset="100%" stopColor="#4f5bd5" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#instagram-gradient)" />
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="17.4" cy="6.6" r="1.3" fill="#fff" />
+      <rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="#fff" strokeWidth="0" />
+    </svg>
+  )
+}
