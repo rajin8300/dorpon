@@ -2,7 +2,8 @@
 
 /* ---------------------------------------------------------------------------
    DESIGN TOKENS
-   Warm, light, editorial. Photographs are the only strong visual element.
+   Dark theme, as approved in the preview. Photographs keep their
+   original colours; only the page chrome goes dark.
 --------------------------------------------------------------------------- */
 @theme {
   --font-sans:
@@ -15,7 +16,10 @@
   --color-paper: #fffdf9;
   --color-ink: #1b1916;
   --color-ink-soft: #46413a;
-  --color-muted: #8b8275;
+  --color-muted: #b0a897;
+  --color-night: #141210;
+  --color-card: #221f1b;
+  --color-card-hover: #2a2621;
   --color-sand: #c1ab8b;
   --color-sand-soft: #e5dac7;
   --color-line: #e6dfd4;
@@ -45,8 +49,8 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-night);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.65;
@@ -87,14 +91,14 @@
     box-shadow: 0 14px 34px rgba(124, 58, 237, 0.4);
   }
   .section-tint-rose {
-    background: linear-gradient(180deg, #fff1f2, #faf7f2);
+    background: linear-gradient(180deg, #2a1218, #141210);
   }
   .section-tint-violet {
-    background: linear-gradient(180deg, #f5f3ff, #faf7f2);
+    background: linear-gradient(180deg, #1e1633, #141210);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-cream);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -131,8 +135,8 @@
   left: 1rem;
   top: -100%;
   z-index: 100;
-  background-color: var(--color-ink);
-  color: var(--color-cream);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
   padding: 0.65rem 1rem;
   font-size: 0.8rem;
   letter-spacing: 0.12em;

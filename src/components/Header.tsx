@@ -59,7 +59,9 @@ export default function Header() {
     }
   }, [menuOpen])
 
-  const onDark = !scrolled && !menuOpen
+  // Dark theme: the header is always on a dark background, so the
+  // cream logo and cream text are used in every state.
+  const onDark = true
 
   return (
     <>
@@ -67,7 +69,7 @@ export default function Header() {
         className={[
           'fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500',
           scrolled && !menuOpen
-            ? 'border-b border-line bg-cream/85 backdrop-blur-md'
+            ? 'border-b border-white/10 bg-[#141210]/85 backdrop-blur-md'
             : 'border-b border-transparent bg-transparent',
         ].join(' ')}
       >
@@ -159,12 +161,12 @@ export default function Header() {
         id="mobile-menu"
         tabIndex={-1}
         hidden={!menuOpen}
-        className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-cream outline-none md:hidden"
-        style={{ backgroundColor: '#faf7f2' }}
+        className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#141210] outline-none md:hidden"
+        style={{ backgroundColor: '#141210' }}
       >
         <div className="flex h-16 items-center justify-between px-5 sm:px-8">
           <img
-            src={brandAssets.logoBlack}
+            src={brandAssets.logoCream}
             alt={site.brand.full}
             width={640}
             height={367}
@@ -174,7 +176,7 @@ export default function Header() {
             type="button"
             onClick={() => setMenuOpen(false)}
             aria-label="Close navigation menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/5"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-cream transition-colors hover:bg-cream/10"
           >
             <IconClose className="h-6 w-6" />
           </button>
@@ -186,7 +188,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="border-b border-line py-5 font-display text-3xl text-ink transition-colors hover:text-sand"
+              className="border-b border-white/10 py-5 font-display text-3xl text-cream transition-colors hover:text-sand"
             >
               {item.label}
             </a>
@@ -197,7 +199,7 @@ export default function Header() {
           <a
             href="#contact"
             onClick={() => setMenuOpen(false)}
-            className="inline-flex w-full items-center justify-center rounded-full bg-ink px-6 py-3.5 text-[0.75rem] font-medium uppercase tracking-label text-cream transition-opacity hover:opacity-90"
+            className="inline-flex w-full items-center justify-center rounded-full bg-cream px-6 py-3.5 text-[0.75rem] font-medium uppercase tracking-label text-ink transition-opacity hover:opacity-90"
           >
             Contact Us
           </a>

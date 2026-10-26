@@ -28,12 +28,12 @@ export default function SectionIntro({
       ) : null}
       <h2
         id={titleId}
-        className="font-display text-[1.75rem] font-normal leading-[1.15] tracking-[-0.01em] text-ink sm:text-4xl lg:text-[2.75rem]"
+        className="font-display text-[1.75rem] font-normal leading-[1.15] tracking-[-0.01em] text-cream sm:text-4xl lg:text-[2.75rem]"
       >
         {title}
       </h2>
       {description ? (
-        <p className="mt-5 text-base leading-relaxed text-ink-soft sm:text-[1.0625rem]">{description}</p>
+        <p className="mt-5 text-base leading-relaxed text-cream/70 sm:text-[1.0625rem]">{description}</p>
       ) : null}
     </div>
   )

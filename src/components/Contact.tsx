@@ -17,7 +17,7 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="section-tint-rose border-t border-rose-soft py-20 sm:py-28 lg:py-36"
+      className="section-tint-rose border-t border-white/10 py-20 sm:py-28 lg:py-36"
     >
       <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
         <SectionIntro
@@ -28,36 +28,36 @@ export default function Contact() {
         />
 
         {/* Hairline-divided details. No form — every row is a real, working link. */}
-        <div className="reveal mt-14 overflow-hidden border border-line bg-line sm:mt-16">
+        <div className="reveal mt-14 overflow-hidden border border-white/10 bg-white/10 sm:mt-16">
           <div className="grid gap-px sm:grid-cols-3">
-            <div className="bg-cream-deep p-7 sm:p-8">
+            <div className="bg-[#221f1b] p-7 sm:p-8">
               <IconGoogleMaps className="h-5 w-5" />
-              <p className="mt-5 text-[0.68rem] font-medium uppercase tracking-label text-muted">Location</p>
-              <p className="mt-2 text-lg text-ink">{location}</p>
+              <p className="mt-5 text-[0.68rem] font-medium uppercase tracking-label text-cream/60">Location</p>
+              <p className="mt-2 text-lg text-cream">{location}</p>
             </div>
 
             <a
               href={contact.phoneHref}
-              className="group bg-cream-deep p-7 transition-colors duration-300 hover:bg-cream sm:p-8"
+              className="group bg-[#221f1b] p-7 transition-colors duration-300 hover:bg-[#2a2621] sm:p-8"
             >
               <IconPhone className="h-5 w-5 text-green-600" />
-              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-muted">
+              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-cream/60">
                 Phone
                 <IconArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </p>
-              <p className="mt-2 text-lg text-ink">{contact.phoneDisplay}</p>
+              <p className="mt-2 text-lg text-cream">{contact.phoneDisplay}</p>
             </a>
 
             <a
               href={contact.emailHref}
-              className="group bg-cream-deep p-7 transition-colors duration-300 hover:bg-cream sm:p-8"
+              className="group bg-[#221f1b] p-7 transition-colors duration-300 hover:bg-[#2a2621] sm:p-8"
             >
               <IconGmail className="h-5 w-5" />
-              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-muted">
+              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-cream/60">
                 Email
                 <IconArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </p>
-              <p className="mt-2 break-all text-lg text-ink">{contact.email}</p>
+              <p className="mt-2 break-all text-lg text-cream">{contact.email}</p>
             </a>
           </div>
 
@@ -67,28 +67,28 @@ export default function Contact() {
               href={contact.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-cream-deep p-7 transition-colors duration-300 hover:bg-cream sm:p-8"
+              className="group bg-[#221f1b] p-7 transition-colors duration-300 hover:bg-[#2a2621] sm:p-8"
             >
               <IconFacebookOriginal className="h-5 w-5" />
-              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-muted">
+              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-cream/60">
                 Facebook
                 <IconArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </p>
-              <p className="mt-2 break-all text-lg text-ink">{contact.facebookHandle}</p>
+              <p className="mt-2 break-all text-lg text-cream">{contact.facebookHandle}</p>
             </a>
 
             <a
               href={contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-cream-deep p-7 transition-colors duration-300 hover:bg-cream sm:p-8"
+              className="group bg-[#221f1b] p-7 transition-colors duration-300 hover:bg-[#2a2621] sm:p-8"
             >
               <IconInstagramOriginal className="h-5 w-5" />
-              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-muted">
+              <p className="mt-5 flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-label text-cream/60">
                 Instagram
                 <IconArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </p>
-              <p className="mt-2 break-all text-lg text-ink">{contact.instagramHandle}</p>
+              <p className="mt-2 break-all text-lg text-cream">{contact.instagramHandle}</p>
             </a>
           </div>
         </div>

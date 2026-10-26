@@ -23,7 +23,7 @@ function PhotoTile({ photo, index, onOpen }: PhotoTileProps) {
         type="button"
         onClick={onOpen}
         aria-label={`View larger image: ${photo.alt}`}
-        className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl shadow-md ring-1 ring-line transition-shadow duration-500 hover:shadow-xl hover:shadow-rose/20"
+        className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl shadow-md ring-1 ring-white/10 transition-shadow duration-500 hover:shadow-xl hover:shadow-rose/20"
       >
         {/* Tiny inline WebP stretched as a blur-up placeholder */}
         <span

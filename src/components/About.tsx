@@ -15,8 +15,8 @@ export default function About() {
         </div>
 
         <div className="reveal lg:col-span-7 lg:pt-2">
-          <p className="text-lg leading-relaxed text-ink-soft sm:text-xl sm:leading-relaxed">
-            <span lang="bn" className="text-ink">
+          <p className="text-lg leading-relaxed text-cream/70 sm:text-xl sm:leading-relaxed">
+            <span lang="bn" className="text-cream">
               {site.brand.full}
             </span>{' '}
             is a photography and videography brand based in Rajbari, Bangladesh. We focus on capturing
