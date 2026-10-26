@@ -294,9 +294,6 @@
         border: 1px solid rgba(251, 246, 238, 0.35);
         border-radius: 999px;
         padding: 0.45rem 1rem;
-        background: rgba(20, 10, 5, 0.35);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
         font-size: 0.68rem; font-weight: 600;
         letter-spacing: 0.24em; text-transform: uppercase;
         color: rgba(251, 246, 238, 0.95);
@@ -538,25 +535,6 @@
       .lb-prev { left: 0.9rem; }
       .lb-next { right: 0.9rem; }
 
-      /* ---------- preview note ---------- */
-      .preview-note {
-        position: fixed; left: 1rem; bottom: 1rem; z-index: 40;
-        display: flex; align-items: center; gap: 0.7rem;
-        max-width: min(92vw, 26rem);
-        background: #221a14; color: #fbf6ee;
-        border-radius: 999px;
-        padding: 0.55rem 0.6rem 0.55rem 1.1rem;
-        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
-        font-size: 0.85rem; line-height: 1.4;
-      }
-      .preview-note .pn-dot { width: 0.55rem; height: 0.55rem; border-radius: 999px; background: var(--grad); flex: none; }
-      .preview-note button {
-        flex: none; border: 0; cursor: pointer;
-        width: 1.9rem; height: 1.9rem; border-radius: 999px;
-        background: rgba(251, 246, 238, 0.14); color: #fbf6ee;
-        display: inline-flex; align-items: center; justify-content: center;
-      }
-
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         .reveal.is-visible { animation: none; }
@@ -784,15 +762,6 @@
         <p>&copy; <span id="year">2026</span> দর্পণ – Dorpon. All rights reserved.</p>
       </div>
     </footer>
-
-    <!-- Preview note (this page only — not part of the live site) -->
-    <div class="preview-note" id="previewNote" role="note">
-      <span class="pn-dot" aria-hidden="true"></span>
-      <span>New colorful theme — preview only. The live site still has the old design.</span>
-      <button type="button" id="previewNoteClose" aria-label="Dismiss preview note">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
 
     <!-- ================= LIGHTBOX ================= -->
     <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -1032,9 +1001,6 @@
         }
 
         /* ---------- preview note + year ---------- */
-        document.getElementById("previewNoteClose").addEventListener("click", function () {
-          document.getElementById("previewNote").style.display = "none";
-        });
         document.getElementById("year").textContent = new Date().getFullYear();
       })();
     </script>
