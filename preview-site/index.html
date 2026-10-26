@@ -137,7 +137,11 @@
       /* Desktop only: scale the whole desktop layout up, so it looks
          like the zoomed-in screenshots instead of small in the middle
          of a wide screen. Mobile and tablet are untouched. */
-      @media (min-width: 1024px) { html { font-size: 22px; } }
+      @media (min-width: 1024px) { html { font-size: 26px; } }
+      /* Desktop only: no centred narrow column and no large empty
+         sides — content stretches almost full width, with only a
+         small side padding. Mobile and tablet are untouched. */
+      @media (min-width: 1024px) { .wrap { max-width: none; padding-inline: 4rem; } }
 
       section { padding-block: 5rem; }
       @media (min-width: 640px) { section { padding-block: 7rem; } }
