@@ -882,12 +882,17 @@
         function buildHero() {
           var wantWide = desktopMq.matches;
           heroSet = [];
-          PHOTOS.forEach(function (p, i) { if (!isTopLeftLogo(p) && isWide(p) === wantWide) heroSet.push(i); });
-          if (!heroSet.length) {
-            /* Both wide photos have top-left logos, so on desktop fall back
-               to the remaining photos instead of re-adding the excluded ones. */
-            PHOTOS.forEach(function (p, i) { if (!isTopLeftLogo(p)) heroSet.push(i); });
+          if (wantWide) {
+            /* Desktop: slideshow is the 2 wide photos only, so the hero
+               fills a wide screen without heavy portrait cropping. This
+               is the original responsive split the user asked for. */
+            PHOTOS.forEach(function (p, i) { if (isWide(p)) heroSet.push(i); });
+          } else {
+            /* Mobile: portrait photos only, excluding the top-left logo
+               photos whose logo would sit under the header logo. */
+            PHOTOS.forEach(function (p, i) { if (!isTopLeftLogo(p) && !isWide(p)) heroSet.push(i); });
           }
+          if (!heroSet.length) heroSet = PHOTOS.map(function (_, i) { return i; });
 
           slidesWrap.innerHTML = "";
           dotsWrap.innerHTML = "";
