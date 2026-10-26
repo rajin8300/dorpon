@@ -128,12 +128,16 @@
 
       .wrap {
         width: 100%;
-        max-width: 1400px;
+        max-width: 1800px;
         margin-inline: auto;
         padding-inline: 1.25rem;
       }
       @media (min-width: 640px) { .wrap { padding-inline: 2rem; } }
       @media (min-width: 1024px) { .wrap { padding-inline: 3rem; } }
+      /* Desktop only: scale the whole desktop layout up, so it looks
+         like the zoomed-in screenshots instead of small in the middle
+         of a wide screen. Mobile and tablet are untouched. */
+      @media (min-width: 1024px) { html { font-size: 22px; } }
 
       section { padding-block: 5rem; }
       @media (min-width: 640px) { section { padding-block: 7rem; } }
