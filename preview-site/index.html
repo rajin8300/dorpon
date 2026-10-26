@@ -313,13 +313,18 @@
         text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.45);
       }
       @media (min-width: 640px) { .hero h1 { font-size: 3.9rem; } }
-      /* Mobile only: ONLY the title moves up (transform, so the rest
-         of the hero does not move with it); the pill, subtitle and
-         buttons move down instead, increasing the gap. Desktop and
-         tablet are unchanged. */
+      /* Mobile only: title at the top, rest at the bottom, middle
+         empty so the model's face stays visible. Desktop and tablet
+         are unchanged. */
       @media (max-width: 639px) {
-        .hero h1 { font-size: 2.2rem; transform: translateY(-2rem); }
-        .hero-eyebrow { margin-top: 4rem; }
+        .hero h1 { font-size: 2.2rem; transform: none; }
+        .hero-content {
+          display: flex; flex-direction: column;
+          min-height: 94svh;
+          padding-top: 5.5rem !important;
+          padding-bottom: 3.5rem !important;
+        }
+        .hero-eyebrow { margin-top: auto; }
       }
       @media (min-width: 1024px) { .hero h1 { font-size: 4.6rem; } }
       .hero h1 .grad-word {
