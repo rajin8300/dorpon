@@ -88,7 +88,7 @@ export default function HeroSlideshow({
     if (reducedMotion || count < 2) return
     const id = window.setInterval(() => setIndex((i) => i + 1), intervalMs)
     return () => window.clearInterval(id)
-  }, [reducedMotion, count, intervalMs, index])
+  }, [reducedMotion, count, intervalMs])
 
   const handleSelect = (i: number) => {
     const targetKey = available[i]?.key

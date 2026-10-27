@@ -59,9 +59,7 @@ export default function Header() {
     }
   }, [menuOpen])
 
-  // Dark theme: the header is always on a dark background, so the
-  // cream logo and cream text are used in every state.
-  const onDark = true
+  // Dark theme is always active — cream text and logo are used in all states.
 
   return (
     <>
@@ -79,33 +77,16 @@ export default function Header() {
             aria-label={`${site.brand.full} — home`}
             className="group flex items-center"
           >
-            <span className="relative block h-9 aspect-[640/367] sm:h-11">
-              <img
-                src={brandAssets.logoCream}
-                alt=""
-                aria-hidden="true"
-                width={640}
-                height={367}
-                fetchPriority="high"
-                decoding="async"
-                className={[
-                  'absolute inset-0 h-full w-full object-contain transition-opacity duration-500',
-                  onDark ? 'opacity-100' : 'opacity-0',
-                ].join(' ')}
-              />
-              <img
-                src={brandAssets.logoBlack}
-                alt=""
-                aria-hidden="true"
-                width={640}
-                height={367}
-                decoding="async"
-                className={[
-                  'absolute inset-0 h-full w-full object-contain transition-opacity duration-500',
-                  onDark ? 'opacity-0' : 'opacity-100',
-                ].join(' ')}
-              />
-            </span>
+            <img
+              src={brandAssets.logoCream}
+              alt=""
+              aria-hidden="true"
+              width={640}
+              height={367}
+              fetchPriority="high"
+              decoding="async"
+              className="block h-9 w-auto object-contain sm:h-11"
+            />
           </a>
 
           <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
@@ -113,11 +94,7 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className={[
-                  'relative py-1 text-[0.72rem] font-medium uppercase tracking-label transition-colors duration-300',
-                  'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full',
-                  onDark ? 'text-cream/85 hover:text-cream' : 'text-ink-soft hover:text-ink',
-                ].join(' ')}
+              className="relative py-1 text-[0.72rem] font-medium uppercase tracking-label text-cream/85 transition-colors duration-300 hover:text-cream after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.label}
               </a>
@@ -127,12 +104,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className={[
-                'hidden rounded-full border px-5 py-2 text-[0.72rem] font-medium uppercase tracking-label transition-colors duration-300 md:inline-flex',
-                onDark
-                  ? 'border-cream/45 text-cream hover:bg-cream hover:text-ink'
-                  : 'border-ink/25 text-ink hover:bg-ink hover:text-cream',
-              ].join(' ')}
+              className="hidden rounded-full border border-cream/45 px-5 py-2 text-[0.72rem] font-medium uppercase tracking-label text-cream transition-colors duration-300 hover:bg-cream hover:text-ink md:inline-flex"
             >
               Contact Us
             </a>
@@ -144,10 +116,7 @@ export default function Header() {
               aria-label="Open navigation menu"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              className={[
-                'inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 md:hidden',
-                onDark ? 'text-cream hover:bg-cream/10' : 'text-ink hover:bg-ink/5',
-              ].join(' ')}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-cream transition-colors duration-300 hover:bg-cream/10 md:hidden"
             >
               <IconMenu className="h-6 w-6" />
             </button>

@@ -8,7 +8,6 @@ import SectionIntro from './SectionIntro'
 function embedUrl(id: string) {
   const params = new URLSearchParams({
     rel: '0',
-    modestbranding: '1',
     playsinline: '1',
   })
   return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`
