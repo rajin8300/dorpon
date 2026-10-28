@@ -146,9 +146,9 @@
          small side padding. Mobile and tablet are untouched. */
       @media (min-width: 1024px) { .wrap { max-width: none; padding-inline: 4rem; } }
 
-      section { padding-block: 2.25rem; }
-      @media (min-width: 640px) { section { padding-block: 2.75rem; } }
-      @media (min-width: 1024px) { section { padding-block: 3rem; } }
+      section { padding-block: 1.5rem; }
+      @media (min-width: 640px) { section { padding-block: 2rem; } }
+      @media (min-width: 1024px) { section { padding-block: 2.25rem; } }
 
       /* ---------- reveal on scroll ----------
          Content is visible by default; the entrance animation only plays
@@ -423,18 +423,18 @@
       .eyebrow.violet { color: var(--violet); }
       .eyebrow.teal { color: var(--teal); }
       .section-title {
-        margin-top: 1rem;
+        margin-top: 0.45rem;
         font-size: 1.8rem; font-weight: 450;
         line-height: 1.15; letter-spacing: -0.01em;
       }
       @media (min-width: 640px) { .section-title { font-size: 2.3rem; } }
       @media (min-width: 1024px) { .section-title { font-size: 2.8rem; } }
-      .section-desc { margin-top: 1.2rem; max-width: 38rem; font-size: 1rem; line-height: 1.7; color: var(--ink-soft); }
+      .section-desc { margin-top: 0.5rem; max-width: 38rem; font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
       @media (min-width: 640px) { .section-desc { font-size: 1.06rem; } }
 
       /* ---------- portfolio ---------- */
-      .gallery { margin-top: 1.75rem; columns: 1; column-gap: 1.1rem; }
-      @media (min-width: 640px) { .gallery { columns: 2; margin-top: 2.25rem; } }
+      .gallery { margin-top: 1.25rem; columns: 1; column-gap: 1.1rem; }
+      @media (min-width: 640px) { .gallery { columns: 2; margin-top: 1.5rem; } }
       @media (min-width: 1024px) { .gallery { columns: 3; } }
       .tile { margin: 0 0 1.1rem; break-inside: avoid; }
       .tile button {
@@ -471,8 +471,8 @@
 
       /* ---------- videos ---------- */
       .videos-section { background: linear-gradient(180deg, var(--lilac-bg), var(--cream)); border-block: 1px solid var(--violet-soft); }
-      .video-grid { margin-top: 1.75rem; display: grid; gap: 1.5rem; }
-      @media (min-width: 640px) { .video-grid { margin-top: 2.25rem; } }
+      .video-grid { margin-top: 1.25rem; display: grid; gap: 1.5rem; }
+      @media (min-width: 640px) { .video-grid { margin-top: 1.5rem; } }
       @media (min-width: 1024px) { .video-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
       .video-frame {
         position: relative; aspect-ratio: 16 / 9; width: 100%;
@@ -485,8 +485,8 @@
       .video-cap { margin-top: 0.8rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
 
       /* ---------- about ---------- */
-      .about-grid { display: grid; gap: 2.5rem; }
-      @media (min-width: 1024px) { .about-grid { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+      .about-grid { display: grid; gap: 1.75rem; margin-top: 1.25rem; }
+      @media (min-width: 1024px) { .about-grid { grid-template-columns: 5fr 7fr; gap: 2.5rem; margin-top: 1.5rem; } }
       .about-text { font-size: 1.125rem; line-height: 1.75; color: var(--ink-soft); }
       @media (min-width: 640px) { .about-text { font-size: 1.25rem; } }
       .about-text .brand-name { color: var(--ink); font-weight: 600; }
@@ -535,8 +535,8 @@
       .contact-layout-wrap {
         display: flex;
         flex-direction: column;
-        gap: 2.25rem;
-        margin-top: 1.75rem;
+        gap: 1.75rem;
+        margin-top: 1.25rem;
       }
       .booking-form-col .booking-card {
         margin-top: 0;
@@ -548,7 +548,7 @@
         .contact-layout-wrap {
           display: grid;
           grid-template-columns: 5fr 7fr;
-          gap: 3.5rem;
+          gap: 2.75rem;
           align-items: start;
         }
         .contact-layout-wrap .contact-info-col {
@@ -570,7 +570,7 @@
 
       /* ---------- booking form ---------- */
       .booking-card {
-        margin-top: 2.25rem;
+        margin-top: 1.5rem;
         background: var(--card-bg);
         border: 1px solid var(--line);
         border-radius: 18px;
@@ -580,15 +580,44 @@
       @media (min-width: 640px) {
         .booking-card { padding: 3rem 2.5rem; }
       }
-      .booking-header { margin-bottom: 2rem; }
-      .booking-title { font-size: 1.75rem; margin-top: 0.5rem; color: var(--ink); font-weight: 500; }
-      @media (min-width: 640px) { .booking-title { font-size: 2.2rem; } }
-      .booking-desc { margin-top: 0.5rem; color: var(--muted); font-size: 0.95rem; }
+      .booking-header { margin-bottom: 1.75rem; }
+      .booking-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 1.15rem;
+        border-radius: 999px;
+        background: linear-gradient(92deg, rgba(245, 158, 11, 0.16), rgba(225, 29, 72, 0.16));
+        border: 1px solid rgba(245, 158, 11, 0.45);
+        color: var(--marigold);
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .booking-title {
+        font-size: 2rem;
+        margin-top: 0.35rem;
+        color: var(--ink);
+        font-weight: 500;
+        line-height: 1.25;
+      }
+      @media (min-width: 640px) { .booking-title { font-size: 2.5rem; } }
+      .booking-desc { margin-top: 0.5rem; color: var(--muted); font-size: 0.98rem; line-height: 1.6; }
       .form-row-2 { display: grid; gap: 1.25rem; margin-bottom: 1.25rem; }
       @media (min-width: 640px) { .form-row-2 { grid-template-columns: 1fr 1fr; } }
       .form-group { margin-bottom: 1.25rem; }
-      .form-label { display: block; margin-bottom: 0.45rem; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); }
-      .form-label .req { color: var(--rose); margin-left: 2px; }
+      .form-label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: normal !important;
+        text-transform: none !important;
+        color: var(--ink-soft);
+      }
+      .form-label .req { color: var(--rose); margin-left: 3px; }
       .form-input, .form-select, .form-textarea {
         width: 100%;
         box-sizing: border-box;
@@ -768,7 +797,7 @@
       <section class="hero" id="home" style="padding-block:0;">
         <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
 
-        <div class="wrap hero-content" style="padding-top:6.5rem; padding-bottom:3rem;">
+        <div class="wrap hero-content" style="padding-top:5.5rem; padding-bottom:1.75rem;">
           <h1 class="font-display">Every Frame Tells a <span class="grad-word">Story.</span></h1>
           <p class="hero-eyebrow"><img class="hero-pin" src="assets/location-pin.png" alt="" width="256" height="256" aria-hidden="true" /> Photography &amp; Cinematography · Rajbari</p>
           <p class="hero-sub">Capturing meaningful moments through photography and cinematic storytelling.</p>
@@ -872,10 +901,13 @@
             <div class="booking-form-col">
               <div class="booking-card reveal" id="booking-form-wrap">
                 <div class="booking-header">
-                  <p class="eyebrow marigold">Booking &amp; Inquiry</p>
+                  <span class="booking-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Booking &amp; Inquiry
+                  </span>
                   <h3 class="font-display booking-title">আমাদের সাথে যোগাযোগ করুন</h3>
                   <p class="booking-desc">
-                    আপনার ইভেন্টের জন্য ফটোগ্রাফি বা সিনেমাটোগ্রাফি বুক করতে নিচের তথ্যগুলো পূরণ করুন।
+                    আপনার বিশেষ মুহূর্তগুলোকে ফ্রেমে বন্দী করতে নিচের ফর্মটি পূরণ করে পাঠান।
                   </p>
                 </div>
 
@@ -935,7 +967,7 @@
 
                   <div class="form-actions">
                     <button type="submit" id="submit-btn" class="btn btn-gradient submit-btn">
-                      <span id="btn-text">তথ্য জমা দিন (Send Request)</span>
+                      <span id="btn-text">বুকিং রিকোয়েস্ট পাঠান (Send Request)</span>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
 
@@ -1360,7 +1392,7 @@
             resetFormBtn.addEventListener("click", function () {
               bookingForm.reset();
               submitBtn.disabled = false;
-              btnText.textContent = "তথ্য জমা দিন (Send Request)";
+              btnText.textContent = "বুকিং রিকোয়েস্ট পাঠান (Send Request)";
               formSuccessBox.style.display = "none";
               bookingForm.style.display = "block";
             });
