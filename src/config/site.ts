@@ -22,7 +22,7 @@ export const site = {
   },
 
   /** Short business label used in small caps. */
-  label: 'Photography & Videography',
+  label: 'Photography & Cinematography',
   /** Location shown in the hero eyebrow and contact section. */
   location: 'Rajbari, Bangladesh',
 

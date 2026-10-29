@@ -1,7 +1,7 @@
 # দর্পণ – Dorpon · Portfolio Website
 
 A minimal, premium, single-page portfolio website for **দর্পণ – Dorpon**, a photography and
-videography brand based in **Rajbari, Bangladesh**.
+cinematography brand based in **Rajbari, Bangladesh**.
 
 Built with **React + Vite + TypeScript + Tailwind CSS v4**. No backend, no database — the whole
 site is static and can be hosted anywhere.
@@ -202,7 +202,7 @@ colour change. To use a different colour there, change the `src` in `src/compone
 ```ts
 export const site = {
   brand: { bn: 'দর্পণ', en: 'Dorpon', full: 'দর্পণ – Dorpon' },
-  label: 'Photography & Videography',
+  label: 'Photography & Cinematography',
   location: 'Rajbari, Bangladesh',
   contact: {
     phoneDisplay: '01740-744170',
@@ -245,7 +245,7 @@ If you later move to a custom domain (e.g. `dorpon.com`) or another host:
 | Behind the Lens  | Two responsive 16:9 YouTube embeds (privacy-friendly `youtube-nocookie.com`, no autoplay) |
 | About            | “A Little About Dorpon” — short and factual                          |
 | Contact          | Phone (`tel:`), email (`mailto:`), Facebook & Instagram profile links, WhatsApp button, location |
-| Footer           | Logo, location, “Photography & Videography”, dynamic copyright year |
+| Footer           | Logo, location, “Photography & Cinematography”, dynamic copyright year |
 
 There is **no contact form** — every contact row is a real, working link instead, so nothing can
 silently fail to send.

@@ -2,7 +2,7 @@
   "name": "dorpon-website",
   "private": true,
   "version": "1.0.0",
-  "description": "দর্পণ – Dorpon | Photography & Videography portfolio website (Rajbari, Bangladesh)",
+  "description": "দর্পণ – Dorpon | Photography & Cinematography portfolio website (Rajbari, Bangladesh)",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -19,7 +19,7 @@ export default function About() {
             <span lang="bn" className="text-cream">
               {site.brand.full}
             </span>{' '}
-            is a photography and videography brand based in Rajbari, Bangladesh. We focus on capturing
+            is a photography and cinematography brand based in Rajbari, Bangladesh. We focus on capturing
             meaningful moments and turning them into timeless visual stories.
           </p>
         </div>

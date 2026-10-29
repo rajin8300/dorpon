@@ -24,7 +24,7 @@ export default function Contact() {
           eyebrow="Contact"
           title="Let's Create Something Meaningful"
           titleId="contact-title"
-          description="Have a project in mind or want to discuss your photography or videography needs? We'd love to hear from you."
+          description="Have a project in mind or want to discuss your photography or cinematography needs? We'd love to hear from you."
         />
 
         {/* Hairline-divided details. No form — every row is a real, working link. */}
