@@ -32,9 +32,9 @@ export const site = {
     /** Clickable tel: link (international format works on mobile). */
     phoneHref: 'tel:+8801740744170',
     /** Email address. */
-    email: 'rajin8300@gmail.com',
+    email: 'contact@rajinmd.com',
     /** Clickable mailto: link. */
-    emailHref: 'mailto:rajin8300@gmail.com',
+    emailHref: 'mailto:contact@rajinmd.com',
     /** WhatsApp deep link using the international number without "+" or spaces. */
     whatsapp: 'https://wa.me/8801740744170',
     /** Facebook page URL. */

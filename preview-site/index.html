@@ -13,6 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://www.youtube-nocookie.com https://hcaptcha.com https://*.hcaptcha.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
     <meta
       name="description"
       content="দর্পণ – Dorpon is a photography and videography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling."
@@ -932,24 +933,25 @@
                   <input type="hidden" name="access_key" value="e7ac1dff-e0f9-44f0-b6a0-c568da4499c4" />
                   <input type="hidden" name="subject" id="form_subject" value="নতুন বুকিং অনুসন্ধান - Dorpon Website" />
                   <input type="hidden" name="from_name" id="form_from_name" value="Dorpon Visitor" />
+                  <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
 
                   <div id="form-error-msg" class="form-error" style="display: none;"></div>
 
                   <div class="form-row-2">
                     <div class="form-group">
                       <label for="client_name" class="form-label">আপনার নাম (Full Name) <span class="req">*</span></label>
-                      <input type="text" id="client_name" name="name" class="form-input" placeholder="যেমন: মোঃ সাব্বির আহমেদ" required />
+                      <input type="text" id="client_name" name="name" class="form-input" placeholder="যেমন: মোঃ সাব্বির আহমেদ" maxlength="100" required />
                     </div>
                     <div class="form-group">
                       <label for="client_phone" class="form-label">ফোন নম্বর (Phone Number) <span class="req">*</span></label>
-                      <input type="tel" id="client_phone" name="phone" class="form-input" placeholder="01XXXXXXXXX" required />
+                      <input type="tel" id="client_phone" name="phone" class="form-input" placeholder="01XXXXXXXXX" maxlength="20" required />
                     </div>
                   </div>
 
                   <div class="form-row-2">
                     <div class="form-group">
                       <label for="client_email" class="form-label">ইমেইল ঠিকানা (Email - Optional)</label>
-                      <input type="email" id="client_email" name="email" class="form-input" placeholder="example@gmail.com" />
+                      <input type="email" id="client_email" name="email" class="form-input" placeholder="example@gmail.com" maxlength="100" />
                     </div>
                     <div class="form-group">
                       <label for="client_date" class="form-label">ইভেন্টের তারিখ (Event Date - Optional)</label>
@@ -971,8 +973,10 @@
 
                   <div class="form-group">
                     <label for="client_message" class="form-label">বার্তা বা অতিরিক্ত তথ্য (Message / Location / Requirements)</label>
-                    <textarea id="client_message" name="message" class="form-textarea" rows="4" placeholder="আপনার ইভেন্টের লোকেশন, সময়সূচী বা বিশেষ কোনো চাহিদা থাকলে লিখুন..."></textarea>
+                    <textarea id="client_message" name="message" class="form-textarea" rows="4" maxlength="1000" placeholder="আপনার ইভেন্টের লোকেশন, সময়সূচী বা বিশেষ কোনো চাহিদা থাকলে লিখুন..."></textarea>
                   </div>
+
+                  <div class="h-captcha" data-captcha="true"></div>
 
                   <div class="form-actions">
                     <button type="submit" id="submit-btn" class="btn btn-gradient submit-btn">
@@ -1335,17 +1339,39 @@
         var formFromName = document.getElementById("form_from_name");
 
         if (bookingForm) {
-          bookingForm.addEventListener("submit", function (e) {
+          bookingForm.addEventListener("submit", async function (e) {
+            // Single submission path: JS fetch only. The form's native
+            // POST to the hidden iframe is NOT used when JS runs, so a
+            // booking is no longer sent twice to Web3Forms.
+            e.preventDefault();
             var nameVal = document.getElementById("client_name").value.trim();
             var phoneVal = document.getElementById("client_phone").value.trim();
             var emailVal = document.getElementById("client_email").value.trim();
             var serviceVal = document.getElementById("client_service").value;
             var dateVal = document.getElementById("client_date").value;
             var messageVal = document.getElementById("client_message").value.trim();
+            var phoneDigits = phoneVal.replace(/[\s-]/g, "");
+            var phoneOk = /^(01[3-9]\d{8})$/.test(phoneDigits) || /^\+8801[3-9]\d{8}$/.test(phoneDigits);
 
             if (!nameVal || !phoneVal) {
-              e.preventDefault();
               formErrorMsg.textContent = "অনুগ্রহ করে আপনার নাম এবং ফোন নম্বর প্রদান করুন।";
+              formErrorMsg.style.display = "block";
+              return;
+            }
+            if (!phoneOk) {
+              formErrorMsg.textContent = "অনুগ্রহ করে সঠিক বাংলাদেশি মোবাইল নম্বর দিন (যেমন: 01XXXXXXXXX)।";
+              formErrorMsg.style.display = "block";
+              return;
+            }
+            // hCaptcha: only required when the widget is actually rendered
+            // (i.e. hCaptcha is enabled in the Web3Forms dashboard). If the
+            // dashboard toggle is off, no widget/token exists and the form
+            // still submits with the botcheck honeypot as protection.
+            var captchaEl = document.querySelector('[name="h-captcha-response"]');
+            var captchaToken = captchaEl ? captchaEl.value : "";
+            var captchaWidget = document.querySelector(".h-captcha iframe");
+            if (captchaWidget && !captchaToken) {
+              formErrorMsg.textContent = "অনুগ্রহ করে ক্যাপচা সম্পূর্ণ করুন, তারপর আবার পাঠান।";
               formErrorMsg.style.display = "block";
               return;
             }
@@ -1357,24 +1383,39 @@
             submitBtn.disabled = true;
             btnText.textContent = "পাঠানো হচ্ছে...";
 
-            // Parallel background API call to Web3Forms
+            var payload = {
+              access_key: "e7ac1dff-e0f9-44f0-b6a0-c568da4499c4",
+              subject: "নতুন বুকিং অনুসন্ধান - " + nameVal + " (" + serviceVal + ")",
+              from_name: nameVal,
+              name: nameVal,
+              phone: phoneVal,
+              email: emailVal || "Not provided",
+              service: serviceVal,
+              event_date: dateVal || "Not specified",
+              message: messageVal || "No additional message",
+              botcheck: false
+            };
+            if (captchaToken) { payload["h-captcha-response"] = captchaToken; }
+
+            var ok = false;
             try {
-              fetch("https://api.web3forms.com/submit", {
+              var resp = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: JSON.stringify({
-                  access_key: "e7ac1dff-e0f9-44f0-b6a0-c568da4499c4",
-                  subject: "নতুন বুকিং অনুসন্ধান - " + nameVal + " (" + serviceVal + ")",
-                  from_name: nameVal,
-                  name: nameVal,
-                  phone: phoneVal,
-                  email: emailVal || "Not provided",
-                  service: serviceVal,
-                  event_date: dateVal || "Not specified",
-                  message: messageVal || "No additional message"
-                })
-              }).catch(function() {});
-            } catch (err) {}
+                body: JSON.stringify(payload)
+              });
+              var result = await resp.json();
+              ok = resp.ok && result && result.success === true;
+            } catch (err) {
+              ok = false;
+            }
+            if (!ok) {
+              formErrorMsg.textContent = "দুঃখিত, মেসেজটি পাঠানো যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন, অথবা WhatsApp-এ সরাসরি মেসেজ দিন।";
+              formErrorMsg.style.display = "block";
+              submitBtn.disabled = false;
+              btnText.textContent = "বুকিং রিকোয়েস্ট পাঠান";
+              return;
+            }
 
             // Pre-fill WhatsApp message link
             var waMsg = "*নতুন অনুসন্ধান (Dorpon Website)*\n" +
@@ -1388,13 +1429,10 @@
             var waUrl = "https://wa.me/8801740744170?text=" + encodeURIComponent(waMsg);
             if (successWaBtn) successWaBtn.href = waUrl;
 
-            // Transition to success screen smoothly
-            setTimeout(function () {
-              bookingForm.style.display = "none";
-              successClientName.textContent = "ধন্যবাদ, " + nameVal + "!";
-              successDescText.textContent = "আপনার তথ্য আমরা পেয়েছি। খুব শীঘ্রই আমরা আপনার সাথে (" + phoneVal + ") নম্বরে যোগাযোগ করব।";
-              formSuccessBox.style.display = "block";
-            }, 1200);
+            bookingForm.style.display = "none";
+            successClientName.textContent = "ধন্যবাদ, " + nameVal + "!";
+            successDescText.textContent = "আপনার তথ্য আমরা পেয়েছি। খুব শীঘ্রই আমরা আপনার সাথে (" + phoneVal + ") নম্বরে যোগাযোগ করব।";
+            formSuccessBox.style.display = "block";
           });
 
           if (resetFormBtn) {
@@ -1412,5 +1450,6 @@
         document.getElementById("year").textContent = new Date().getFullYear();
       })();
     </script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
   </body>
 </html>

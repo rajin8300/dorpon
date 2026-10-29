@@ -207,8 +207,8 @@ export const site = {
   contact: {
     phoneDisplay: '01740-744170',
     phoneHref: 'tel:+8801740744170',
-    email: 'rajin8300@gmail.com',
-    emailHref: 'mailto:rajin8300@gmail.com',
+    email: 'contact@rajinmd.com',
+    emailHref: 'mailto:contact@rajinmd.com',
     whatsapp: 'https://wa.me/8801740744170',
     facebook: 'https://www.facebook.com/dorpon830',
     facebookHandle: '@dorpon830',
