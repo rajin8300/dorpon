@@ -1775,29 +1775,50 @@
         }
 
         /* ---------- single video playback ---------- */
-        /* Facebook/YouTube iframes are cross-origin, so the page cannot
-           hear their internal play events. Instead, when the visitor
-           clicks into a video iframe, the browser window loses focus
-           and document.activeElement becomes that iframe. At that
-           moment every OTHER video iframe is reloaded to its
-           thumbnail state, which stops it — so only one video can
-           play at a time. The active video itself is never reloaded. */
+        /* Facebook iframes are cross-origin, so the page cannot hear
+           their internal play events, and a window-blur handler alone
+           proved unreliable (a desktop test showed a second video
+           starting while the first kept playing). So the page now
+           polls which video iframe has focus: whenever focus moves
+           to a different video iframe, every OTHER video iframe is
+           force-reloaded (src cleared, then restored) to its
+           thumbnail state, which stops it. The focused video itself
+           is never reloaded, so it keeps playing. */
         (function () {
+          var lastActive = null;
           function videoIframes() {
             return Array.prototype.slice.call(
               document.querySelectorAll(".video-frame iframe, .reel-frame iframe")
             );
           }
-          window.addEventListener("blur", function () {
-            var active = document.activeElement;
-            if (!active || active.tagName !== "IFRAME") return;
+          function stopOthers(active) {
             videoIframes().forEach(function (frame) {
               if (frame !== active) {
                 var src = frame.getAttribute("src");
-                if (src) frame.setAttribute("src", src);
+                if (src) {
+                  frame.setAttribute("src", "");
+                  frame.setAttribute("src", src);
+                }
               }
             });
+          }
+          window.addEventListener("blur", function () {
+            var active = document.activeElement;
+            if (active && active.tagName === "IFRAME") {
+              lastActive = active;
+              stopOthers(active);
+            }
           });
+          setInterval(function () {
+            var active = document.activeElement;
+            if (active && active.tagName === "IFRAME" && active !== lastActive) {
+              var frames = videoIframes();
+              if (frames.indexOf(active) !== -1) {
+                lastActive = active;
+                stopOthers(active);
+              }
+            }
+          }, 300);
         })();
 
         /* ---------- preview note + year ---------- */
