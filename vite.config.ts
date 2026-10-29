@@ -4,15 +4,12 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 /**
- * GitHub Pages project sites are served from https://<user>.github.io/<repo>/,
- * so every asset URL needs that prefix. This is the base path for this repo.
+ * Custom domain root path: https://rajinmd.com/
  *
- *   Deployed at: https://rajin8300.github.io/dorpon/
- *
- * Using a custom domain (or a user/root site) later? Override it:
- *   BASE_PATH=/ npm run build
+ * Can still be overridden if needed:
+ *   BASE_PATH=/dorpon/ npm run build
  */
-const BASE_PATH = process.env.BASE_PATH ?? '/dorpon/'
+const BASE_PATH = process.env.BASE_PATH ?? '/'
 
 /**
  * With a base path configured, the dev server only serves the app under that

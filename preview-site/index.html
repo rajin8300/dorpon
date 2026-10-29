@@ -37,6 +37,7 @@
     <link rel="image_src" href="https://rajinmd.com/assets/photos/og-preview.jpg" />
 
     <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://www.youtube-nocookie.com https://hcaptcha.com https://*.hcaptcha.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
 
     <!-- Google tag (gtag.js) -->
@@ -1300,7 +1301,7 @@
           btn.type = "button";
           btn.setAttribute("aria-label", "View larger image: " + alt(i));
           var img = document.createElement("img");
-          img.src = fullSrc(p);
+          img.src = thumbSrc(p);
           img.alt = alt(i);
           img.width = p.w;
           img.height = p.h;
@@ -1398,6 +1399,14 @@
             var messageVal = document.getElementById("client_message").value.trim();
             var phoneDigits = phoneVal.replace(/[\s-]/g, "");
             var phoneOk = /^(01[3-9]\d{8})$/.test(phoneDigits) || /^\+8801[3-9]\d{8}$/.test(phoneDigits);
+
+            // Botcheck honeypot: if an automated bot filled the hidden input, abort silently
+            var botcheckEl = bookingForm.querySelector('[name="botcheck"]');
+            if (botcheckEl && (botcheckEl.checked || botcheckEl.value)) {
+              bookingForm.style.display = "none";
+              formSuccessBox.style.display = "block";
+              return;
+            }
 
             if (!nameVal || !phoneVal) {
               formErrorMsg.textContent = "অনুগ্রহ করে আপনার নাম এবং ফোন নম্বর প্রদান করুন।";
