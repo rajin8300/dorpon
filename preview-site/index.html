@@ -16,12 +16,13 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://www.youtube-nocookie.com https://hcaptcha.com https://*.hcaptcha.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
     <meta
       name="description"
-      content="দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling."
+      content="দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling."
     />
+    <link rel="canonical" href="https://rajinmd.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="দর্পণ – Dorpon" />
     <meta property="og:title" content="দর্পণ – Dorpon | Photography & Cinematography in Rajbari" />
-    <meta property="og:description" content="দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling." />
+    <meta property="og:description" content="দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling." />
     <meta property="og:url" content="https://rajinmd.com/" />
     <meta property="og:image" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -30,7 +31,7 @@
     <meta property="og:image:alt" content="Dorpon – bridal photography in Rajbari, Bangladesh" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="দর্পণ – Dorpon | Photography & Cinematography in Rajbari" />
-    <meta name="twitter:description" content="দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling." />
+    <meta name="twitter:description" content="দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling." />
     <meta name="twitter:image" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -767,6 +768,27 @@
         .hero-slides img { transition: none; }
       }
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "দর্পণ – Dorpon",
+  "description": "দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling.",
+  "url": "https://rajinmd.com/",
+  "telephone": "+8801740744170",
+  "email": "contact@rajinmd.com",
+  "image": "https://rajinmd.com/assets/photos/og-preview.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Rajbari",
+    "addressCountry": "BD"
+  },
+  "sameAs": [
+    "https://www.facebook.com/dorpon830",
+    "https://www.instagram.com/rajin.830"
+  ]
+}
+    </script>
   </head>
   <body>
     <!-- ================= HEADER ================= -->
@@ -1134,7 +1156,7 @@
           { slug: "fb-img-1792035452690", w: 1352, h: 1800 },
           { slug: "fb-img-bride", w: 1200, h: 1800 }
         ];
-        function alt(i) { return "Photograph " + (i + 1) + " from the Dorpon photography portfolio."; }
+        function alt(i) { return "Dorpon photography portfolio in Rajbari, Bangladesh – photograph " + (i + 1) + "."; }
         function fullSrc(p) { return "assets/photos/" + p.slug + ".webp"; }
         function thumbSrc(p) { return "assets/photos/thumbs/" + p.slug + ".webp"; }
 
@@ -1272,7 +1294,7 @@
           img.alt = alt(i);
           img.width = p.w;
           img.height = p.h;
-          img.loading = "eager";
+          img.loading = (i < 3) ? "eager" : "lazy";
           img.decoding = "async";
           var shade = document.createElement("span");
           shade.className = "tile-shade";
