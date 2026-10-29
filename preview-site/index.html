@@ -1400,7 +1400,7 @@
 
             // Botcheck honeypot: if an automated bot filled the hidden input, abort silently
             var botcheckEl = bookingForm.querySelector('[name="botcheck"]');
-            if (botcheckEl && (botcheckEl.checked || botcheckEl.value)) {
+            if (botcheckEl && botcheckEl.checked) {
               bookingForm.style.display = "none";
               formSuccessBox.style.display = "block";
               return;
