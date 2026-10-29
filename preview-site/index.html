@@ -38,7 +38,7 @@
 
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://*.fbcdn.net; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXT8SFHPLK"></script>
@@ -508,7 +508,11 @@
         box-shadow: 0 16px 40px rgba(124, 58, 237, 0.22);
         border: 1px solid var(--violet-soft);
       }
+      .video-frame:has(.fb-video) { aspect-ratio: auto; }
+      .reel-frame:has(.fb-video) { aspect-ratio: auto; }
       .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .video-frame .fb-video, .reel-frame .fb-video { width: 100%; display: block; }
+      .video-frame .fb-video iframe, .reel-frame .fb-video iframe { position: static; width: 100% !important; }
       .video-cap { margin-top: 0.8rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
       /* ---------- vertical reels ---------- */
       .reels-section { background: linear-gradient(180deg, var(--cream), var(--blush-bg)); border-block: 1px solid var(--rose-soft); }
@@ -815,6 +819,8 @@
     </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
       <div class="wrap header-inner">
@@ -906,157 +912,73 @@
           <div class="video-grid reveal">
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1224904015771152&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Rag Day Drone"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1224904015771152" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Rag Day Drone"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Rag Day Drone</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1531786270788297&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Maroon Saree Walk"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1531786270788297" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Maroon Saree Walk"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Maroon Saree Walk</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1461538111464192&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Red Saree Bridge"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1461538111464192" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Red Saree Bridge"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Red Saree Bridge</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1445836667289025&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Red Saree Station"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/watch/?v=1445836667289025" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Red Saree Station"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Red Saree Station</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2316011832096431&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Portrait (Ipty)"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/2316011832096431" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Portrait (Ipty)"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Portrait (Ipty)</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D2521324541592505&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Yellow Saree Palms"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/watch/?v=2521324541592505" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Yellow Saree Palms"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Yellow Saree Palms</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1634892954699923&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Portrait Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1634892954699923" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Portrait Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Portrait Reel</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1141303574017253&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Commercial Shoot"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1141303574017253" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Commercial Shoot"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Commercial Shoot</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1414335359648185&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Kacha Holud (Personal)"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/watch/?v=1414335359648185" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Kacha Holud (Personal)"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Kacha Holud (Personal)</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F499348682557516&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Green Saree Portrait"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/499348682557516" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Green Saree Portrait"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Green Saree Portrait</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F3950935668468565&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Purple Dress Portrait"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/3950935668468565" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Purple Dress Portrait"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Purple Dress Portrait</figcaption>
             </figure>
 <figure>
               <div class="video-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1021736793909368&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Haldi Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1021736793909368" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Haldi Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Haldi Reel</figcaption>
             </figure>
@@ -1076,66 +998,31 @@
           <div class="reel-grid reveal">
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2881895688836059&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Cinematic Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/2881895688836059" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Cinematic Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Cinematic Reel</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1073006068217205&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Blue Saree Roses"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1073006068217205" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Blue Saree Roses"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Blue Saree Roses</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1446444140752490&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Holud Makeover Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1446444140752490" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Holud Makeover Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Holud Makeover Reel</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4281918682137578&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Elegance Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/4281918682137578" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Elegance Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Elegance Reel</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1788533128992811&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Glow-Up Reel"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1788533128992811" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Glow-Up Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Glow-Up Reel</figcaption>
             </figure>
@@ -1155,53 +1042,25 @@
           <div class="reel-grid reveal">
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1175265943968509&amp;show_text=false&amp;width=500"
-                  title="Dorpon — BTS Maroon Bench"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1175265943968509" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — BTS Maroon Bench"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Maroon Bench</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F715877131010386&amp;show_text=false&amp;width=500"
-                  title="Dorpon — Nabin Boron"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/715877131010386" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — Nabin Boron"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Nabin Boron</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1079451777327036&amp;show_text=false&amp;width=500"
-                  title="Dorpon — BTS Boishakhi"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1079451777327036" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — BTS Boishakhi"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Boishakhi</figcaption>
             </figure>
 <figure>
               <div class="reel-frame">
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1467362517590851&amp;show_text=false&amp;width=500"
-                  title="Dorpon — BTS Red Saree"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/reel/1467362517590851" data-show-text="false" data-autoplay="true" data-allowfullscreen="true" title="Dorpon — BTS Red Saree"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Red Saree</figcaption>
             </figure>
