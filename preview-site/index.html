@@ -1774,51 +1774,16 @@
           }
         }
 
-        /* ---------- single video playback ---------- */
-        /* Facebook iframes are cross-origin, so the page cannot hear
-           their internal play events, and a window-blur handler alone
-           proved unreliable (a desktop test showed a second video
-           starting while the first kept playing). So the page now
-           polls which video iframe has focus: whenever focus moves
-           to a different video iframe, every OTHER video iframe is
-           force-reloaded (src cleared, then restored) to its
-           thumbnail state, which stops it. The focused video itself
-           is never reloaded, so it keeps playing. */
+        /* ---------- video tap stability (mobile) ---------- */
+        /* NOTE: an earlier single-video-playback attempt reloaded
+           every other video iframe on tap. On the user's phone that
+           coincided with the page jumping after a tap, so the reload
+           approach is REMOVED — no video iframe is touched on tap
+           anymore. overflow-anchor is also disabled so a late-loading
+           embed below the fold cannot shift the scroll position. */
         (function () {
-          var lastActive = null;
-          function videoIframes() {
-            return Array.prototype.slice.call(
-              document.querySelectorAll(".video-frame iframe, .reel-frame iframe")
-            );
-          }
-          function stopOthers(active) {
-            videoIframes().forEach(function (frame) {
-              if (frame !== active) {
-                var src = frame.getAttribute("src");
-                if (src) {
-                  frame.setAttribute("src", "");
-                  frame.setAttribute("src", src);
-                }
-              }
-            });
-          }
-          window.addEventListener("blur", function () {
-            var active = document.activeElement;
-            if (active && active.tagName === "IFRAME") {
-              lastActive = active;
-              stopOthers(active);
-            }
-          });
-          setInterval(function () {
-            var active = document.activeElement;
-            if (active && active.tagName === "IFRAME" && active !== lastActive) {
-              var frames = videoIframes();
-              if (frames.indexOf(active) !== -1) {
-                lastActive = active;
-                stopOthers(active);
-              }
-            }
-          }, 300);
+          document.documentElement.style.overflowAnchor = "none";
+          document.body.style.overflowAnchor = "none";
         })();
 
         /* ---------- preview note + year ---------- */
