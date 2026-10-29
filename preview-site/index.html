@@ -1047,6 +1047,19 @@
               </div>
               <figcaption class="video-cap">Dorpon — Yellow Saree Palms</figcaption>
             </figure>
+            <figure>
+              <div class="video-frame">
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1461538111464192&amp;show_text=false&amp;width=500"
+                  title="Dorpon — Red Saree Bridge"
+                  loading="lazy"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <figcaption class="video-cap">Dorpon — Red Saree Bridge</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -1762,6 +1775,32 @@
             });
           }
         }
+
+        /* ---------- single video playback ---------- */
+        /* Facebook/YouTube iframes are cross-origin, so the page cannot
+           hear their internal play events. Instead, when the visitor
+           clicks into a video iframe, the browser window loses focus
+           and document.activeElement becomes that iframe. At that
+           moment every OTHER video iframe is reloaded to its
+           thumbnail state, which stops it — so only one video can
+           play at a time. The active video itself is never reloaded. */
+        (function () {
+          function videoIframes() {
+            return Array.prototype.slice.call(
+              document.querySelectorAll(".video-frame iframe, .reel-frame iframe")
+            );
+          }
+          window.addEventListener("blur", function () {
+            var active = document.activeElement;
+            if (!active || active.tagName !== "IFRAME") return;
+            videoIframes().forEach(function (frame) {
+              if (frame !== active) {
+                var src = frame.getAttribute("src");
+                if (src) frame.setAttribute("src", src);
+              }
+            });
+          });
+        })();
 
         /* ---------- preview note + year ---------- */
         document.getElementById("year").textContent = new Date().getFullYear();
