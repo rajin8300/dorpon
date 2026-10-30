@@ -798,6 +798,10 @@
         .reveal.is-visible { animation: none; }
         .hero-slides img { transition: none; }
       }
+      .faq-list { margin-top: 1.25rem; display: grid; gap: 0.9rem; }
+      .faq-item { border: 1px solid var(--violet-soft); border-radius: 14px; padding: 0.9rem 1.1rem; }
+      .faq-item summary { cursor: pointer; font-weight: 700; }
+      .faq-item p { margin: 0.6rem 0 0; color: var(--muted); line-height: 1.6; }
     </style>
     <script type="application/ld+json">
 {
@@ -817,6 +821,20 @@
   "sameAs": [
     "https://www.facebook.com/dorpon830",
     "https://www.instagram.com/rajin.830"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What services does Dorpon offer?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Bangladesh."}},
+    {"@type": "Question", "name": "Where is Dorpon based?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon is based in Rajbari, Bangladesh. It is a service-area business with no walk-in office, and travels to clients for shoots."}},
+    {"@type": "Question", "name": "How can I book Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170."}},
+    {"@type": "Question", "name": "How can I contact Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page."}},
+    {"@type": "Question", "name": "Can I see Dorpon's previous work before booking?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon."}},
+    {"@type": "Question", "name": "How much does a Dorpon shoot cost?", "acceptedAnswer": {"@type": "Answer", "text": "The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you."}}
   ]
 }
     </script>
@@ -1181,6 +1199,25 @@
               is a photography and cinematography brand based in Rajbari, Bangladesh. We focus on capturing
               meaningful moments and turning them into timeless visual stories.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section id="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow teal">FAQ</p>
+            <h2 class="section-title font-display" id="faq-title">Frequently Asked Questions</h2>
+            <p class="section-desc">Answers about booking Dorpon for photography and cinematography in Rajbari.</p>
+          </div>
+          <div class="faq-list reveal">
+            <details class="faq-item"><summary>What services does Dorpon offer?</summary><p>Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Bangladesh.</p></details>
+            <details class="faq-item"><summary>Where is Dorpon based?</summary><p>Dorpon is based in Rajbari, Bangladesh. It is a service-area business with no walk-in office, and travels to clients for shoots.</p></details>
+            <details class="faq-item"><summary>How can I book Dorpon?</summary><p>Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170.</p></details>
+            <details class="faq-item"><summary>How can I contact Dorpon?</summary><p>Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page.</p></details>
+            <details class="faq-item"><summary>Can I see Dorpon's previous work before booking?</summary><p>Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon.</p></details>
+            <details class="faq-item"><summary>How much does a Dorpon shoot cost?</summary><p>The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you.</p></details>
           </div>
         </div>
       </section>
