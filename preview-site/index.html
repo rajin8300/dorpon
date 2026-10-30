@@ -513,6 +513,9 @@
       .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
       .video-frame .fb-video, .reel-frame .fb-video { width: 100%; display: block; }
       .video-frame .fb-video iframe, .reel-frame .fb-video iframe { position: static; width: 100% !important; }
+      .video-frame .fb-fallback, .reel-frame .fb-fallback { display: none; position: absolute; inset: 0; z-index: 2; align-items: center; justify-content: center; }
+      .video-frame .fb-fallback span, .reel-frame .fb-fallback span { background: #1877f2; color: #fff; font-weight: 700; font-size: 0.9rem; padding: 0.65rem 1.4rem; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+      .video-frame.fb-failed .fb-fallback, .reel-frame.fb-failed .fb-fallback { display: flex; }
       .video-cap { margin-top: 0.8rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
       /* ---------- vertical reels ---------- */
       .reels-section { background: linear-gradient(180deg, var(--cream), var(--blush-bg)); border-block: 1px solid var(--rose-soft); }
@@ -845,7 +848,7 @@
           var entry = { id: msg.id, player: msg.instance };
           players.push(entry);
           var el = document.getElementById(msg.id);
-          if (el) el.classList.add("fb-parsed");
+          if (el) { el.classList.add("fb-parsed"); if (el.parentNode) el.parentNode.classList.remove("fb-failed"); }
           try {
             entry.player.subscribe("startedPlaying", function () {
               try { entry.player.unmute(); } catch (e) {}
@@ -858,6 +861,7 @@
            empty dark frame at the right aspect ratio, so 20 Facebook
            players no longer all load at page load and compete with
            the photos for bandwidth/CPU. */
+        function setupLazy() {
         var lazyEls = document.querySelectorAll(".fb-video");
         if ("IntersectionObserver" in window) {
           var lo = new IntersectionObserver(function (entries) {
@@ -872,9 +876,45 @@
         } else {
           lazyEls.forEach(function (el) { try { FB.XFBML.parse(el.parentNode); } catch (e) {} });
         }
+        }
+        /* Race fix: the SDK can load (from cache) before the video divs
+           exist in the DOM, which left them unobserved forever. Wait for
+           the DOM when it is still parsing. */
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupLazy);
+        else setupLazy();
       };
     </script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+      /* Fallback: if a Facebook player has not parsed 15 seconds after
+         the page is ready (slow/blocked Facebook on mobile data, or the
+         SDK never loading), show a "Facebook-এ দেখুন" button in that
+         card so the reel still opens in the Facebook app/page. If the
+         SDK parses later, the button is removed by xfbml.ready. */
+      (function () {
+        function setupFallback() {
+          var els = document.querySelectorAll(".fb-video");
+          els.forEach(function (el) {
+            var frame = el.parentNode;
+            if (!frame || frame.querySelector(".fb-fallback")) return;
+            var a = document.createElement("a");
+            a.className = "fb-fallback";
+            a.href = el.getAttribute("data-href");
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.innerHTML = "<span>Facebook-এ দেখুন</span>";
+            frame.appendChild(a);
+          });
+          setTimeout(function () {
+            els.forEach(function (el) {
+              if (!el.classList.contains("fb-parsed") && el.parentNode) el.parentNode.classList.add("fb-failed");
+            });
+          }, 15000);
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupFallback);
+        else setupFallback();
+      })();
+    </script>
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
       <div class="wrap header-inner">
