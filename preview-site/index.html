@@ -38,7 +38,7 @@
 
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://*.fbcdn.net; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://*.fbcdn.net; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXT8SFHPLK"></script>
@@ -851,15 +851,35 @@
          are paused via player.pause() (no iframe reload, no scroll
          jump). At that same moment the playing video is unmuted via
          player.unmute(), so sound comes on together with play. */
+      /* Cross-platform one-at-a-time (2026-10-30): Facebook and
+         YouTube share one pause list. FB players live in
+         window.__dorponFBPlayers; the YouTube player (YT API, plus a
+         postMessage fallback) lives in window.__dorponYTPlayer.
+         When any player starts, all players on BOTH platforms pause.
+         No iframe reload, no scroll jump. */
+      window.__dorponFBPlayers = [];
+      window.__pauseYouTube = function () {
+        try { if (window.__dorponYTPlayer && window.__dorponYTPlayer.pauseVideo) window.__dorponYTPlayer.pauseVideo(); } catch (e) {}
+        try {
+          var yt = document.getElementById("yt-player-0");
+          if (yt && yt.contentWindow) yt.contentWindow.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
+        } catch (e) {}
+      };
+      window.__pauseFacebook = function () {
+        (window.__dorponFBPlayers || []).forEach(function (entry) {
+          try { entry.player.pause(); } catch (e) {}
+        });
+      };
       window.fbAsyncInit = function () {
         FB.init({ version: "v18.0", xfbml: false });
-        var players = [];
+        var players = window.__dorponFBPlayers;
         function pauseOthers(active) {
           players.forEach(function (entry) {
             if (entry.player !== active) {
               try { entry.player.pause(); } catch (e) {}
             }
           });
+          window.__pauseYouTube();
         }
         FB.Event.subscribe("xfbml.ready", function (msg) {
           if (msg.type !== "video") return;
@@ -903,6 +923,24 @@
       };
     </script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+      /* YouTube side of cross-platform pause: when the YouTube Short
+         starts playing, pause every Facebook player. Uses the official
+         YouTube IFrame API; if it is not ready yet, the postMessage
+         pause in __pauseYouTube still works the other way. */
+      window.onYouTubeIframeAPIReady = function () {
+        try {
+          window.__dorponYTPlayer = new YT.Player("yt-player-0", {
+            events: {
+              onStateChange: function (ev) {
+                if (ev && ev.data === YT.PlayerState.PLAYING) window.__pauseFacebook();
+              }
+            }
+          });
+        } catch (e) {}
+      };
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
       /* Fallback: if a Facebook player has not parsed 15 seconds after
          the page is ready (slow/blocked Facebook on mobile data, or the
@@ -1104,7 +1142,7 @@
           <div class="reel-grid reveal">
 <figure>
               <div class="reel-frame">
-                <iframe src="https://www.youtube-nocookie.com/embed/Su47lhgitkc" title="Ipty - Cinematic Wedding Reel" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe id="yt-player-0" src="https://www.youtube-nocookie.com/embed/Su47lhgitkc?enablejsapi=1" title="Ipty - Cinematic Wedding Reel" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <figcaption class="video-cap">Ipty — Cinematic Wedding Reel</figcaption>
             </figure>
