@@ -7,9 +7,9 @@
 --------------------------------------------------------------------------- */
 @theme {
   --font-sans:
-    'Hind Siliguri', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Bengali',
+    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hind Siliguri',
     sans-serif;
-  --font-display: 'Fraunces', 'Hind Siliguri', Georgia, 'Times New Roman', serif;
+  --font-display: 'Cormorant Garamond', 'Fraunces', Georgia, 'Times New Roman', serif;
 
   --color-cream: #faf7f2;
   --color-cream-deep: #f3eee5;
@@ -167,3 +167,127 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   VIDEO & REELS FRAMES (MATCHING LIVE RAJINMD.COM)
+--------------------------------------------------------------------------- */
+.video-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .video-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.reel-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .reel-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .reel-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #17110c;
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.22);
+  border: 1px solid rgba(237, 233, 254, 0.2);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.video-frame:hover {
+  transform: translateY(-4px);
+}
+
+.reel-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #17110c;
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.22);
+  border: 1px solid rgba(237, 233, 254, 0.2);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.reel-frame:hover {
+  transform: translateY(-4px);
+}
+
+.video-frame:has(.fb-video.fb-parsed),
+.reel-frame:has(.fb-video.fb-parsed) {
+  aspect-ratio: auto;
+}
+
+.video-frame iframe,
+.reel-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-frame .fb-video,
+.reel-frame .fb-video {
+  width: 100%;
+  display: block;
+}
+
+.video-frame .fb-video iframe,
+.reel-frame .fb-video iframe {
+  position: static;
+  width: 100% !important;
+}
+
+.video-frame .fb-fallback,
+.reel-frame .fb-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-frame .fb-fallback span,
+.reel-frame .fb-fallback span {
+  background: #1877f2;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.video-frame.fb-failed .fb-fallback,
+.reel-frame.fb-failed .fb-fallback {
+  display: flex;
+}
+
+.video-cap {
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+

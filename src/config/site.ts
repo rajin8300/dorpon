@@ -64,6 +64,7 @@ export const site = {
   nav: [
     { label: 'Home', href: '#home' },
     { label: 'Portfolio', href: '#portfolio' },
+    { label: 'Packages', href: '#packages' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ],

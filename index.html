@@ -42,16 +42,101 @@
     />
     <meta name="twitter:image" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
 
-    <!-- Fonts: Hind Siliguri supports Bangla + Latin; Fraunces is the editorial display serif. -->
+    <!-- Fonts: Plus Jakarta Sans (body sans), Cormorant Garamond (editorial luxury display), Hind Siliguri (Bangla fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <div id="fb-root"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+      window.__dorponFBPlayers = [];
+      window.__pauseYouTube = function () {
+        try { if (window.__dorponYTPlayer && window.__dorponYTPlayer.pauseVideo) window.__dorponYTPlayer.pauseVideo(); } catch (e) {}
+        try {
+          var yt = document.getElementById("yt-player-0");
+          if (yt && yt.contentWindow) yt.contentWindow.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
+        } catch (e) {}
+      };
+      window.__pauseFacebook = function () {
+        (window.__dorponFBPlayers || []).forEach(function (entry) {
+          try { entry.player.pause(); } catch (e) {}
+        });
+      };
+      window.fbAsyncInit = function () {
+        FB.init({ version: "v18.0", xfbml: false });
+        var players = window.__dorponFBPlayers;
+        function pauseOthers(active) {
+          players.forEach(function (entry) {
+            if (entry.player !== active) {
+              try { entry.player.pause(); } catch (e) {}
+            }
+          });
+          window.__pauseYouTube();
+        }
+        FB.Event.subscribe("xfbml.ready", function (msg) {
+          if (msg.type !== "video") return;
+          var entry = { id: msg.id, player: msg.instance };
+          players.push(entry);
+          var el = document.getElementById(msg.id);
+          if (el) { el.classList.add("fb-parsed"); if (el.parentNode) el.parentNode.classList.remove("fb-failed"); }
+          try {
+            entry.player.subscribe("startedPlaying", function () {
+              try { entry.player.unmute(); } catch (e) {}
+              pauseOthers(entry.player);
+            });
+          } catch (e) {}
+        });
+        function setupLazy() {
+          var lazyEls = document.querySelectorAll(".fb-video");
+          if ("IntersectionObserver" in window) {
+            var lo = new IntersectionObserver(function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                  lo.unobserve(en.target);
+                  try { FB.XFBML.parse(en.target.parentNode); } catch (e) {}
+                }
+              });
+            }, { rootMargin: "300px 0px" });
+            lazyEls.forEach(function (el) { lo.observe(el); });
+          } else {
+            lazyEls.forEach(function (el) { try { FB.XFBML.parse(el.parentNode); } catch (e) {} });
+          }
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupLazy);
+        else setupLazy();
+        window.__setupLazyFB = setupLazy;
+      };
+      (function () {
+        function setupFallback() {
+          var els = document.querySelectorAll(".fb-video");
+          els.forEach(function (el) {
+            var frame = el.parentNode;
+            if (!frame || frame.querySelector(".fb-fallback")) return;
+            var a = document.createElement("a");
+            a.className = "fb-fallback";
+            a.href = el.getAttribute("data-href");
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.innerHTML = "<span>Facebook-এ দেখুন</span>";
+            frame.appendChild(a);
+          });
+          setTimeout(function () {
+            els.forEach(function (el) {
+              if (!el.classList.contains("fb-parsed") && el.parentNode) el.parentNode.classList.add("fb-failed");
+            });
+          }, 15000);
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupFallback);
+        else setupFallback();
+        window.__setupFallbackFB = setupFallback;
+      })();
+    </script>
   </body>
 </html>
