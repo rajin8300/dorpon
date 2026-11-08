@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var saved = "dark";
+        try { saved = localStorage.getItem("dorpon_theme") || "dark"; } catch (e) {}
+        document.documentElement.setAttribute("data-theme", saved);
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>দর্পণ – Dorpon | Photography &amp; Cinematography in Rajbari, Faridpur &amp; Dhaka</title>
@@ -8,6 +15,8 @@
       name="description"
       content="দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, serving Rajbari, Faridpur and Dhaka, capturing meaningful moments through cinematic storytelling."
     />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="google-site-verification" content="googlea40599de001c6caf" />
     <link rel="canonical" href="https://rajinmd.com/" />
 
     <!-- Open Graph / Facebook / WhatsApp / Messenger -->
@@ -38,7 +47,7 @@
 
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://*.fbcdn.net; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://*.fbcdn.net https://*.ytimg.com; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://www.facebook.com https://www.instagram.com https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXT8SFHPLK"></script>
@@ -833,12 +842,726 @@
       .faq-item p { margin: 0.6rem 0 0; color: var(--muted); line-height: 1.6; }
     
 
+    
+      /* ---------- cinema unified hub ---------- */
+      .cinema-section { padding-block: 4rem; border-block: 1px solid var(--border); background: var(--night); }
+      @media (min-width: 640px) { .cinema-section { padding-block: 6rem; } }
+      .cinema-header-wrap { display: flex; flex-direction: column; gap: 1.25rem; }
+      @media (min-width: 768px) {
+        .cinema-header-wrap { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+      }
+      .cinema-nav-tabs {
+        display: flex;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px;
+        gap: 3px;
+        width: 100%;
+        max-width: 480px;
+        box-sizing: border-box;
+      }
+      .cinema-tab-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 0.5rem 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+      }
+      @media (min-width: 640px) {
+        .cinema-nav-tabs { width: auto; gap: 4px; padding: 4px; }
+        .cinema-tab-btn { flex: initial; padding: 0.55rem 1.15rem; font-size: 0.76rem; letter-spacing: 0.1em; }
+      }
+      .cinema-tab-btn:hover { color: var(--cream); background: rgba(255, 255, 255, 0.06); }
+      .cinema-tab-btn.active {
+        background: var(--rose);
+        color: #ffffff;
+        box-shadow: 0 4px 18px rgba(225, 29, 72, 0.35);
+      }
+      .tab-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.25);
+        color: currentColor;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 999px;
+        margin-left: 0.35rem;
+      }
+      .cinema-tab-btn.active .tab-badge {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .cinema-panel { margin-top: 1.75rem; }
+      .media-item-extra { display: none !important; }
+      .media-item-extra.is-expanded {
+        display: block !important;
+        animation: rise 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      }
+      .cinema-expander {
+        display: flex;
+        justify-content: center;
+        margin-top: 2.25rem;
+      }
+      .expand-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.7rem 1.6rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--cream);
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+      .expand-btn:hover {
+        background: rgba(255, 255, 255, 0.09);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      .expand-btn svg { transition: transform 0.3s ease; }
+      .expand-btn.is-active svg { transform: rotate(180deg); }
+
+      /* ---------- portfolio carousel ---------- */
+      .portfolio-section { padding-top: 1.25rem; padding-bottom: 2.5rem; overflow: hidden; }
+      @media (min-width: 640px) { .portfolio-section { padding-block: 5.5rem; } }
+      .portfolio-header-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.85rem;
+      }
+      @media (min-width: 640px) {
+        .portfolio-header-wrap {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-end;
+          gap: 1.25rem;
+          margin-bottom: 2rem;
+        }
+      }
+      .portfolio-header-text { flex: 1; }
+      .portfolio-header-wrap .eyebrow { font-size: 0.65rem; margin-bottom: 0.15rem; }
+      @media (min-width: 640px) { .portfolio-header-wrap .eyebrow { font-size: 0.72rem; margin-bottom: 0.5rem; } }
+      .portfolio-header-wrap .section-title { font-size: 1.5rem; margin: 0; line-height: 1.15; }
+      @media (min-width: 640px) { .portfolio-header-wrap .section-title { font-size: 2.25rem; line-height: 1.2; } }
+      .portfolio-header-wrap .section-desc { display: none; }
+      @media (min-width: 640px) { .portfolio-header-wrap .section-desc { display: block; margin-top: 0.5rem; } }
+
+      .carousel-controls { display: flex; align-items: center; gap: 0.65rem; align-self: center; }
+      @media (min-width: 640px) { .carousel-controls { align-self: flex-end; gap: 1rem; } }
+      .carousel-counter {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 3px;
+        font-family: var(--font-display);
+        color: var(--cream);
+        font-size: 1.05rem;
+      }
+      @media (min-width: 640px) { .carousel-counter { font-size: 1.25rem; gap: 4px; } }
+      .counter-curr { font-weight: 700; color: var(--rose); font-size: 1.2rem; }
+      @media (min-width: 640px) { .counter-curr { font-size: 1.4rem; } }
+      .counter-sep { color: var(--muted); font-size: 0.9rem; }
+      .counter-total { color: var(--muted); font-size: 0.9rem; }
+      .carousel-arrows { display: flex; gap: 0.4rem; }
+      .c-arrow-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        color: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        touch-action: manipulation;
+      }
+      @media (min-width: 640px) {
+        .c-arrow-btn { width: 42px; height: 42px; }
+      }
+      .c-arrow-btn:hover {
+        background: var(--rose);
+        border-color: var(--rose);
+        transform: scale(1.08);
+      }
+      .portfolio-carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        touch-action: pan-y;
+        padding-block: 0.25rem;
+      }
+      .portfolio-carousel-container:active { cursor: grabbing; }
+      .carousel-track {
+        display: flex;
+        will-change: transform;
+        transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .carousel-slide {
+        flex: 0 0 82%;
+        margin-right: 12px;
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        aspect-ratio: 3 / 4;
+        max-height: 440px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        cursor: pointer;
+      }
+      @media (min-width: 640px) {
+        .carousel-slide { flex: 0 0 46%; margin-right: 18px; max-height: 520px; border-radius: 18px; }
+      }
+      @media (min-width: 1024px) {
+        .carousel-slide { flex: 0 0 31.5%; margin-right: 22px; }
+      }
+      .carousel-slide:hover {
+        border: none;
+        box-shadow: none;
+      }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        transition: transform 0.5s ease;
+      }
+      
+      .carousel-slide-overlay { display: none; }
+      .carousel-slide-zoom {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(18, 16, 22, 0.7);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: all 0.25s ease;
+        pointer-events: none;
+      }
+      .carousel-slide:hover .carousel-slide-zoom {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .carousel-footer-bar {
+        margin-top: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .carousel-dots {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .c-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .c-dot.active {
+        width: 22px;
+        background: var(--rose);
+      }
+      .mobile-swipe-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+      }
+      @media (min-width: 640px) {
+        .mobile-swipe-indicator { display: none; }
+      }
+
+    
+      /* ================= THEME TOGGLE & PALETTES ================= */
+      :root, html[data-theme="dark"] {
+        --cream: #17120e;
+        --cream-deep: #1f1813;
+        --paper: #201913;
+        --ink: #f5ecdf;
+        --ink-soft: #d8cbb8;
+        --muted: #a2937f;
+        --line: #3a2f24;
+        --border: rgba(255, 255, 255, 0.12);
+        --night: #121016;
+        --card: rgba(255, 255, 255, 0.03);
+        --card-hover: rgba(255, 255, 255, 0.07);
+        --card-bg: #201913;
+        --header-bg: rgba(23, 18, 14, 0.92);
+      }
+
+      html[data-theme="light"] {
+        --cream: #fbf6ee;
+        --cream-deep: #f3ece0;
+        --paper: #ffffff;
+        --ink: #221a14;
+        --ink-soft: #4c4338;
+        --muted: #73675a;
+        --line: #e5dac6;
+        --border: rgba(34, 26, 20, 0.12);
+        --night: #f5eee3;
+        --card: #ffffff;
+        --card-hover: #faf6f0;
+        --card-bg: #ffffff;
+        --header-bg: rgba(251, 246, 238, 0.94);
+      }
+
+      html[data-theme="light"] body {
+        background: var(--cream) !important;
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] .cinema-section {
+        background: var(--night) !important;
+      }
+      html[data-theme="light"] .site-footer {
+        background: var(--cream-deep) !important;
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] .site-footer p,
+      html[data-theme="light"] .site-footer a {
+        color: var(--ink-soft) !important;
+      }
+      html[data-theme="light"] .site-footer a:hover {
+        color: var(--rose) !important;
+      }
+      html[data-theme="light"] .mobile-menu {
+        background: var(--cream) !important;
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] .booking-card,
+      html[data-theme="light"] .info-card {
+        background: #ffffff !important;
+        box-shadow: 0 10px 30px rgba(76, 67, 56, 0.08) !important;
+        border-color: var(--line) !important;
+      }
+      html[data-theme="light"] .contact-section {
+        background: var(--cream-deep) !important;
+      }
+      html[data-theme="light"] .video-frame,
+      html[data-theme="light"] .reel-frame {
+        border-color: rgba(34, 26, 20, 0.12) !important;
+        box-shadow: 0 14px 35px rgba(76, 67, 56, 0.12) !important;
+      }
+      html[data-theme="light"] .video-cap {
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] .cinema-nav-tabs {
+        background: rgba(34, 26, 20, 0.06) !important;
+        border-color: rgba(34, 26, 20, 0.12) !important;
+      }
+      html[data-theme="light"] .cinema-tab-btn {
+        color: var(--muted) !important;
+      }
+      html[data-theme="light"] .cinema-tab-btn:hover {
+        color: var(--ink) !important;
+        background: rgba(34, 26, 20, 0.08) !important;
+      }
+      html[data-theme="light"] .cinema-tab-btn.active {
+        color: #ffffff !important;
+        background: var(--rose) !important;
+      }
+      html[data-theme="light"] .cinema-tab-btn.active .tab-badge {
+        background: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+      }
+      html[data-theme="light"] .tab-badge {
+        background: rgba(0, 0, 0, 0.08) !important;
+        color: var(--ink-soft) !important;
+      }
+
+      /* Logo switching */
+      header.site-header:not(.scrolled) .logo-light { opacity: 1 !important; display: block !important; }
+      header.site-header:not(.scrolled) .logo-dark { opacity: 0 !important; display: none !important; }
+
+      html[data-theme="dark"] header.site-header.scrolled .logo-light { opacity: 1 !important; display: block !important; }
+      html[data-theme="dark"] header.site-header.scrolled .logo-dark { opacity: 0 !important; display: none !important; }
+      html[data-theme="light"] header.site-header.scrolled .logo-light { opacity: 0 !important; display: none !important; }
+      html[data-theme="light"] header.site-header.scrolled .logo-dark { opacity: 1 !important; display: block !important; }
+
+      html[data-theme="dark"] .mm-logo-light { display: block !important; }
+      html[data-theme="dark"] .mm-logo-dark { display: none !important; }
+      html[data-theme="light"] .mm-logo-light { display: none !important; }
+      html[data-theme="light"] .mm-logo-dark { display: block !important; }
+
+      /* Scrolled header links in light mode */
+      html[data-theme="light"] header.site-header.scrolled nav.primary a {
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] header.site-header.scrolled nav.primary a:hover {
+        color: var(--rose) !important;
+      }
+      html[data-theme="light"] header.site-header.scrolled .menu-btn {
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] header.site-header.scrolled .header-cta {
+        border-color: var(--ink) !important;
+        color: var(--ink) !important;
+      }
+      html[data-theme="light"] header.site-header.scrolled .header-cta:hover {
+        background: var(--ink) !important;
+        color: var(--cream) !important;
+      }
+
+      /* Theme toggle button styling */
+      .theme-toggle-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        flex-shrink: 0;
+      }
+      .theme-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: scale(1.08);
+      }
+      html[data-theme="dark"] .theme-icon-moon { display: none; }
+      html[data-theme="dark"] .theme-icon-sun { display: block; color: #fde047; }
+      html[data-theme="light"] .theme-icon-sun { display: none; }
+      html[data-theme="light"] .theme-icon-moon { display: block; color: #221a14; }
+      html[data-theme="light"] .theme-toggle-btn {
+        background: rgba(34, 26, 20, 0.07);
+        border-color: rgba(34, 26, 20, 0.15);
+        color: #221a14;
+      }
+      html[data-theme="light"] .theme-toggle-btn:hover {
+        background: rgba(34, 26, 20, 0.14);
+      }
+
+      /* ================= PROMINENT RADIANT "VIEW ALL" BUTTON ================= */
+      .cinema-expander {
+        display: flex;
+        justify-content: center;
+        margin-top: 2.75rem;
+        padding-top: 0.5rem;
+      }
+      .expand-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.95rem 2.4rem;
+        background: linear-gradient(135deg, #e11d48 0%, #7c3aed 100%);
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        color: #ffffff !important;
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(225, 29, 72, 0.45), 0 0 20px rgba(124, 58, 237, 0.35);
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        position: relative;
+        overflow: hidden;
+        animation: pulseGlow 3.2s ease-in-out infinite;
+      }
+      @keyframes pulseGlow {
+        0%, 100% {
+          box-shadow: 0 10px 28px rgba(225, 29, 72, 0.4), 0 0 16px rgba(124, 58, 237, 0.25);
+          transform: translateY(0);
+        }
+        50% {
+          box-shadow: 0 16px 42px rgba(225, 29, 72, 0.7), 0 0 30px rgba(124, 58, 237, 0.6);
+          transform: translateY(-2px);
+        }
+      }
+      .expand-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+      .expand-btn:hover {
+        transform: translateY(-4px) scale(1.04);
+        box-shadow: 0 18px 48px rgba(225, 29, 72, 0.8), 0 0 35px rgba(124, 58, 237, 0.7);
+        animation-play-state: paused;
+      }
+      .expand-btn:hover::before {
+        transform: translateX(100%);
+      }
+      .expand-btn svg {
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        color: #ffffff;
+      }
+      .expand-btn.is-active {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--border);
+        color: var(--ink) !important;
+        box-shadow: none;
+        animation: none;
+      }
+      html[data-theme="light"] .expand-btn.is-active {
+        background: rgba(34, 26, 20, 0.08);
+        border-color: rgba(34, 26, 20, 0.2);
+        color: #221a14 !important;
+        box-shadow: none;
+        animation: none;
+      }
+      .expand-btn.is-active svg {
+        transform: rotate(180deg);
+      }
+
+    
+      /* ---------- Expandable FAQ Section ---------- */
+      .faq-section {
+        padding-block: 1.25rem 2rem;
+      }
+      @media (min-width: 640px) {
+        .faq-section { padding-block: 2rem 3.5rem; }
+      }
+      .faq-card-wrap {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .faq-card-wrap:hover {
+        border-color: rgba(225, 29, 72, 0.35);
+      }
+      .faq-toggle-bar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.15rem 1.4rem;
+        background: transparent;
+        border: none;
+        color: var(--ink);
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.25s ease;
+        gap: 1rem;
+      }
+      .faq-toggle-bar:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      html[data-theme="light"] .faq-toggle-bar:hover {
+        background: rgba(34, 26, 20, 0.03);
+      }
+      .faq-toggle-left {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+      .faq-pill-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--teal);
+        background: rgba(13, 148, 136, 0.12);
+        padding: 0.3rem 0.65rem;
+        border-radius: 999px;
+        flex-shrink: 0;
+      }
+      .faq-heading-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .faq-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--ink);
+      }
+      .faq-sub {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin: 0.2rem 0 0;
+      }
+      .faq-toggle-right {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-shrink: 0;
+      }
+      .faq-count-pill {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+      }
+      html[data-theme="light"] .faq-count-pill {
+        background: rgba(34, 26, 20, 0.05);
+      }
+      .faq-expand-chevron {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        color: var(--ink);
+      }
+      .faq-toggle-bar[aria-expanded="true"] .faq-expand-chevron {
+        transform: rotate(180deg);
+        background: var(--rose);
+        color: #fff;
+      }
+      .faq-expand-content {
+        padding: 0 1.4rem 1.4rem;
+        border-top: 1px solid var(--border);
+      }
+      .faq-list {
+        margin-top: 1.15rem;
+        display: grid;
+        gap: 0.85rem;
+      }
+      .faq-item {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.85rem 1.1rem;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.25s ease;
+      }
+      html[data-theme="light"] .faq-item {
+        background: #ffffff;
+        border-color: var(--line);
+      }
+      .faq-item[open] {
+        border-color: rgba(225, 29, 72, 0.45);
+        background: rgba(225, 29, 72, 0.03);
+      }
+      .faq-item summary {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.94rem;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        list-style: none;
+        user-select: none;
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-icon {
+        color: var(--muted);
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+      }
+      .faq-item[open] .faq-icon {
+        transform: rotate(180deg);
+        color: var(--rose);
+      }
+      .faq-item p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      /* Floating Back To Top Button */
+      .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        z-index: 45;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--paper);
+        color: var(--ink);
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(12px);
+        transition: all 0.3s ease;
+      }
+      .back-to-top:hover {
+        background: var(--rose);
+        color: #ffffff;
+        border-color: var(--rose);
+        transform: translateY(-2px);
+      }
+      .back-to-top.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
     </style>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "name": "দর্পণ – Dorpon",
+  "priceRange": "৳৳",
+  "currenciesAccepted": "BDT",
   "description": "দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, serving Rajbari, Faridpur and Dhaka, capturing meaningful moments through cinematic storytelling.",
   "url": "https://rajinmd.com/",
   "telephone": "+8801740744170",
@@ -856,19 +1579,19 @@
   ]
 }
     </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "What services does Dorpon offer?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Faridpur and Dhaka, Bangladesh."}},
-    {"@type": "Question", "name": "Where is Dorpon based?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon is based in Rajbari, Bangladesh, and serves Rajbari, Faridpur and Dhaka. It is a service-area business with no walk-in office, and travels to clients for shoots."}},
-    {"@type": "Question", "name": "How can I book Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170."}},
-    {"@type": "Question", "name": "How can I contact Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page."}},
-    {"@type": "Question", "name": "Can I see Dorpon's previous work before booking?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon."}},
-    {"@type": "Question", "name": "How much does a Dorpon shoot cost?", "acceptedAnswer": {"@type": "Answer", "text": "The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you."}}
-  ]
-}
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What services does Dorpon offer?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Faridpur and Dhaka, Bangladesh."}},
+        {"@type": "Question", "name": "Where is Dorpon based?", "acceptedAnswer": {"@type": "Answer", "text": "Dorpon is based in Rajbari, Bangladesh, and serves Rajbari, Faridpur and Dhaka. It is a service-area business with no walk-in office, and travels to clients for shoots."}},
+        {"@type": "Question", "name": "How can I book Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170."}},
+        {"@type": "Question", "name": "How can I contact Dorpon?", "acceptedAnswer": {"@type": "Answer", "text": "Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page."}},
+        {"@type": "Question", "name": "Can I see Dorpon's previous work before booking?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon."}},
+        {"@type": "Question", "name": "How much does a Dorpon shoot cost?", "acceptedAnswer": {"@type": "Answer", "text": "The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you."}}
+      ]
+    }
     </script>
   </head>
   <body>
@@ -1016,11 +1739,18 @@
         <nav class="primary" aria-label="Primary">
           <a href="#home">Home</a>
           <a href="#portfolio">Portfolio</a>
-          <a href="#about">About</a>
+          <a href="#films">Films &amp; Reels</a>
+          <a href="#faq">FAQ</a>
+          <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
 
         <div style="display:flex; align-items:center; gap:0.75rem;">
+          <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Switch between light and dark mode" title="Toggle Light/Dark Theme">
+            <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
           <a class="header-cta" href="#contact">Contact Us</a>
           <button class="menu-btn" id="menuOpenBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
@@ -1034,13 +1764,20 @@
       <div class="mm-top">
         <img class="mm-logo-dark" src="assets/logo/logo-black.webp" alt="দর্পণ – Dorpon" width="640" height="367" style="height:2.25rem; width:auto;" />
         <img class="mm-logo-light" src="assets/logo/logo-cream.webp" alt="দর্পণ – Dorpon" width="640" height="367" style="height:2.25rem; width:auto;" />
-        <button class="menu-btn" id="menuCloseBtn" type="button" aria-label="Close navigation menu" style="color:var(--ink);">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <button class="theme-toggle-btn" id="themeToggleBtnMobile" type="button" aria-label="Switch between light and dark mode" title="Toggle Light/Dark Theme">
+            <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
+          <button class="menu-btn" id="menuCloseBtn" type="button" aria-label="Close navigation menu" style="color:var(--ink);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
+        </div>
       </div>
       <nav aria-label="Mobile">
         <a href="#home">Home</a>
         <a href="#portfolio">Portfolio</a>
+        <a href="#films">Films &amp; Reels</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -1069,197 +1806,250 @@
       </section>
       <div class="color-bar" aria-hidden="true"></div>
       <!-- ================= PORTFOLIO ================= -->
-      <section id="portfolio" aria-labelledby="portfolio-title">
+            <!-- ================= PORTFOLIO CAROUSEL ================= -->
+      <section id="portfolio" aria-labelledby="portfolio-title" class="portfolio-section">
         <div class="wrap">
-          <div class="reveal">
-            <p class="eyebrow rose">Portfolio</p>
-            <h2 class="section-title font-display" id="portfolio-title">Our Selected Works</h2>
-            <p class="section-desc">A collection of moments, stories, and memories captured through our lens.</p>
+          <div class="portfolio-header-wrap reveal">
+            <div class="portfolio-header-text">
+              <p class="eyebrow rose">Selected Portfolio</p>
+              <h2 class="section-title font-display" id="portfolio-title">Timeless Moments</h2>
+              <p class="section-desc">Swipe left or right to explore our favorite captures. Click any photo to view full size.</p>
+            </div>
+            
+            <!-- Controls (Nav buttons + Counter) -->
+            <div class="carousel-controls">
+              <span class="carousel-counter" id="carouselCounter">
+                <span class="counter-curr" id="carouselCurrentNum">01</span>
+                <span class="counter-sep">/</span>
+                <span class="counter-total">12</span>
+              </span>
+              <div class="carousel-arrows">
+                <button type="button" class="c-arrow-btn" id="cPrevBtn" aria-label="Previous photo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="c-arrow-btn" id="cNextBtn" aria-label="Next photo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="gallery" id="gallery"></div>
+          <!-- Touch-Swipeable Looping Carousel Container -->
+          <div class="portfolio-carousel-container" id="portfolioCarousel">
+            <div class="carousel-track" id="carouselTrack">
+              <!-- Dynamically populated with slides -->
+            </div>
+          </div>
+
+          <!-- Mobile Swipe Hint & Progress Dots -->
+          <div class="carousel-footer-bar">
+            <div class="carousel-dots" id="carouselDots"></div>
+            <div class="mobile-swipe-indicator">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16l-4-4m0 0l4-4m-4 4h18m-4 4l4-4m0 0l-4-4"/></svg>
+              <span>Swipe left or right to explore</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- ================= VIDEOS ================= -->
-      <section class="videos-section" id="videos" aria-labelledby="videos-title">
+            <!-- ================= CINEMA & STORIES HUB ================= -->
+      <section class="cinema-section" id="films" aria-labelledby="cinema-title">
+        <span id="videos" style="position:relative; top:-80px;"></span>
+        <span id="reels" style="position:relative; top:-80px;"></span>
         <div class="wrap">
-          <div class="reveal">
-            <p class="eyebrow violet">Film</p>
-            <h2 class="section-title font-display" id="videos-title">Behind the Lens</h2>
-            <p class="section-desc">Watch our stories come to life.</p>
+          <div class="cinema-header-wrap reveal">
+            <div>
+              <p class="eyebrow violet">Cinema &amp; Stories</p>
+              <h2 class="section-title font-display" id="cinema-title">Stories in Motion</h2>
+              <p class="section-desc">Cinematic wedding films, vertical reels, and behind-the-scenes moments.</p>
+            </div>
+            
+            <div class="cinema-nav-tabs" role="tablist" aria-label="Media Categories">
+              <button type="button" class="cinema-tab-btn active" role="tab" aria-selected="true" id="c-tab-films" onclick="switchCinemaTab('films')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"/><line x1="7" x2="7" y1="2" y2="22"/><line x1="17" x2="17" y1="2" y2="22"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="2" x2="7" y1="7" y2="7"/><line x1="2" x2="7" y1="17" y2="17"/><line x1="17" x2="22" y1="17" y2="17"/><line x1="17" x2="22" y1="7" y2="7"/></svg>
+                Films <span class="tab-badge">11</span>
+              </button>
+              <button type="button" class="cinema-tab-btn" role="tab" aria-selected="false" id="c-tab-reels" onclick="switchCinemaTab('reels')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+                Reels <span class="tab-badge">6</span>
+              </button>
+              <button type="button" class="cinema-tab-btn" role="tab" aria-selected="false" id="c-tab-bts" onclick="switchCinemaTab('bts')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                BTS <span class="tab-badge">5</span>
+              </button>
+            </div>
           </div>
 
-          <div class="video-grid reveal">
+          <!-- TAB PANEL 1: CINEMATIC FILMS (12) -->
+          <div class="cinema-panel" id="c-panel-films" role="tabpanel">
+            <div class="video-grid reveal">
 <figure>
-              <div class="video-frame">
+<div class="video-frame">
                 <div id="fb-video-22" class="fb-video" data-href="https://www.facebook.com/reel/1752194542531779" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Featured Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Featured Reel</figcaption>
             </figure>
 <figure>
-              <div class="video-frame">
+<div class="video-frame">
                 <div id="fb-video-1" class="fb-video" data-href="https://www.facebook.com/reel/1531786270788297" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Maroon Saree Walk"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Maroon Saree Walk</figcaption>
             </figure>
 <figure>
-              <div class="video-frame">
+<div class="video-frame">
                 <div id="fb-video-11" class="fb-video" data-href="https://www.facebook.com/reel/1021736793909368" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Haldi Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Haldi Reel</figcaption>
             </figure>
 <figure>
-              <div class="video-frame">
+<div class="video-frame">
                 <div id="fb-video-6" class="fb-video" data-href="https://www.facebook.com/reel/1634892954699923" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Portrait Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Portrait Reel</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-2" class="fb-video" data-href="https://www.facebook.com/reel/1461538111464192" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Red Saree Bridge"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Red Saree Bridge</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-3" class="fb-video" data-href="https://www.facebook.com/watch/?v=1445836667289025" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Red Saree Station"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Red Saree Station</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-4" class="fb-video" data-href="https://www.facebook.com/reel/2316011832096431" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Portrait (Ipty)"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Portrait (Ipty)</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-5" class="fb-video" data-href="https://www.facebook.com/watch/?v=2521324541592505" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Yellow Saree Palms"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Yellow Saree Palms</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-7" class="fb-video" data-href="https://www.facebook.com/reel/1141303574017253" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Commercial Shoot"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Commercial Shoot</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-9" class="fb-video" data-href="https://www.facebook.com/reel/499348682557516" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Green Saree Portrait"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Green Saree Portrait</figcaption>
             </figure>
-<figure>
-              <div class="video-frame">
-                <div id="fb-video-10" class="fb-video" data-href="https://www.facebook.com/reel/3950935668468565" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Purple Dress Portrait"></div>
-              </div>
-              <figcaption class="video-cap">Dorpon — Purple Dress Portrait</figcaption>
-            </figure>
-<figure>
-              <div class="video-frame">
+<figure class="media-item-extra">
+<div class="video-frame">
                 <div id="fb-video-0" class="fb-video" data-href="https://www.facebook.com/reel/1224904015771152" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Rag Day Drone"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Rag Day Drone</figcaption>
             </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= VERTICAL REELS ================= -->
-      <section class="reels-section" id="reels" aria-labelledby="reels-title">
-        <div class="wrap">
-          <div class="reveal">
-            <p class="eyebrow rose">Reels</p>
-            <h2 class="section-title font-display" id="reels-title">Vertical Reels</h2>
-            <p class="section-desc">Short vertical stories from our page.</p>
+            </div>
+            <div class="cinema-expander">
+              <button type="button" class="expand-btn" id="c-expand-btn-films" onclick="toggleCinemaExpand('films', 11, 'Films')">
+                <span>View All 11 Films</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+            </div>
           </div>
 
-          <div class="reel-grid reveal">
+          <!-- TAB PANEL 2: VERTICAL REELS (6) -->
+          <div class="cinema-panel" id="c-panel-reels" role="tabpanel" style="display:none;">
+            <div class="reel-grid reveal">
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <iframe id="yt-player-0" src="https://www.youtube-nocookie.com/embed/Su47lhgitkc?enablejsapi=1" title="Ipty - Cinematic Wedding Reel" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <figcaption class="video-cap">Ipty — Cinematic Wedding Reel</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-12" class="fb-video" data-href="https://www.facebook.com/reel/2881895688836059" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Cinematic Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Cinematic Reel</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-16" class="fb-video" data-href="https://www.facebook.com/reel/1788533128992811" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Glow-Up Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Glow-Up Reel</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-14" class="fb-video" data-href="https://www.facebook.com/reel/1446444140752490" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Holud Makeover Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Holud Makeover Reel</figcaption>
             </figure>
-<figure>
-              <div class="reel-frame">
+<figure class="media-item-extra">
+<div class="reel-frame">
                 <div id="fb-video-15" class="fb-video" data-href="https://www.facebook.com/reel/4281918682137578" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Elegance Reel"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Elegance Reel</figcaption>
             </figure>
-<figure>
-              <div class="reel-frame">
+<figure class="media-item-extra">
+<div class="reel-frame">
                 <div id="fb-video-13" class="fb-video" data-href="https://www.facebook.com/reel/1073006068217205" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Blue Saree Roses"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Blue Saree Roses</figcaption>
             </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= BTS REELS ================= -->
-      <section class="reels-section" id="bts-reels" aria-labelledby="bts-reels-title">
-        <div class="wrap">
-          <div class="reveal">
-            <p class="eyebrow teal">Behind the Scenes</p>
-            <h2 class="section-title font-display" id="bts-reels-title">BTS Reels</h2>
-            <p class="section-desc">Behind-the-scenes moments from our shoots.</p>
+            </div>
+            <div class="cinema-expander">
+              <button type="button" class="expand-btn" id="c-expand-btn-reels" onclick="toggleCinemaExpand('reels', 6, 'Reels')">
+                <span>View All 6 Reels</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+            </div>
           </div>
 
-          <div class="reel-grid reveal">
+          <!-- TAB PANEL 3: BTS REELS (5) -->
+          <div class="cinema-panel" id="c-panel-bts" role="tabpanel" style="display:none;">
+            <div class="reel-grid reveal">
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-21" class="fb-video" data-href="https://www.facebook.com/reel/979993120918648" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Rag Day 2K25"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Rag Day 2K25</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-17" class="fb-video" data-href="https://www.facebook.com/reel/1175265943968509" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — BTS Maroon Bench"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Maroon Bench</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-18" class="fb-video" data-href="https://www.facebook.com/reel/715877131010386" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — Nabin Boron"></div>
               </div>
               <figcaption class="video-cap">Dorpon — Nabin Boron</figcaption>
             </figure>
 <figure>
-              <div class="reel-frame">
+<div class="reel-frame">
                 <div id="fb-video-19" class="fb-video" data-href="https://www.facebook.com/reel/1079451777327036" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — BTS Boishakhi"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Boishakhi</figcaption>
             </figure>
-<figure>
-              <div class="reel-frame">
+<figure class="media-item-extra">
+<div class="reel-frame">
                 <div id="fb-video-20" class="fb-video" data-href="https://www.facebook.com/reel/1467362517590851" data-show-text="false" data-autoplay="false" data-allowfullscreen="true" title="Dorpon — BTS Red Saree"></div>
               </div>
               <figcaption class="video-cap">Dorpon — BTS Red Saree</figcaption>
             </figure>
+            </div>
+            <div class="cinema-expander">
+              <button type="button" class="expand-btn" id="c-expand-btn-bts" onclick="toggleCinemaExpand('bts', 5, 'BTS Moments')">
+                <span>View All 5 BTS Moments</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
 
       
       <!-- ================= ABOUT ================= -->
@@ -1285,26 +2075,67 @@
         </div>
       </section>
 
-      <!-- ================= FAQ ================= -->
-      <section id="faq" aria-labelledby="faq-title">
-        <div class="wrap">
-          <div class="reveal">
-            <p class="eyebrow teal">FAQ</p>
-            <h2 class="section-title font-display" id="faq-title">Frequently Asked Questions</h2>
-            <p class="section-desc">Answers about booking Dorpon for photography and cinematography in Rajbari, Faridpur and Dhaka.</p>
-          </div>
-          <div class="faq-list reveal">
-            <details class="faq-item"><summary>What services does Dorpon offer?</summary><p>Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Faridpur and Dhaka, Bangladesh.</p></details>
-            <details class="faq-item"><summary>Where is Dorpon based?</summary><p>Dorpon is based in Rajbari, Bangladesh, and serves Rajbari, Faridpur and Dhaka. It is a service-area business with no walk-in office, and travels to clients for shoots.</p></details>
-            <details class="faq-item"><summary>How can I book Dorpon?</summary><p>Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170.</p></details>
-            <details class="faq-item"><summary>How can I contact Dorpon?</summary><p>Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page.</p></details>
-            <details class="faq-item"><summary>Can I see Dorpon's previous work before booking?</summary><p>Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon.</p></details>
-            <details class="faq-item"><summary>How much does a Dorpon shoot cost?</summary><p>The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you.</p></details>
-          </div>
-        </div>
-      </section>
+      
+        <!-- ================= FAQ (COMPACT & EXPANDABLE) ================= -->
+        <section id="faq" aria-labelledby="faq-title" class="faq-section">
+          <div class="wrap">
+            <div class="faq-card-wrap">
+              <button
+                type="button"
+                class="faq-toggle-bar"
+                id="faqToggleBtn"
+                aria-expanded="false"
+                aria-controls="faqContent"
+              >
+                <div class="faq-toggle-left">
+                  <span class="faq-pill-badge">FAQ</span>
+                  <div class="faq-heading-group">
+                    <h2 class="faq-title font-display" id="faq-title">Frequently Asked Questions</h2>
+                    <p class="faq-sub">Common questions about bookings, packages &amp; locations (Click to view)</p>
+                  </div>
+                </div>
+                <div class="faq-toggle-right">
+                  <span class="faq-count-pill">6 Questions</span>
+                  <span class="faq-expand-chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                  </span>
+                </div>
+              </button>
 
-      <!-- ================= CONTACT ================= -->
+              <!-- Collapsible Content (hidden by default) -->
+              <div class="faq-expand-content" id="faqContent" hidden>
+                <div class="faq-list">
+                  <details class="faq-item">
+                    <summary><span>What services does Dorpon offer?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>Dorpon offers photography and cinematography for weddings, holud ceremonies, portraits and events in Rajbari, Faridpur and Dhaka, Bangladesh.</p>
+                  </details>
+                  <details class="faq-item">
+                    <summary><span>Where is Dorpon based?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>Dorpon is based in Rajbari, Bangladesh, and serves Rajbari, Faridpur and Dhaka. It is a service-area business with no walk-in office, and travels to clients for shoots.</p>
+                  </details>
+                  <details class="faq-item">
+                    <summary><span>How can I book Dorpon?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>Fill in the booking and inquiry form on this page, message Dorpon on WhatsApp, or call 01740-744170.</p>
+                  </details>
+                  <details class="faq-item">
+                    <summary><span>How can I contact Dorpon?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>Call or WhatsApp 01740-744170, email contact@rajinmd.com, or use the booking form on this page.</p>
+                  </details>
+                  <details class="faq-item">
+                    <summary><span>Can I see Dorpon's previous work before booking?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>Yes. The portfolio and video sections on this page show selected wedding, portrait and behind-the-scenes work from Dorpon.</p>
+                  </details>
+                  <details class="faq-item">
+                    <summary><span>How much does a Dorpon shoot cost?</span> <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+                    <p>The price depends on the event, duration and package. Send your event details through the booking form or WhatsApp and Dorpon will discuss the package with you.</p>
+                  </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= CONTACT ================= -->
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
         <div class="wrap">
           <div class="reveal">
@@ -1649,36 +2480,246 @@
         if (desktopMq.addEventListener) desktopMq.addEventListener("change", buildHero);
         else if (desktopMq.addListener) desktopMq.addListener(buildHero);
 
-        /* ---------- portfolio gallery + lightbox ---------- */
-        var gallery = document.getElementById("gallery");
-        PHOTOS.forEach(function (p, i) {
-          var fig = document.createElement("figure");
-          fig.className = "tile reveal";
-          fig.style.animationDelay = Math.min(i, 5) * 70 + "ms";
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.setAttribute("aria-label", "View larger image: " + alt(i));
-          var img = document.createElement("img");
-          img.src = thumbSrc(p);
-          img.alt = alt(i);
-          img.width = p.w;
-          img.height = p.h;
-          img.loading = (i < 3) ? "eager" : "lazy";
-          img.decoding = "async";
-          var shade = document.createElement("span");
-          shade.className = "tile-shade";
-          shade.setAttribute("aria-hidden", "true");
-          var zoom = document.createElement("span");
-          zoom.className = "tile-zoom";
-          zoom.setAttribute("aria-hidden", "true");
-          zoom.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6M11 8.5v5M8.5 11h5"/></svg>';
-          btn.appendChild(img);
-          btn.appendChild(shade);
-          btn.appendChild(zoom);
-          btn.addEventListener("click", function () { openLightbox(i); });
-          fig.appendChild(btn);
-          gallery.appendChild(fig);
+        /* ---------- portfolio carousel + lightbox ---------- */
+        var carouselTrack = document.getElementById("carouselTrack");
+        var carouselContainer = document.getElementById("portfolioCarousel");
+        var cPrevBtn = document.getElementById("cPrevBtn");
+        var cNextBtn = document.getElementById("cNextBtn");
+        var cCounterNum = document.getElementById("carouselCurrentNum");
+        var cDotsWrap = document.getElementById("carouselDots");
+
+        var totalPhotos = PHOTOS.length; // 12
+        var clonesCount = 3;
+        var trackItems = [];
+
+        var order = [];
+        for (var ci = totalPhotos - clonesCount; ci < totalPhotos; ci++) order.push(ci);
+        for (var ci = 0; ci < totalPhotos; ci++) order.push(ci);
+        for (var ci = 0; ci < clonesCount; ci++) order.push(ci);
+
+        var hasUserDragged = false;
+        var dragDistance = 0;
+
+        if (carouselTrack) {
+          carouselTrack.innerHTML = "";
+          order.forEach(function (realIdx, tIdx) {
+            var p = PHOTOS[realIdx];
+            var slide = document.createElement("div");
+            slide.className = "carousel-slide";
+            slide.setAttribute("data-real-index", realIdx);
+
+            var img = document.createElement("img");
+            img.src = thumbSrc(p);
+            img.alt = alt(realIdx);
+            img.loading = tIdx < 6 ? "eager" : "lazy";
+            img.decoding = "async";
+
+            var overlay = document.createElement("div");
+            overlay.className = "carousel-slide-overlay";
+
+            var zoom = document.createElement("div");
+            zoom.className = "carousel-slide-zoom";
+            zoom.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6M11 8.5v5M8.5 11h5"/></svg>';
+
+            slide.appendChild(img);
+            slide.appendChild(overlay);
+            slide.appendChild(zoom);
+
+            slide.addEventListener("click", function (e) {
+              if (hasUserDragged || dragDistance > 8) {
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+              }
+              openLightbox(realIdx);
+            });
+
+            carouselTrack.appendChild(slide);
+            trackItems.push(slide);
+          });
+        }
+
+        if (cDotsWrap) {
+          cDotsWrap.innerHTML = "";
+          for (var di = 0; di < totalPhotos; di++) {
+            (function (idx) {
+              var dot = document.createElement("button");
+              dot.type = "button";
+              dot.className = "c-dot" + (idx === 0 ? " active" : "");
+              dot.setAttribute("aria-label", "Go to photo " + (idx + 1));
+              dot.addEventListener("click", function () { goToReal(idx); });
+              cDotsWrap.appendChild(dot);
+            })(di);
+          }
+        }
+
+        var currentSlideIdx = clonesCount; // starts at 3
+        var isSlideTransitioning = false;
+
+        function getSlideStep() {
+          if (!trackItems[0]) return 320;
+          var rect = trackItems[0].getBoundingClientRect();
+          var style = window.getComputedStyle(trackItems[0]);
+          var mr = parseFloat(style.marginRight) || 0;
+          return rect.width + mr;
+        }
+
+        function updateCarousel(animate) {
+          if (!carouselTrack) return;
+          var step = getSlideStep();
+          var x = -(currentSlideIdx * step);
+          carouselTrack.style.transition = animate ? "transform 0.42s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
+          carouselTrack.style.transform = "translate3d(" + x + "px, 0, 0)";
+
+          var real = (currentSlideIdx - clonesCount) % totalPhotos;
+          if (real < 0) real += totalPhotos;
+
+          if (cCounterNum) {
+            cCounterNum.textContent = String(real + 1).padStart(2, "0");
+          }
+          if (cDotsWrap) {
+            var dots = cDotsWrap.querySelectorAll(".c-dot");
+            dots.forEach(function (dt, i) { dt.classList.toggle("active", i === real); });
+          }
+        }
+
+        function nextPhoto() {
+          if (isSlideTransitioning) return;
+          isSlideTransitioning = true;
+          currentSlideIdx++;
+          updateCarousel(true);
+        }
+
+        function prevPhoto() {
+          if (isSlideTransitioning) return;
+          isSlideTransitioning = true;
+          currentSlideIdx--;
+          updateCarousel(true);
+        }
+
+        function goToReal(rIdx) {
+          if (isSlideTransitioning) return;
+          isSlideTransitioning = true;
+          currentSlideIdx = clonesCount + rIdx;
+          updateCarousel(true);
+        }
+
+        if (carouselTrack) {
+          carouselTrack.addEventListener("transitionend", function () {
+            isSlideTransitioning = false;
+            if (currentSlideIdx >= totalPhotos + clonesCount) {
+              currentSlideIdx = clonesCount + (currentSlideIdx - (totalPhotos + clonesCount));
+              updateCarousel(false);
+            } else if (currentSlideIdx < clonesCount) {
+              currentSlideIdx = totalPhotos + currentSlideIdx;
+              updateCarousel(false);
+            }
+          });
+        }
+
+        if (cNextBtn) cNextBtn.addEventListener("click", nextPhoto);
+        if (cPrevBtn) cPrevBtn.addEventListener("click", prevPhoto);
+
+        // Fluid touch swipe & mouse drag logic
+        var startX = 0;
+        var startY = 0;
+        var startTime = 0;
+        var currentDiffX = 0;
+        var isPointerActive = false;
+        var isHorizontalGesture = false;
+
+        function startGesture(x, y) {
+          if (isSlideTransitioning) return;
+          startX = x;
+          startY = y;
+          startTime = Date.now();
+          currentDiffX = 0;
+          dragDistance = 0;
+          hasUserDragged = false;
+          isPointerActive = true;
+          isHorizontalGesture = false;
+        }
+
+        function moveGesture(x, y) {
+          if (!isPointerActive || !carouselTrack) return;
+          var dx = x - startX;
+          var dy = y - startY;
+          dragDistance = Math.hypot(dx, dy);
+
+          if (!isHorizontalGesture) {
+            if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.1) {
+              isHorizontalGesture = true;
+              hasUserDragged = true;
+            } else if (Math.abs(dy) > 10) {
+              isPointerActive = false;
+              return;
+            }
+          }
+
+          if (isHorizontalGesture) {
+            currentDiffX = dx;
+            var step = getSlideStep();
+            var base = -(currentSlideIdx * step);
+            carouselTrack.style.transition = "none";
+            carouselTrack.style.transform = "translate3d(" + (base + currentDiffX) + "px, 0, 0)";
+          }
+        }
+
+        function endGesture() {
+          if (!isPointerActive && !isHorizontalGesture) return;
+          isPointerActive = false;
+
+          if (isHorizontalGesture) {
+            var elapsed = Date.now() - startTime;
+            var step = getSlideStep();
+            var threshold = (elapsed < 320) ? 28 : Math.min(step * 0.12, 42);
+
+            if (currentDiffX < -threshold) {
+              nextPhoto();
+            } else if (currentDiffX > threshold) {
+              prevPhoto();
+            } else {
+              updateCarousel(true);
+            }
+          }
+
+          setTimeout(function () {
+            hasUserDragged = false;
+            dragDistance = 0;
+            isHorizontalGesture = false;
+          }, 120);
+        }
+
+        if (carouselContainer) {
+          // Touch events for mobile
+          carouselContainer.addEventListener("touchstart", function (e) {
+            if (e.touches.length === 1) startGesture(e.touches[0].clientX, e.touches[0].clientY);
+          }, { passive: true });
+
+          carouselContainer.addEventListener("touchmove", function (e) {
+            if (e.touches.length === 1) moveGesture(e.touches[0].clientX, e.touches[0].clientY);
+          }, { passive: true });
+
+          carouselContainer.addEventListener("touchend", endGesture);
+          carouselContainer.addEventListener("touchcancel", endGesture);
+
+          // Mouse events for desktop
+          carouselContainer.addEventListener("mousedown", function (e) {
+            startGesture(e.clientX, e.clientY);
+          });
+        }
+
+        window.addEventListener("mousemove", function (e) {
+          if (isPointerActive) moveGesture(e.clientX, e.clientY);
         });
+        window.addEventListener("mouseup", endGesture);
+
+        window.addEventListener("resize", function () {
+          updateCarousel(false);
+        });
+
+        // Initial paint
+        updateCarousel(false);
 
         var lightbox = document.getElementById("lightbox");
         var lbImg = document.getElementById("lbImg");
@@ -1743,34 +2784,29 @@
         var formFromName = document.getElementById("form_from_name");
 
         if (bookingForm) {
-          bookingForm.addEventListener("submit", async function (e) {
-            // Single submission path: JS fetch only. The form's native
-            // POST to the hidden iframe is NOT used when JS runs, so a
-            // booking is no longer sent twice to Web3Forms.
-            e.preventDefault();
+          bookingForm.addEventListener("submit", function (e) {
             var nameVal = document.getElementById("client_name").value.trim();
             var phoneVal = document.getElementById("client_phone").value.trim();
-            var emailVal = document.getElementById("client_email").value.trim();
-            var serviceVal = document.getElementById("client_service").value;
-            var dateVal = document.getElementById("client_date").value;
-            var messageVal = document.getElementById("client_message").value.trim();
             var phoneDigits = phoneVal.replace(/[\s-]/g, "");
             var phoneOk = /^(01[3-9]\d{8})$/.test(phoneDigits) || /^\+8801[3-9]\d{8}$/.test(phoneDigits);
 
             // Botcheck honeypot: if an automated bot filled the hidden input, abort silently
             var botcheckEl = bookingForm.querySelector('[name="botcheck"]');
             if (botcheckEl && botcheckEl.checked) {
+              e.preventDefault();
               bookingForm.style.display = "none";
               formSuccessBox.style.display = "block";
               return;
             }
 
             if (!nameVal || !phoneVal) {
+              e.preventDefault();
               formErrorMsg.textContent = "অনুগ্রহ করে আপনার নাম এবং ফোন নম্বর প্রদান করুন।";
               formErrorMsg.style.display = "block";
               return;
             }
             if (!phoneOk) {
+              e.preventDefault();
               formErrorMsg.textContent = "অনুগ্রহ করে সঠিক বাংলাদেশি মোবাইল নম্বর দিন (যেমন: 01XXXXXXXXX)।";
               formErrorMsg.style.display = "block";
               return;
@@ -1778,45 +2814,17 @@
 
             formErrorMsg.style.display = "none";
             formFromName.value = nameVal;
-            formSubject.value = "নতুন বুকিং অনুসন্ধান - " + nameVal + " (" + serviceVal + ")";
+            formSubject.value = "নতুন বুকিং অনুসন্ধান - " + nameVal + " (" + document.getElementById("client_service").value + ")";
 
             submitBtn.disabled = true;
             btnText.textContent = "পাঠানো হচ্ছে...";
 
-            var payload = {
-              access_key: "e7ac1dff-e0f9-44f0-b6a0-c568da4499c4",
-              subject: "নতুন বুকিং অনুসন্ধান - " + nameVal + " (" + serviceVal + ")",
-              from_name: nameVal,
-              name: nameVal,
-              phone: phoneVal,
-              email: emailVal || "Not provided",
-              service: serviceVal,
-              event_date: dateVal || "Not specified",
-              message: messageVal || "No additional message",
-              botcheck: false
-            };
+            // Pre-fill WhatsApp message link for the success screen
+            var emailVal = document.getElementById("client_email").value.trim();
+            var serviceVal = document.getElementById("client_service").value;
+            var dateVal = document.getElementById("client_date").value;
+            var messageVal = document.getElementById("client_message").value.trim();
 
-            var ok = false;
-            try {
-              var resp = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: JSON.stringify(payload)
-              });
-              var result = await resp.json();
-              ok = resp.ok && result && result.success === true;
-            } catch (err) {
-              ok = false;
-            }
-            if (!ok) {
-              formErrorMsg.textContent = "দুঃখিত, মেসেজটি পাঠানো যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন, অথবা WhatsApp-এ সরাসরি মেসেজ দিন।";
-              formErrorMsg.style.display = "block";
-              submitBtn.disabled = false;
-              btnText.textContent = "বুকিং রিকোয়েস্ট পাঠান";
-              return;
-            }
-
-            // Pre-fill WhatsApp message link
             var waMsg = "*নতুন অনুসন্ধান (Dorpon Website)*\n" +
               "👤 *নাম:* " + nameVal + "\n" +
               "📞 *ফোন:* " + phoneVal + "\n" +
@@ -1828,10 +2836,15 @@
             var waUrl = "https://wa.me/8801740744170?text=" + encodeURIComponent(waMsg);
             if (successWaBtn) successWaBtn.href = waUrl;
 
-            bookingForm.style.display = "none";
-            successClientName.textContent = "ধন্যবাদ, " + nameVal + "!";
-            successDescText.textContent = "আপনার তথ্য আমরা পেয়েছি। খুব শীঘ্রই আমরা আপনার সাথে (" + phoneVal + ") নম্বরে যোগাযোগ করব।";
-            formSuccessBox.style.display = "block";
+            // Form natively submits to booking_iframe (Zero-CORS, reliable across all devices)
+            setTimeout(function () {
+              bookingForm.style.display = "none";
+              successClientName.textContent = "ধন্যবাদ, " + nameVal + "!";
+              successDescText.textContent = "আপনার তথ্য আমরা পেয়েছি। খুব শীঘ্রই আমরা আপনার সাথে (" + phoneVal + ") নম্বরে যোগাযোগ করব।";
+              formSuccessBox.style.display = "block";
+              submitBtn.disabled = false;
+              btnText.textContent = "বুকিং রিকোয়েস্ট পাঠান";
+            }, 1000);
           });
 
           if (resetFormBtn) {
@@ -1861,5 +2874,107 @@
         document.getElementById("year").textContent = new Date().getFullYear();
       })();
     </script>
+  
+    <!-- ================= FLOATING ACTION BAR ================= -->
+    <aside class="floating-quick-bar" id="floatingQuickBar" aria-label="Quick contact & navigation">
+      <button type="button" class="quick-btn back-to-top" id="backToTopBtn" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+      </button>
+      </aside>
+
+  
+    <script>
+      
+      
+      /* ---------- FAQ Expand/Collapse Logic ---------- */
+      var faqToggleBtn = document.getElementById("faqToggleBtn");
+      var faqContent = document.getElementById("faqContent");
+      function toggleFAQ(open) {
+        if (!faqToggleBtn || !faqContent) return;
+        var currentExpanded = faqToggleBtn.getAttribute("aria-expanded") === "true";
+        var willOpen = open !== undefined ? open : !currentExpanded;
+        faqToggleBtn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        faqContent.hidden = !willOpen;
+      }
+      if (faqToggleBtn) {
+        faqToggleBtn.addEventListener("click", function () { toggleFAQ(); });
+      }
+      document.querySelectorAll('a[href="#faq"]').forEach(function (a) {
+        a.addEventListener("click", function () {
+          toggleFAQ(true);
+        });
+      });
+
+      /* ---------- 1-Click Theme Toggle Logic ---------- */
+      function toggleTheme() {
+        var current = document.documentElement.getAttribute("data-theme") || "dark";
+        var next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        try { localStorage.setItem("dorpon_theme", next); } catch (e) {}
+      }
+      document.querySelectorAll(".theme-toggle-btn").forEach(function (btn) {
+        btn.addEventListener("click", toggleTheme);
+      });
+
+      /* ---------- Cinema Hub Tabs & Expander ---------- */
+      function switchCinemaTab(tab) {
+        var panels = {
+          films: document.getElementById('c-panel-films'),
+          reels: document.getElementById('c-panel-reels'),
+          bts: document.getElementById('c-panel-bts')
+        };
+        var tabs = {
+          films: document.getElementById('c-tab-films'),
+          reels: document.getElementById('c-tab-reels'),
+          bts: document.getElementById('c-tab-bts')
+        };
+        for (var k in panels) {
+          if (!panels[k] || !tabs[k]) continue;
+          if (k === tab) {
+            panels[k].style.display = 'block';
+            tabs[k].classList.add('active');
+            tabs[k].setAttribute('aria-selected', 'true');
+          } else {
+            panels[k].style.display = 'none';
+            tabs[k].classList.remove('active');
+            tabs[k].setAttribute('aria-selected', 'false');
+          }
+        }
+        if (window.__setupLazyFB) window.__setupLazyFB();
+      }
+
+      function toggleCinemaExpand(tab, total, label) {
+        var panel = document.getElementById('c-panel-' + tab);
+        var btn = document.getElementById('c-expand-btn-' + tab);
+        if (!panel || !btn) return;
+        var extras = panel.querySelectorAll('.media-item-extra');
+        var isExpanded = btn.classList.contains('is-active');
+        if (isExpanded) {
+          extras.forEach(function (el) { el.classList.remove('is-expanded'); });
+          btn.classList.remove('is-active');
+          btn.querySelector('span').textContent = 'View All ' + total + ' ' + label;
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          extras.forEach(function (el) { el.classList.add('is-expanded'); });
+          btn.classList.add('is-active');
+          btn.querySelector('span').textContent = 'Show Less';
+          if (window.__setupLazyFB) window.__setupLazyFB();
+        }
+      }
+
+      // Back-to-top button scroll listener
+      (function () {
+        var btt = document.getElementById('backToTopBtn');
+        if (!btt) return;
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 400) {
+            btt.classList.add('is-visible');
+          } else {
+            btt.classList.remove('is-visible');
+          }
+        }, { passive: true });
+      })();
+    </script>
+
   </body>
 </html>
