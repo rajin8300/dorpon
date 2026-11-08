@@ -140,6 +140,7 @@ export default function Header({ onBookClick }: HeaderProps) {
           {/* Theme Toggle (Dark / Light) */}
           <button
             type="button"
+            data-theme-toggle="true"
             onClick={toggleTheme}
             className="p-2 min-w-[36px] min-h-[36px] rounded-full bg-paper/80 text-ink-2 hover:text-ink hover:bg-paper-3 border border-rule transition-colors cursor-pointer flex items-center justify-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
             aria-label={theme === 'dark' ? t.nav.switchThemeLight : t.nav.switchThemeDark}
@@ -221,6 +222,7 @@ export default function Header({ onBookClick }: HeaderProps) {
             {/* Theme Switch */}
             <button
               type="button"
+              data-theme-toggle="true"
               onClick={toggleTheme}
               className="px-3 py-1.5 rounded-lg bg-paper border border-rule text-xs font-semibold text-ink flex items-center gap-1.5 cursor-pointer hover:bg-paper-3 transition-colors"
               aria-label={theme === 'dark' ? t.nav.switchThemeLight : t.nav.switchThemeDark}
