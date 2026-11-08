@@ -33,12 +33,14 @@ export default defineConfig({
   base: BASE_PATH,
   plugins: [react(), tailwindcss(), redirectRootToBase(BASE_PATH)],
   server: {
+    host: true,
     port: 5173,
-    open: true,
+    open: false,
   },
   preview: {
+    host: true,
     port: 4173,
-    open: true,
+    open: false,
   },
   build: {
     // Photos are served from /public, so no special asset handling is required.

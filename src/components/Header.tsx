@@ -1,182 +1,188 @@
-import { useEffect, useRef, useState } from 'react'
-import { site } from '../config/site'
-import { brandAssets } from '../data/brand'
-import { IconClose, IconMenu } from './Icons'
+import { useState, useEffect } from 'react'
+import { IconMenu, IconClose, IconPhone, IconWhatsApp } from './Icons'
 
-export default function Header() {
+interface HeaderProps {
+  onBookClick?: () => void
+}
+
+export default function Header({ onBookClick }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const menuButtonRef = useRef<HTMLButtonElement>(null)
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
-  // Swap from the transparent (over-hero) header to the solid one on scroll.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Lock body scroll, trap focus, and close on Escape while the mobile menu is open.
-  useEffect(() => {
-    if (!menuOpen) return
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+  const navLinks = [
+    { label: 'Films & Reels', href: '#showcase', count: '22' },
+    { label: 'Packages', href: '#packages', count: '7' },
+    { label: 'Story & FAQ', href: '#about-faq' },
+    { label: 'Contact', href: '#contact' },
+  ]
 
-    const menuEl = mobileMenuRef.current
-    const focusable = menuEl?.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-    )
-    focusable?.[0]?.focus()
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        setMenuOpen(false)
-      } else if (event.key === 'Tab' && focusable && focusable.length > 0) {
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
-
-        if (event.shiftKey) {
-          if (document.activeElement === first || document.activeElement === menuEl) {
-            event.preventDefault()
-            last.focus()
-          }
-        } else {
-          if (document.activeElement === last) {
-            event.preventDefault()
-            first.focus()
-          }
-        }
-      }
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+    const target = document.querySelector(href)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
     }
+  }
 
-    window.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', onKeyDown)
-      menuButtonRef.current?.focus()
+  const triggerBookAction = () => {
+    setMobileMenuOpen(false)
+    if (onBookClick) {
+      onBookClick()
+    } else {
+      const el = document.querySelector('#booking-studio')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [menuOpen])
-
-  // Dark theme is always active — cream text and logo are used in all states.
+  }
 
   return (
-    <>
-      <header
-        className={[
-          'fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500',
-          scrolled && !menuOpen
-            ? 'border-b border-white/10 bg-[#141210]/85 backdrop-blur-md'
-            : 'border-b border-transparent bg-transparent',
-        ].join(' ')}
-      >
-        <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-5 sm:px-8 md:h-20 lg:px-12">
-          <a
-            href="#home"
-            aria-label={`${site.brand.full} — home`}
-            className="group flex items-center"
-          >
-            <img
-              src={brandAssets.logoCream}
-              alt=""
-              aria-hidden="true"
-              width={640}
-              height={367}
-              fetchPriority="high"
-              decoding="async"
-              className="block h-9 w-auto object-contain sm:h-11"
-            />
-          </a>
-
-          <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
-            {site.nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-              className="relative py-1 text-[0.72rem] font-medium uppercase tracking-label text-cream/85 transition-colors duration-300 hover:text-cream after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              className="hidden rounded-full border border-cream/45 px-5 py-2 text-[0.72rem] font-medium uppercase tracking-label text-cream transition-colors duration-300 hover:bg-cream hover:text-ink md:inline-flex"
-            >
-              Contact Us
-            </a>
-
-            <button
-              ref={menuButtonRef}
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open navigation menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-cream transition-colors duration-300 hover:bg-cream/10 md:hidden"
-            >
-              <IconMenu className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile navigation panel */}
+    <header className="fixed top-2 sm:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
       <div
-        ref={mobileMenuRef}
-        id="mobile-menu"
-        tabIndex={-1}
-        hidden={!menuOpen}
-        className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#141210] outline-none md:hidden"
-        style={{ backgroundColor: '#141210' }}
+        className={`pointer-events-auto w-full max-w-5xl transition-colors duration-200 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between ${
+          scrolled
+            ? 'bg-paper/95 backdrop-blur-2xl border border-rule shadow-card'
+            : 'bg-paper-2/90 backdrop-blur-xl border border-rule shadow-md'
+        }`}
       >
-        <div className="flex h-16 items-center justify-between px-5 sm:px-8">
+        {/* Brand Logo Artwork */}
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="flex items-center gap-3 group focus-visible:outline-none"
+          aria-label="দর্পণ (Dorpon) Home"
+        >
           <img
-            src={brandAssets.logoCream}
-            alt={site.brand.full}
-            width={640}
-            height={367}
-            className="h-9 w-auto"
+            src="/logo/logo-white.webp"
+            alt="দর্পণ (Dorpon)"
+            className="h-7 sm:h-8 w-auto object-contain transition-opacity group-hover:opacity-85"
+            onError={(e) => {
+              ;(e.currentTarget as HTMLImageElement).src = '/logo/logo-cream.webp'
+            }}
           />
-          <button
-            type="button"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close navigation menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-cream transition-colors hover:bg-cream/10"
-          >
-            <IconClose className="h-6 w-6" />
-          </button>
-        </div>
+          <div className="hidden md:flex flex-col border-l border-rule pl-3">
+            <span className="text-xs font-medium text-accent">
+              Rajbari, Faridpur & Dhaka
+            </span>
+            <span className="text-xs text-muted">
+              Photography & Cinematography
+            </span>
+          </div>
+        </a>
 
-        <nav aria-label="Mobile" className="flex flex-col px-5 pt-6 sm:px-8">
-          {site.nav.map((item) => (
+        {/* Center Nav Links (Desktop) */}
+        <nav className="hidden lg:flex items-center gap-1 bg-paper/60 p-1 rounded-full border border-rule">
+          {navLinks.map((link) => (
             <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              className="border-b border-white/10 py-5 font-display text-3xl text-cream transition-colors hover:text-sand"
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="px-4 py-1.5 rounded-full text-xs font-medium text-ink-2 hover:text-ink hover:bg-paper-3 transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
             >
-              {item.label}
+              <span>{link.label}</span>
+              {link.count && (
+                <span className="px-1.5 py-0.2 rounded-full text-xs bg-accent/20 text-accent font-mono">
+                  {link.count}
+                </span>
+              )}
             </a>
           ))}
         </nav>
 
-        <div className="px-5 pt-8 sm:px-8">
-          <a
-            href="#contact"
-            onClick={() => setMenuOpen(false)}
-            className="inline-flex w-full items-center justify-center rounded-full bg-cream px-6 py-3.5 text-[0.75rem] font-medium uppercase tracking-label text-ink transition-opacity hover:opacity-90"
+        {/* Right Action Button & Mobile Menu Toggle */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={triggerBookAction}
+            className="brand-btn px-4 sm:px-5 py-2.5 min-h-[44px] rounded-full text-xs font-bold focus-visible:outline-none cursor-pointer flex items-center justify-center"
           >
-            Contact Us
-          </a>
-          <p className="mt-8 text-sm text-muted">
-            {site.label} · {site.location}
-          </p>
+            Book
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2.5 min-w-[44px] min-h-[44px] rounded-full bg-paper-2 text-ink-2 hover:text-ink hover:bg-paper-3 border border-rule transition-colors cursor-pointer flex items-center justify-center"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <IconClose className="w-5 h-5" /> : <IconMenu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
-    </>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="pointer-events-auto fixed inset-x-3 top-16 z-50 p-5 rounded-card bg-paper/98 backdrop-blur-2xl border border-rule shadow-card lg:hidden flex flex-col gap-4 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between pb-3 border-b border-rule">
+            <img
+              src="/logo/logo-white.webp"
+              alt="দর্পণ (Dorpon)"
+              className="h-7 w-auto object-contain"
+            />
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-1 rounded-full text-muted hover:text-ink"
+            >
+              <IconClose className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5 py-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="p-3 rounded-xl bg-paper-2 hover:bg-paper-3 border border-rule flex flex-col gap-1 transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs sm:text-sm font-medium text-ink">{link.label}</span>
+                  {link.count && (
+                    <span className="text-xs text-accent font-mono px-1.5 py-0.5 rounded bg-paper">
+                      {link.count}
+                    </span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="pt-3 border-t border-rule flex flex-col gap-2.5">
+            <button
+              onClick={triggerBookAction}
+              className="brand-btn w-full py-3.5 min-h-[44px] rounded-full text-center text-sm font-bold flex items-center justify-center cursor-pointer"
+            >
+              Book a Shoot
+            </button>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="https://wa.me/8801740744170"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 min-h-[44px] px-3 rounded-xl bg-accent/20 text-accent border border-accent/40 text-xs font-medium flex items-center justify-center gap-1.5"
+              >
+                <IconWhatsApp className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </a>
+              <a
+                href="tel:+8801740744170"
+                className="py-3 min-h-[44px] px-3 rounded-xl bg-paper-2 text-ink border border-rule text-xs font-medium flex items-center justify-center gap-1.5"
+              >
+                <IconPhone className="w-4 h-4 text-accent" />
+                <span>Call Now</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   )
 }

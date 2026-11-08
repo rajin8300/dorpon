@@ -4,7 +4,6 @@ import { IconArrowLeft, IconArrowRight, IconClose } from './Icons'
 
 interface LightboxProps {
   photos: Photo[]
-  /** Index of the open photo, or null when the lightbox is closed. */
   index: number | null
   onClose: () => void
   onNavigate: (index: number) => void
@@ -27,7 +26,6 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
   const handlePrev = useCallback(() => goTo((index ?? 0) - 1), [goTo, index])
   const handleNext = useCallback(() => goTo((index ?? 0) + 1), [goTo, index])
 
-  // Body scroll lock and focus restoration. Only runs when open state changes.
   useEffect(() => {
     if (!isOpen) return
 
@@ -42,7 +40,6 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
     }
   }, [isOpen])
 
-  // Keyboard navigation, escape, and focus trap.
   useEffect(() => {
     if (!isOpen) return
 
@@ -56,27 +53,6 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
       } else if (event.key === 'ArrowRight') {
         event.preventDefault()
         handleNext()
-      } else if (event.key === 'Tab') {
-        const dialog = dialogRef.current
-        if (!dialog) return
-        const focusable = dialog.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        )
-        if (focusable.length === 0) return
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
-
-        if (event.shiftKey) {
-          if (document.activeElement === first || document.activeElement === dialog) {
-            event.preventDefault()
-            last.focus()
-          }
-        } else {
-          if (document.activeElement === last) {
-            event.preventDefault()
-            first.focus()
-          }
-        }
       }
     }
 
@@ -84,12 +60,10 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [isOpen, onClose, handlePrev, handleNext])
 
-  // Reset the loading state whenever a different photo is shown.
   useEffect(() => {
     setLoaded(false)
   }, [index])
 
-  // Preload the neighbouring images for instant navigation.
   useEffect(() => {
     if (!isOpen || index === null || total < 2) return
     const neighbours = [(index + 1) % total, (index - 1 + total) % total]
@@ -106,40 +80,65 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={`Image preview: ${current.alt}`}
+      aria-label={`Photo view: ${current.alt}`}
       tabIndex={-1}
-      className="fixed inset-0 z-[60] flex flex-col bg-ink/96 outline-none backdrop-blur-sm"
-      onClick={(event) => {
-        if (event.target === event.currentTarget) onClose()
+      className="fixed inset-0 z-[70] flex flex-col bg-paper/98 backdrop-blur-3xl outline-none"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
       }}
     >
-      <div className="flex items-center justify-between px-4 py-4 sm:px-8">
-        <p className="text-[0.7rem] font-medium uppercase tracking-label text-cream/60">
-          {index + 1} / {total}
-        </p>
+      {/* Top Floating Action Bar */}
+      <div className="flex items-center justify-between px-4 sm:px-8 py-3.5 border-b border-rule bg-paper-2/90">
+        <div className="flex items-center gap-3">
+          <img
+            src="/logo/logo-white.webp"
+            alt="দর্পণ (Dorpon)"
+            className="h-7 w-auto object-contain"
+          />
+          <div className="border-l border-rule pl-3">
+            <span className="text-xs text-accent font-medium block">
+              Dorpon Portfolio Lightbox
+            </span>
+            <p className="text-xs text-muted">
+              {index + 1} of {total} Photographs
+            </p>
+          </div>
+        </div>
+
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close image preview"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full text-cream/80 transition-colors hover:bg-cream/10 hover:text-cream"
+          aria-label="Close lightbox"
+          className="w-10 h-10 rounded-full bg-paper-3 hover:bg-paper text-ink flex items-center justify-center transition-colors cursor-pointer border border-rule"
         >
-          <IconClose className="h-6 w-6" />
+          <IconClose className="w-5 h-5" />
         </button>
       </div>
 
+      {/* Main Image Stage */}
       <div
-        className="relative flex flex-1 items-center justify-center px-3 pb-2 sm:px-8"
-        onClick={(event) => {
-          if (event.target === event.currentTarget) onClose()
+        className="relative flex-1 flex items-center justify-center p-3 sm:p-8 overflow-hidden select-none"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose()
         }}
       >
-        <div className="relative flex max-h-[76svh] items-center justify-center overflow-hidden">
+        {/* Previous Button (Left) */}
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="Previous photograph"
+          className="absolute left-3 sm:left-6 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full green-glass-panel text-ink hover:bg-accent hover:text-paper flex items-center justify-center transition-colors cursor-pointer shadow-2xl active:scale-95"
+        >
+          <IconArrowLeft className="w-5 h-5" />
+        </button>
+
+        {/* High-res Image */}
+        <div className="relative max-h-[78vh] max-w-[92vw] flex items-center justify-center rounded-card overflow-hidden shadow-card border border-rule">
           <span
             aria-hidden="true"
-            className={[
-              'absolute inset-0 bg-cover bg-center transition-opacity duration-500',
-              loaded ? 'opacity-0 pointer-events-none' : 'opacity-100',
-            ].join(' ')}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-300 ${
+              loaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
             style={{ backgroundImage: `url(${current.blur})` }}
           />
           <img
@@ -149,34 +148,41 @@ export default function Lightbox({ photos, index, onClose, onNavigate }: Lightbo
             width={current.width}
             height={current.height}
             onLoad={() => setLoaded(true)}
-            className={[
-              'relative max-h-[76svh] w-auto max-w-full object-contain transition-opacity duration-500',
-              loaded ? 'opacity-100' : 'opacity-0',
-            ].join(' ')}
+            className={`max-h-[78vh] w-auto max-w-full object-contain transition-opacity duration-300 ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         </div>
-      </div>
 
-      <div className="flex items-center justify-between gap-4 px-4 pb-6 pt-2 sm:px-8">
-        <button
-          type="button"
-          onClick={handlePrev}
-          aria-label="Previous image"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/25 text-cream/85 transition-colors hover:bg-cream/10 hover:text-cream"
-        >
-          <IconArrowLeft className="h-5 w-5" />
-        </button>
-
-        <p className="hidden max-w-xl text-center text-sm text-cream/65 sm:block">{current.alt}</p>
-
+        {/* Next Button (Right) */}
         <button
           type="button"
           onClick={handleNext}
-          aria-label="Next image"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/25 text-cream/85 transition-colors hover:bg-cream/10 hover:text-cream"
+          aria-label="Next photograph"
+          className="absolute right-3 sm:right-6 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full green-glass-panel text-ink hover:bg-accent hover:text-paper flex items-center justify-center transition-colors cursor-pointer shadow-2xl active:scale-95"
         >
-          <IconArrowRight className="h-5 w-5" />
+          <IconArrowRight className="w-5 h-5" />
         </button>
+      </div>
+
+      {/* Bottom Info Strip */}
+      <div className="px-4 sm:px-8 py-3.5 border-t border-rule bg-paper-2/90 flex items-center justify-between text-xs text-muted">
+        <p className="truncate max-w-md text-ink font-medium">
+          {current.alt || 'দর্পণ (Dorpon) Photography'}
+        </p>
+        <div className="flex items-center gap-4">
+          <span className="hidden sm:inline text-xs text-muted/60">
+            [Left / Right] Navigation · [Esc] Close
+          </span>
+          <a
+            href={current.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline text-xs"
+          >
+            Full Size ↗
+          </a>
+        </div>
       </div>
     </div>
   )

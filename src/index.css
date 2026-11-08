@@ -1,169 +1,264 @@
+/* Hallmark · shape: Stage · genre: atmospheric · theme: brand · redesign: full
+ * paper: oklch(18.5% 0.024 185) · accent: oklch(71% 0.17 160) · display: Playfair Display · body: Plus Jakarta Sans · hero: Stage · nav: dock · footer: mast · signature: uncropped dorpon frame deck
+ * axes: dark/high-contrast-serif/chromatic-emerald · posture: Stage · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: H, solid typography with no single-word italic gradient */
+/* Hallmark · reworded "Curated Packages" to "Packages & Pricing" · gate 8 names content composition */
+/* Hallmark · reworded "Dorpon Shriti" to "Standard Photography" · user requested practical package names */
+/* Hallmark · reworded "Dorpon Bandhon" to "Standard Photo & Cinema" · user requested practical package names */
+/* Hallmark · reworded "Dorpon Utshob" to "2-Day Wedding Combo" · user requested practical package names */
+/* Hallmark · reworded "Dorpon Signature" to "Royal Wedding & Drone" · user requested practical package names */
+/* Hallmark · dropped https://wa.me/8801740744170?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%B0%E0%A7%8D%E0%A6%AA%E0%A6%A3%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%AE%20%E0%A6%AA%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%95%E0%A6%A5%E0%A6%BE%20%E0%A6%AC%E0%A6%B2%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4 · user requested removal of redundant custom package banner */
 @import 'tailwindcss';
+@import './tokens.css';
+@import './base.css' layer(base);
 
-/* ---------------------------------------------------------------------------
-   DESIGN TOKENS
-   Dark theme, as approved in the preview. Photographs keep their
-   original colours; only the page chrome goes dark.
---------------------------------------------------------------------------- */
 @theme {
-  --font-sans:
-    'Hind Siliguri', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Bengali',
-    sans-serif;
-  --font-display: 'Fraunces', 'Hind Siliguri', Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-bangla: var(--font-outlier);
 
-  --color-cream: #faf7f2;
-  --color-cream-deep: #f3eee5;
-  --color-paper: #fffdf9;
-  --color-ink: #1b1916;
-  --color-ink-soft: #46413a;
-  --color-muted: #b0a897;
-  --color-night: #141210;
-  --color-card: #221f1b;
-  --color-card-hover: #2a2621;
-  --color-sand: #c1ab8b;
-  --color-sand-soft: #e5dac7;
-  --color-line: #e6dfd4;
+  --color-brand-bg: var(--color-paper);
+  --color-brand-elevated: var(--color-paper-2);
+  --color-brand-card: var(--color-paper-3);
+  --color-brand-border: var(--color-rule);
 
-  /* Colourful accents — wedding marigold, rose, violet and teal.
-     Content and layout are untouched; these only restyle the theme. */
-  --color-marigold: #f59e0b;
-  --color-marigold-deep: #ea580c;
-  --color-rose: #e11d48;
-  --color-rose-soft: #ffe4e6;
-  --color-violet: #7c3aed;
-  --color-violet-soft: #ede9fe;
-  --color-teal: #0d9488;
-  --color-teal-soft: #ccfbf1;
-  --color-blush: #fff1f2;
-  --color-lilac: #f5f3ff;
+  --color-emerald-accent: var(--color-accent);
+  --color-emerald-light: var(--color-focus);
+  --color-emerald-deep: oklch(60% 0.16 160);
 
-  --tracking-label: 0.24em;
+  --color-dorpon-white: var(--color-ink);
+  --color-dorpon-cream: var(--color-ink-2);
+  --color-dorpon-muted: var(--color-muted);
 }
 
 @layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    overflow-x: clip !important;
+  }
+
   html {
     scroll-behavior: smooth;
-    /* keeps anchored sections clear of the fixed header */
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+    width: 100%;
   }
 
   body {
-    background-color: var(--color-night);
-    color: var(--color-cream);
-    font-family: var(--font-sans);
-    font-weight: 400;
-    line-height: 1.65;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    margin: 0;
+    padding: 0;
+  }
+
+  body, button, input, select, textarea {
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* safety net against accidental horizontal scrolling */
-    overflow-x: clip;
-  }
-
-  h1,
-  h2,
-  h3 {
-    text-wrap: balance;
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  ::selection {
-    background-color: var(--color-rose);
-    color: #fff;
-  }
-
-  /* Gradient headline text and gradient buttons, used by the restyle. */
-  .gradient-text {
-    background: linear-gradient(92deg, #ea580c, #e11d48 45%, #7c3aed);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .btn-gradient {
-    background: linear-gradient(92deg, #f59e0b, #e11d48 55%, #7c3aed);
-    color: #fff;
-    box-shadow: 0 10px 30px rgba(225, 29, 72, 0.35);
-  }
-  .btn-gradient:hover {
-    box-shadow: 0 14px 34px rgba(124, 58, 237, 0.4);
-  }
-  .section-tint-rose {
-    background: linear-gradient(180deg, #2a1218, #141210);
-  }
-  .section-tint-violet {
-    background: linear-gradient(180deg, #1e1633, #141210);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-cream);
-    outline-offset: 3px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
   }
 
-  /* Media never overflows its container */
-  img,
-  video,
-  iframe {
+  [lang="bn"],
+  .font-bangla {
+    font-family: var(--font-outlier) !important;
+    letter-spacing: 0.01em;
+  }
+
+  #root {
+    overflow-x: clip !important;
+    width: 100%;
+  }
+
+  img, iframe {
     max-width: 100%;
   }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-rule);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
 }
 
-/* ---------------------------------------------------------------------------
-   REVEAL-ON-SCROLL
-   A single, gentle fade-up. Disabled for reduced-motion users.
---------------------------------------------------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: opacity, transform;
+/* Glassmorphism Surface on Deep Green */
+.green-glass-panel {
+  background: color-mix(in oklab, var(--color-paper-2) 88%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-rule);
 }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Skip link — visible only on keyboard focus */
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: -100%;
-  z-index: 100;
-  background-color: var(--color-cream);
+.green-card {
+  background: var(--color-paper-2);
   color: var(--color-ink);
-  padding: 0.65rem 1rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: top 0.2s ease;
+  border: 1px solid var(--color-rule);
+  transition-property: background-color, border-color, box-shadow, transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.skip-link:focus {
-  top: 1rem;
+.green-card:hover {
+  background: var(--color-paper-3);
+  border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* High Legibility Brand Buttons */
+.brand-btn {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-weight: 700;
+  transition-property: background-color, color, transform, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-button);
+}
+
+.brand-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-paper);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px color-mix(in oklab, var(--color-accent) 35%, transparent);
+}
+
+.brand-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Video & Reel Players (Facebook XFBML + YouTube) */
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+}
+
+.video-frame:has(.fb-video.fb-parsed) {
+  aspect-ratio: auto;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100%;
+  border: 0;
+}
+
+.video-frame .fb-video,
+.reel-frame .fb-video,
+.fb_iframe_widget,
+.fb_iframe_widget span,
+.fb_iframe_widget iframe,
+.fb-video,
+.fb-video span,
+.fb-video iframe {
+  position: static;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.reel-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+}
+
+.reel-frame:has(.fb-video.fb-parsed) {
+  aspect-ratio: auto;
+}
+
+.reel-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100%;
+  border: 0;
+}
+
+.fb-fallback {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklab, var(--color-paper) 90%, transparent);
+  padding: var(--space-md);
+}
+
+.video-frame:has(.fb-video.fb-parsed) .fb-fallback,
+.reel-frame:has(.fb-video.fb-parsed) .fb-fallback,
+.fb-video.fb-parsed ~ .fb-fallback {
+  display: none !important;
+}
+
+.fb-fallback span {
+  background: var(--color-facebook);
+  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-card);
+}
+
+.carousel-snap {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+}
+
+.carousel-snap-item {
+  scroll-snap-align: start;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
+  *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after {
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

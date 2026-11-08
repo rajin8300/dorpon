@@ -3,6 +3,7 @@ node_modules
 
 # Build output
 dist
+.hallmark/
 
 # Logs
 npm-debug.log*

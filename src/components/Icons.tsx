@@ -50,6 +50,14 @@ export function IconArrowUpRight(props: IconProps) {
   )
 }
 
+export function IconArrowUp(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  )
+}
+
 export function IconMapPin(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
@@ -80,7 +88,111 @@ export function IconPlay(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
       <circle cx="12" cy="12" r="9" />
-      <path d="M10 8.5 16 12l-6 3.5v-7Z" />
+      <path d="M10 8.5 16 12l-6 3.5v-7Z" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function IconCheck(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M20 6L9 17l-5-5" strokeWidth={2} />
+    </svg>
+  )
+}
+
+export function IconCopy(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  )
+}
+
+export function IconChevronDown(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M6 9l6 6 6-6" strokeWidth={2} />
+    </svg>
+  )
+}
+
+export function IconZoomIn(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <line x1="11" y1="8" x2="11" y2="14" />
+      <line x1="8" y1="11" x2="14" y2="11" />
+    </svg>
+  )
+}
+
+export function IconCamera(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+      <circle cx="12" cy="13" r="4" />
+    </svg>
+  )
+}
+
+export function IconRing(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <circle cx="12" cy="14" r="7" />
+      <path d="M12 2l2.5 5h-5L12 2z" />
+    </svg>
+  )
+}
+
+export function IconHeartHandshake(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    </svg>
+  )
+}
+
+export function IconSparkles(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" />
+    </svg>
+  )
+}
+
+export function IconBriefcase(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  )
+}
+
+export function IconUser(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+export function IconSliders(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...strokeProps} {...props}>
+      <line x1="4" y1="21" x2="4" y2="14" />
+      <line x1="4" y1="10" x2="4" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12" y2="3" />
+      <line x1="20" y1="21" x2="20" y2="16" />
+      <line x1="20" y1="12" x2="20" y2="3" />
+      <line x1="1" y1="14" x2="7" y2="14" />
+      <line x1="9" y1="8" x2="15" y2="8" />
+      <line x1="17" y1="16" x2="23" y2="16" />
     </svg>
   )
 }
@@ -120,18 +232,16 @@ export function IconGoogleMaps(props: IconProps) {
         fill="#EA4335"
         d="M24 4a12 12 0 0 0-12 12c0 9 12 22 12 22s12-13 12-22A12 12 0 0 0 24 4Z"
       />
-      <path fill="#FBBC04" d="M24 4a12 12 0 0 0-12 12c0 4.5 3 10 6.5 14.5L24 28l5.5 2.5C33 26 36 20.5 36 16A12 12 0 0 0 24 4Z" opacity="0.35" />
       <circle cx="24" cy="16" r="6" fill="#fff" />
       <circle cx="24" cy="16" r="2.8" fill="#4285F4" />
     </svg>
   )
 }
 
-/** Gmail-style multicolour envelope — used for the Email card. */
+/** Gmail-style envelope. */
 export function IconGmail(props: IconProps) {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true" {...props}>
-      <path fill="#EA4335" d="M6 10h36v28H6z" opacity="0.12" />
       <path fill="#EA4335" d="M6 10l18 14L6 38V10Z" />
       <path fill="#4285F4" d="M42 10L24 24l18 14V10Z" />
       <path fill="#FBBC04" d="M6 10l18 14-6 5L6 14V10Z" opacity="0.9" />
@@ -147,7 +257,6 @@ export function IconGmail(props: IconProps) {
   )
 }
 
-/** Original Facebook logo: white f on the official blue circle. */
 export function IconFacebookOriginal(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -160,7 +269,6 @@ export function IconFacebookOriginal(props: IconProps) {
   )
 }
 
-/** Original Instagram logo: gradient rounded square, white camera outline. */
 export function IconInstagramOriginal(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -176,7 +284,6 @@ export function IconInstagramOriginal(props: IconProps) {
       <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#instagram-gradient)" />
       <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.8" />
       <circle cx="17.4" cy="6.6" r="1.3" fill="#fff" />
-      <rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="#fff" strokeWidth="0" />
     </svg>
   )
 }

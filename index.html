@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
@@ -11,46 +11,145 @@
     <title>দর্পণ – Dorpon | Photography &amp; Cinematography in Rajbari</title>
     <meta
       name="description"
-      content="দর্পণ – Dorpon is a photography and cinematography brand based in Rajbari, Bangladesh, capturing meaningful moments through photography and cinematic storytelling."
+      content="Every Frame Tells a Story. দর্পণ – Dorpon captures meaningful moments through photography and cinematic storytelling across Rajbari, Faridpur, and Dhaka."
     />
     <meta name="author" content="দর্পণ – Dorpon" />
-    <meta name="theme-color" content="#FAF7F2" />
+    <meta name="theme-color" content="#061817" />
     <link rel="canonical" href="https://rajinmd.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="দর্পণ – Dorpon" />
-    <meta property="og:title" content="দর্পণ – Dorpon | Photography & Cinematography in Rajbari" />
+    <meta property="og:title" content="দর্পণ – Dorpon | Photography &amp; Cinematography" />
     <meta
       property="og:description"
-      content="দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling."
+      content="Every Frame Tells a Story. Capturing meaningful wedding, portrait, and commercial moments in Rajbari, Faridpur, and Dhaka."
     />
     <meta property="og:url" content="https://rajinmd.com/" />
-    <meta property="og:image" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
-    <meta property="og:image:secure_url" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://rajinmd.com/photos/hero-1920.webp" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1280" />
+    <meta property="og:locale" content="bn_BD" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="দর্পণ – Dorpon | Photography & Cinematography in Rajbari" />
+    <meta name="twitter:title" content="দর্পণ – Dorpon | Photography &amp; Cinematography" />
     <meta
       name="twitter:description"
-      content="দর্পণ – Dorpon is a photography and cinematography brand in Rajbari, Bangladesh, capturing meaningful moments through cinematic storytelling."
+      content="Every Frame Tells a Story. Wedding photography and cinematic films across Rajbari, Faridpur, and Dhaka."
     />
-    <meta name="twitter:image" content="https://rajinmd.com/assets/photos/og-preview.jpg" />
+    <meta name="twitter:image" content="https://rajinmd.com/photos/hero-1920.webp" />
 
-    <!-- Fonts: Hind Siliguri supports Bangla + Latin; Fraunces is the editorial display serif. -->
+    <!-- Performance: DNS Prefetch for Media CDNs -->
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+
+    <!-- Structured Data (JSON-LD): Professional Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "দর্পণ – Dorpon",
+      "alternateName": "Dorpon Photography & Cinematography",
+      "url": "https://rajinmd.com/",
+      "logo": "https://rajinmd.com/logo/logo-white.webp",
+      "image": "https://rajinmd.com/photos/hero-1920.webp",
+      "telephone": "+8801740744170",
+      "priceRange": "৳1,200 - ৳28,000",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rajbari",
+        "addressRegion": "Dhaka Division",
+        "addressCountry": "BD"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Rajbari" },
+        { "@type": "City", "name": "Faridpur" },
+        { "@type": "City", "name": "Dhaka" }
+      ],
+      "sameAs": [
+        "https://facebook.com/dorpon830",
+        "https://instagram.com/dorpon.830"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts: Playfair Display, Plus Jakarta Sans, Noto Sans Bengali, Anek Bangla -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="bg-paper text-ink antialiased selection:bg-accent selection:text-paper min-h-screen overflow-x-clip">
+    <div id="fb-root"></div>
+    <!-- Cross-Platform One-at-a-Time Video Player Engine (Facebook + YouTube) -->
+    <script>
+      window.__dorponFBPlayers = [];
+      window.__pauseYouTube = function () {
+        try {
+          if (window.__dorponYTPlayer && window.__dorponYTPlayer.pauseVideo) {
+            window.__dorponYTPlayer.pauseVideo();
+          }
+        } catch (e) {}
+        try {
+          var yt = document.getElementById("yt-player-0");
+          if (yt && yt.contentWindow) {
+            yt.contentWindow.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
+          }
+        } catch (e) {}
+      };
+      window.__pauseFacebook = function () {
+        (window.__dorponFBPlayers || []).forEach(function (entry) {
+          try { entry.player.pause(); } catch (e) {}
+        });
+      };
+      window.fbAsyncInit = function () {
+        if (!window.FB) return;
+        FB.init({ version: "v21.0", xfbml: false });
+        var players = window.__dorponFBPlayers;
+        function pauseOthers(active) {
+          players.forEach(function (entry) {
+            if (entry.player !== active) {
+              try { entry.player.pause(); } catch (e) {}
+            }
+          });
+          window.__pauseYouTube();
+        }
+        FB.Event.subscribe("xfbml.ready", function (msg) {
+          if (msg.type !== "video") return;
+          var entry = { id: msg.id, player: msg.instance };
+          players.push(entry);
+          var el = document.getElementById(msg.id);
+          if (el) {
+            el.classList.add("fb-parsed");
+            if (el.parentNode) el.parentNode.classList.remove("fb-failed");
+          }
+          try {
+            entry.player.subscribe("startedPlaying", function () {
+              try { entry.player.unmute(); } catch (e) {}
+              pauseOthers(entry.player);
+            });
+          } catch (e) {}
+        });
+      };
+      window.onYouTubeIframeAPIReady = function () {
+        try {
+          window.__dorponYTPlayer = new YT.Player("yt-player-0", {
+            events: {
+              onStateChange: function (ev) {
+                if (ev && ev.data === YT.PlayerState.PLAYING) {
+                  window.__pauseFacebook();
+                }
+              }
+            }
+          });
+        } catch (e) {}
+      };
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

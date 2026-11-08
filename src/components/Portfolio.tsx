@@ -36,12 +36,12 @@ function PhotoTile({ photo, index, onOpen }: PhotoTileProps) {
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          loading="lazy"
+          loading={index === 0 ? 'eager' : 'lazy'}
+          fetchPriority={index === 0 ? 'high' : 'auto'}
           decoding="async"
           onLoad={() => setLoaded(true)}
           className={[
-            'relative block h-auto w-full object-cover transition-[opacity,transform] duration-700 ease-out',
-            'group-hover:scale-[1.03] group-focus-visible:scale-[1.03]',
+            'relative block h-auto w-full object-cover transition-opacity duration-700 ease-out',
             loaded ? 'opacity-100' : 'opacity-0',
           ].join(' ')}
         />

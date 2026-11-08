@@ -42,7 +42,7 @@ export default function Videos() {
                   className="absolute inset-0 h-full w-full border-0"
                 />
               </div>
-              <figcaption className="mt-3 text-[0.7rem] font-medium uppercase tracking-label text-muted">
+              <figcaption className="mt-3 text-xs font-medium text-muted">
                 {video.title}
               </figcaption>
             </figure>
