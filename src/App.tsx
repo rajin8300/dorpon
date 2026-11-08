@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { SiteProvider } from './context/SiteContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Showcase from './components/Showcase'
@@ -10,7 +11,7 @@ import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
 import { photos } from './data/gallery'
 
-export default function App() {
+function MainContent() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [selectedService, setSelectedService] = useState<string>('Wedding & Cinematography')
 
@@ -71,5 +72,13 @@ export default function App() {
         onNavigate={(next) => setLightboxIndex(next)}
       />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <SiteProvider>
+      <MainContent />
+    </SiteProvider>
   )
 }

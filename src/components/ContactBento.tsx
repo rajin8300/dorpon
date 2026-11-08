@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { site } from '../config/site'
+import { useSite } from '../context/SiteContext'
+import { translations } from '../data/translations'
 import {
   IconPhone,
   IconWhatsApp,
@@ -17,6 +19,8 @@ interface ContactBentoProps {
 }
 
 export default function ContactBento({ onBookClick: _onBookClick }: ContactBentoProps) {
+  const { lang } = useSite()
+  const t = translations[lang]
   const { contact } = site
   const [copiedEmail, setCopiedEmail] = useState(false)
 
@@ -38,10 +42,10 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
         {/* Section Header: Direct & Confident */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-ink tracking-tight mb-2">
-            Let’s Connect & Collaborate
+            {t.contact.title}
           </h2>
           <p className="font-bangla text-sm sm:text-base text-muted leading-relaxed">
-            আমরা সর্বদা আপনার বিশেষ দিনের রূপরেখা শুনতে প্রস্তুত। সরাসরি কল, হোয়াটসঅ্যাপ অথবা ইমেইলে যোগাযোগ করুন।
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -59,18 +63,18 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-medium text-accent">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                  <span>Available</span>
+                  <span>{lang === 'bn' ? 'সক্রিয়' : 'Available'}</span>
                 </div>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold font-mono text-ink group-hover:text-accent transition-colors mb-1">
                 {contact.phoneDisplay}
               </h3>
               <p className="text-xs text-muted font-medium">
-                Direct Phone Call
+                {t.contact.callTitle}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule flex items-center justify-between text-xs text-muted group-hover:text-ink">
-              <span>Tap to call directly</span>
+              <span>{lang === 'bn' ? 'সরাসরি কল করতে ট্যাপ করুন' : 'Tap to call directly'}</span>
               <IconArrowUpRight className="w-4 h-4 text-accent" />
             </div>
           </a>
@@ -88,18 +92,18 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                   <IconWhatsApp className="w-5 h-5" />
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-accent/20 text-xs font-bold text-accent">
-                  Fast Response
+                  {lang === 'bn' ? 'দ্রুত রেসপন্স' : 'Fast Response'}
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
-                Chat on WhatsApp
+                {t.contact.waTitle}
               </h3>
               <p className="text-xs text-muted font-medium">
-                WhatsApp Concierge
+                {t.contact.waSub}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule flex items-center justify-between text-xs text-ink-2 group-hover:text-ink">
-              <span>Discuss packages, dates & rates</span>
+              <span>{lang === 'bn' ? 'প্যাকেজ, তারিখ ও রেট আলোচনা করুন' : 'Discuss packages, dates & rates'}</span>
               <IconArrowUpRight className="w-4 h-4 text-accent" />
             </div>
           </a>
@@ -120,12 +124,12 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                   {copiedEmail ? (
                     <>
                       <IconCheck className="w-3.5 h-3.5 text-accent" />
-                      <span className="text-accent">Copied!</span>
+                      <span className="text-accent">{t.contact.copied}</span>
                     </>
                   ) : (
                     <>
                       <IconCopy className="w-3.5 h-3.5" />
-                      <span>Copy Email</span>
+                      <span>{t.contact.emailSub}</span>
                     </>
                   )}
                 </button>
@@ -136,12 +140,12 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                 </a>
               </h3>
               <p className="text-xs text-muted font-medium">
-                Official Inquiries
+                {t.contact.emailTitle}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule flex items-center justify-between text-xs text-muted">
               <a href={contact.emailHref} className="hover:text-ink">
-                Click to send email
+                {lang === 'bn' ? 'ইমেইল পাঠাতে ক্লিক করুন' : 'Click to send email'}
               </a>
               <IconArrowUpRight className="w-4 h-4 text-accent" />
             </div>
@@ -159,17 +163,17 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                 <div className="w-11 h-11 rounded-xl bg-paper border border-rule flex items-center justify-center text-accent">
                   <IconFacebookOriginal className="w-5 h-5" />
                 </div>
-                <span className="text-xs text-muted">Facebook Page</span>
+                <span className="text-xs text-muted">{t.contact.fbTitle}</span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
                 {contact.facebookHandle}
               </h3>
               <p className="text-xs text-muted font-medium">
-                Official Page
+                {t.contact.fbSub}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule flex items-center justify-between text-xs text-muted group-hover:text-ink">
-              <span>View stories and recent reels</span>
+              <span>{lang === 'bn' ? 'ভিডিও ও সাম্প্রতিক পোস্ট দেখুন' : 'View stories and recent reels'}</span>
               <IconArrowUpRight className="w-4 h-4 text-accent" />
             </div>
           </a>
@@ -186,17 +190,17 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                 <div className="w-11 h-11 rounded-xl bg-paper border border-rule flex items-center justify-center text-accent">
                   <IconInstagramOriginal className="w-5 h-5" />
                 </div>
-                <span className="text-xs text-muted">Instagram Feed</span>
+                <span className="text-xs text-muted">{t.contact.igTitle}</span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-accent transition-colors mb-1">
                 {contact.instagramHandle}
               </h3>
               <p className="text-xs text-muted font-medium">
-                Visual Stories
+                {t.contact.igSub}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule flex items-center justify-between text-xs text-muted group-hover:text-ink">
-              <span>Follow for bridal portraits</span>
+              <span>{lang === 'bn' ? 'ব্রাইডাল পোর্ট্রেট দেখুন' : 'Follow for bridal portraits'}</span>
               <IconArrowUpRight className="w-4 h-4 text-accent" />
             </div>
           </a>
@@ -209,18 +213,22 @@ export default function ContactBento({ onBookClick: _onBookClick }: ContactBento
                   <IconMapPin className="w-5 h-5" />
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-paper border border-rule text-xs text-accent">
-                  Service Area
+                  {t.contact.locTitle}
                 </span>
               </div>
               <h3 className="text-base sm:text-xl font-bold text-ink font-bangla mb-1">
-                রাজবাড়ী, ফরিদপুর ও ঢাকা
+                {t.contact.locSub}
               </h3>
               <p className="text-xs text-muted font-medium">
-                Active Travel Route
+                {lang === 'bn' ? 'সক্রিয় ভ্রমণ রুট' : 'Active Travel Route'}
               </p>
             </div>
             <div className="mt-6 pt-3 border-t border-rule text-xs text-muted">
-              <p className="font-bangla leading-relaxed">ক্লায়েন্টের সুবিধার্থে আমরা নির্ধারিত ভেন্যুতে সরাসরি পৌঁছাই।</p>
+              <p className="font-bangla leading-relaxed">
+                {lang === 'bn'
+                  ? 'ক্লায়েন্টের সুবিধার্থে আমরা নির্ধারিত ভেন্যুতে সরাসরি পৌঁছাই।'
+                  : 'We travel directly to your venue across Rajbari, Faridpur, and Dhaka.'}
+              </p>
             </div>
           </div>
         </div>

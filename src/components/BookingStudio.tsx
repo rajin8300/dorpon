@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useSite } from '../context/SiteContext'
+import { translations } from '../data/translations'
 import { IconWhatsApp, IconCheck } from './Icons'
 
 interface BookingStudioProps {
@@ -7,6 +9,9 @@ interface BookingStudioProps {
 }
 
 export default function BookingStudio({ selectedService, onServiceChange }: BookingStudioProps) {
+  const { lang } = useSite()
+  const t = translations[lang]
+
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -21,15 +26,7 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
   const [submittedPhone, setSubmittedPhone] = useState('')
   const [waFollowupUrl, setWaFollowupUrl] = useState('')
 
-  const serviceOptions = [
-    'Wedding & Cinematography',
-    'Pre / Post Wedding',
-    'Birthday & Anniversary',
-    'Corporate & Commercial',
-    'Portrait & Fashion',
-    'Other / Custom Service',
-  ]
-
+  const serviceOptions = t.booking.services
   const activeService = selectedService || serviceOptions[0]
 
   const buildWaUrl = (customMsg?: string) => {
@@ -59,7 +56,7 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
     const trimmedPhone = phone.trim()
 
     if (!trimmedName || !trimmedPhone) {
-      setErrorMsg('Please enter your full name and valid phone number.')
+      setErrorMsg(t.booking.errRequired)
       return
     }
 
@@ -95,7 +92,9 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
       }
     } catch {
       setErrorMsg(
-        'Sorry, could not send request right now. Please check your internet connection, or tap below to message directly on WhatsApp.',
+        lang === 'bn'
+          ? 'দুঃখিত, এই মুহূর্তে বার্তা পাঠানো সম্ভব হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করুন অথবা সরাসরি WhatsApp-এ বার্তা পাঠান।'
+          : 'Sorry, could not send request right now. Please check your internet connection, or tap below to message directly on WhatsApp.',
       )
     } finally {
       setLoading(false)
@@ -123,10 +122,10 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
           {/* Header */}
           <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-2">
-              Book Your Session
+              {t.booking.title}
             </h2>
             <p className="text-sm text-muted">
-              Select your service package and share your event details to check date availability.
+              {t.booking.subtitle}
             </p>
           </div>
 
@@ -137,10 +136,10 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                 <IconCheck className="w-8 h-8" />
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink mb-2">
-                Thank You, {submittedName}!
+                {t.booking.successTitle(submittedName)}
               </h3>
               <p className="text-sm text-muted max-w-md mb-6 leading-relaxed">
-                Your booking inquiry has been delivered to Dorpon. We will connect with you at ({submittedPhone}) shortly.
+                {t.booking.successDesc(submittedPhone)}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md">
@@ -148,17 +147,17 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                   href={waFollowupUrl || 'https://wa.me/8801740744170'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-full bg-accent hover:opacity-90 text-paper font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-opacity shadow-md"
+                  className="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-full bg-accent hover:opacity-90 text-accent-ink font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-opacity shadow-md"
                 >
-                  <IconWhatsApp className="w-4 h-4 text-paper" />
-                  <span>Confirm on WhatsApp</span>
+                  <IconWhatsApp className="w-4 h-4 text-accent-ink" />
+                  <span>{t.booking.successWaBtn}</span>
                 </a>
                 <button
                   type="button"
                   onClick={handleReset}
                   className="w-full sm:w-auto py-3.5 px-6 rounded-full bg-paper-2 hover:bg-paper-3 text-ink text-xs sm:text-sm font-medium transition-colors cursor-pointer border border-rule"
                 >
-                  Send Another Inquiry
+                  {t.booking.successNewBtn}
                 </button>
               </div>
             </div>
@@ -183,7 +182,7 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
               {/* Service Chips */}
               <div>
                 <label className="block text-xs font-semibold text-accent mb-2.5">
-                  1. Select Service Package <span className="text-accent">*</span>
+                  1. {t.booking.serviceLabel} <span className="text-accent">*</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                   {serviceOptions.map((opt) => {
@@ -205,11 +204,11 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                         <span
                           className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-colors ${
                             isSelected
-                              ? 'border-accent bg-accent text-paper'
+                              ? 'border-accent bg-accent text-accent-ink'
                               : 'border-muted/40 bg-transparent'
                           }`}
                         >
-                          {isSelected && <IconCheck className="w-2.5 h-2.5 text-paper stroke-[3]" />}
+                          {isSelected && <IconCheck className="w-2.5 h-2.5 text-accent-ink stroke-[3]" />}
                         </span>
                       </button>
                     )
@@ -220,12 +219,12 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
               {/* Contact Details Fields with Clear Labels & High Contrast */}
               <div>
                 <label className="block text-xs font-semibold text-accent mb-2.5">
-                  2. Contact Details <span className="text-accent">*</span>
+                  2. {lang === 'bn' ? 'যোগাযোগের তথ্য' : 'Contact Details'} <span className="text-accent">*</span>
                 </label>
                 <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label htmlFor="name" className="block text-xs font-medium text-ink-2 mb-1.5">
-                      Full Name <span className="font-bangla">(আপনার নাম)</span> <span className="text-accent">*</span>
+                      {t.booking.nameLabel} <span className="text-accent">*</span>
                     </label>
                     <input
                       type="text"
@@ -233,14 +232,14 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Rajin Ahmed"
+                      placeholder={t.booking.namePlaceholder}
                       className="w-full px-4 py-3 rounded-xl bg-paper border border-muted text-ink placeholder-muted text-sm focus-visible:outline-none focus-visible:border-accent transition-colors"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="phone" className="block text-xs font-medium text-ink-2 mb-1.5">
-                      Phone Number <span className="font-bangla">(মোবাইল নম্বর)</span> <span className="text-accent">*</span>
+                      {t.booking.phoneLabel} <span className="text-accent">*</span>
                     </label>
                     <input
                       type="tel"
@@ -248,29 +247,31 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="01XXXXXXXXX"
+                      placeholder={t.booking.phonePlaceholder}
                       className="w-full px-4 py-3 rounded-xl bg-paper border border-muted text-ink placeholder-muted text-sm focus-visible:outline-none focus-visible:border-accent transition-colors font-mono"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-xs font-medium text-ink-2 mb-1.5">
-                      Email Address <span className="font-bangla">(ইমেইল - Optional)</span>
+                      {t.booking.emailLabel}
                     </label>
                     <input
                       type="email"
                       id="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="name@example.com"
+                      placeholder={t.booking.emailPlaceholder}
                       className="w-full px-4 py-3 rounded-xl bg-paper border border-muted text-ink placeholder-muted text-sm focus-visible:outline-none focus-visible:border-accent transition-colors"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="eventDate" className="block text-xs font-medium text-ink-2 mb-1.5 flex items-center justify-between">
-                      <span>Event Date <span className="font-bangla">(ইভেন্টের তারিখ)</span></span>
-                      <span className="text-xs text-accent">Select date</span>
+                      <span>{t.booking.dateLabel}</span>
+                      <span className="text-xs text-accent">
+                        {lang === 'bn' ? 'তারিখ নির্বাচন' : 'Select date'}
+                      </span>
                     </label>
                     <input
                       type="date"
@@ -286,14 +287,14 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
               {/* Message Field */}
               <div>
                 <label htmlFor="message" className="block text-xs font-semibold text-accent mb-1.5">
-                  3. Event Location & Notes <span className="font-bangla">(লোকেশন ও বিবরণ)</span>
+                  3. {t.booking.notesLabel}
                 </label>
                 <textarea
                   id="message"
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Event location (Rajbari, Faridpur, Dhaka), timings, or special requests…"
+                  placeholder={t.booking.notesPlaceholder}
                   className="w-full px-4 py-3 rounded-xl bg-paper border border-muted text-ink placeholder-muted text-sm focus-visible:outline-none focus-visible:border-accent transition-colors"
                 />
               </div>
@@ -306,7 +307,7 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                   className="brand-btn w-full sm:flex-1 py-3.5 px-7 rounded-full text-sm font-bold flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 whitespace-nowrap"
                 >
                   <span className="whitespace-nowrap">
-                    {loading ? 'Sending…' : 'Send Booking'}
+                    {loading ? t.booking.sendingBtn : t.booking.submitBtn}
                   </span>
                 </button>
 
@@ -317,7 +318,7 @@ export default function BookingStudio({ selectedService, onServiceChange }: Book
                   className="green-glass-panel hover:bg-paper-3 text-ink w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer border border-rule"
                 >
                   <IconWhatsApp className="w-4 h-4 text-accent shrink-0" />
-                  <span>WhatsApp Express</span>
+                  <span>{t.hero.waBtn}</span>
                 </a>
               </div>
             </form>

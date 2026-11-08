@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
+import { useSite } from '../context/SiteContext'
+import { translations } from '../data/translations'
 import { filmsList, verticalReelsList, btsReelsList, type MediaVideoItem } from '../data/mediaData'
 import { IconArrowLeft, IconArrowRight, IconFacebookOriginal, IconArrowUpRight } from './Icons'
 
 export default function Showcase() {
+  const { lang } = useSite()
+  const t = translations[lang]
   const [activeTab, setActiveTab] = useState<'films' | 'reels' | 'bts'>('films')
   const carouselRef = useRef<HTMLDivElement>(null)
 
@@ -42,9 +46,9 @@ export default function Showcase() {
   }
 
   const tabs = [
-    { id: 'films' as const, label: 'Cinematic Films', count: filmsList.length },
-    { id: 'reels' as const, label: 'Vertical Reels', count: verticalReelsList.length },
-    { id: 'bts' as const, label: 'Behind The Scenes', count: btsReelsList.length },
+    { id: 'films' as const, label: t.showcase.tabFilms, count: filmsList.length },
+    { id: 'reels' as const, label: t.showcase.tabReels, count: verticalReelsList.length },
+    { id: 'bts' as const, label: t.showcase.tabBts, count: btsReelsList.length },
   ]
 
   return (
@@ -58,7 +62,7 @@ export default function Showcase() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 min-w-0">
           <div className="min-w-0">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-ink tracking-tight">
-              Selected Films & Reels
+              {t.showcase.title}
             </h2>
           </div>
 
@@ -228,7 +232,7 @@ export default function Showcase() {
                       rel="noopener noreferrer"
                       className="text-xs text-accent hover:text-ink transition-colors shrink-0 font-medium flex items-center gap-1"
                     >
-                      <span>Watch</span>
+                      <span>{t.showcase.watchBtn}</span>
                       <IconArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
@@ -277,7 +281,7 @@ export default function Showcase() {
                       rel="noopener noreferrer"
                       className="text-xs text-accent hover:text-ink transition-colors shrink-0 font-medium flex items-center gap-1"
                     >
-                      <span>Watch</span>
+                      <span>{t.showcase.watchBtn}</span>
                       <IconArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>

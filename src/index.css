@@ -2,12 +2,7 @@
  * paper: oklch(18.5% 0.024 185) · accent: oklch(71% 0.17 160) · display: Playfair Display · body: Plus Jakarta Sans · hero: Stage · nav: dock · footer: mast · signature: uncropped dorpon frame deck
  * axes: dark/high-contrast-serif/chromatic-emerald · posture: Stage · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: H, solid typography with no single-word italic gradient */
-/* Hallmark · reworded "Curated Packages" to "Packages & Pricing" · gate 8 names content composition */
-/* Hallmark · reworded "Dorpon Shriti" to "Standard Photography" · user requested practical package names */
-/* Hallmark · reworded "Dorpon Bandhon" to "Standard Photo & Cinema" · user requested practical package names */
-/* Hallmark · reworded "Dorpon Utshob" to "2-Day Wedding Combo" · user requested practical package names */
-/* Hallmark · reworded "Dorpon Signature" to "Royal Wedding & Drone" · user requested practical package names */
-/* Hallmark · dropped https://wa.me/8801740744170?text=%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%B0%E0%A7%8D%E0%A6%AA%E0%A6%A3%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87%20%E0%A6%95%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%AE%20%E0%A6%AA%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20%E0%A6%95%E0%A6%A5%E0%A6%BE%20%E0%A6%AC%E0%A6%B2%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4 · user requested removal of redundant custom package banner */
+/* Hallmark · bilingual support (Bangla/English) and dual theme (Dark/Light) added per user request */
 @import 'tailwindcss';
 @import './tokens.css';
 @import './base.css' layer(base);
@@ -24,7 +19,7 @@
 
   --color-emerald-accent: var(--color-accent);
   --color-emerald-light: var(--color-focus);
-  --color-emerald-deep: oklch(60% 0.16 160);
+  --color-emerald-deep: var(--color-accent);
 
   --color-dorpon-white: var(--color-ink);
   --color-dorpon-cream: var(--color-ink-2);
@@ -44,8 +39,10 @@
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
-    color-scheme: dark;
     width: 100%;
+    transition-property: background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   body {
@@ -53,6 +50,9 @@
     color: var(--color-ink);
     margin: 0;
     padding: 0;
+    transition-property: background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   body, button, input, select, textarea {
@@ -97,9 +97,9 @@
   }
 }
 
-/* Glassmorphism Surface on Deep Green */
+/* Glassmorphism Surface on Deep Green / Ivory Paper */
 .green-glass-panel {
-  background: color-mix(in oklab, var(--color-paper-2) 88%, transparent);
+  background: color-mix(in oklab, var(--color-paper-2) 90%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-rule);
@@ -134,7 +134,7 @@
 
 .brand-btn:hover {
   background: var(--color-accent);
-  color: var(--color-paper);
+  color: var(--color-accent-ink);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px color-mix(in oklab, var(--color-accent) 35%, transparent);
 }
@@ -226,7 +226,7 @@
 
 .fb-fallback span {
   background: var(--color-facebook);
-  color: var(--color-ink);
+  color: var(--color-white);
   font-weight: 700;
   font-size: 0.85rem;
   padding: 0.6rem 1.25rem;

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { livePackagesData, type LivePackageItem } from '../data/packagesData'
+import { useSite } from '../context/SiteContext'
+import { translations } from '../data/translations'
 import { IconWhatsApp, IconCheck, IconRing } from './Icons'
 
 interface PackagesProps {
@@ -7,19 +9,28 @@ interface PackagesProps {
 }
 
 export default function Packages({ onSelectPackage }: PackagesProps) {
+  const { lang } = useSite()
+  const t = translations[lang]
   const [activeCategory, setActiveCategory] = useState<'wedding' | 'outdoor'>('wedding')
 
   const filteredPackages = livePackagesData.filter((pkg) => pkg.category === activeCategory)
 
   const handleBookOnWhatsApp = (pkg: LivePackageItem) => {
-    const waUrl = `https://wa.me/8801740744170?text=${encodeURIComponent(pkg.waText)}`
+    const textToSend = lang === 'bn' ? pkg.waTextBn : pkg.waText
+    const waUrl = `https://wa.me/8801740744170?text=${encodeURIComponent(textToSend)}`
     window.open(waUrl, '_blank', 'noopener,noreferrer')
   }
 
   const handleCustomFormSelect = (pkg: LivePackageItem) => {
     if (onSelectPackage) {
       const mappedService =
-        pkg.category === 'wedding' ? 'Wedding & Cinematography' : 'Portrait & Fashion'
+        lang === 'bn'
+          ? (pkg.category === 'wedding'
+              ? 'ওয়েডিং ফটোগ্রাফি ও সিনেমাটোগ্রাফি'
+              : 'আউটডোর ও পোর্ট্রেট সেশন')
+          : (pkg.category === 'wedding'
+              ? 'Wedding & Cinematography'
+              : 'Portrait & Fashion')
       onSelectPackage(mappedService)
     }
   }
@@ -35,7 +46,7 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 min-w-0">
           <div className="min-w-0">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-ink tracking-tight">
-              Packages & Pricing
+              {t.packages.title}
             </h2>
           </div>
 
@@ -51,13 +62,13 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
               }`}
             >
               <IconRing className="w-4 h-4" />
-              <span>Weddings & Events</span>
+              <span>{t.packages.tabWedding}</span>
               <span
                 className={`text-xs px-2 py-0.5 rounded-full font-mono ${
                   activeCategory === 'wedding' ? 'bg-paper text-ink' : 'bg-paper-3 text-ink-2'
                 }`}
               >
-                4
+                {lang === 'bn' ? '৪' : '4'}
               </span>
             </button>
 
@@ -70,13 +81,13 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                   : 'text-muted hover:text-ink hover:bg-paper-3'
               }`}
             >
-              <span>Portraits & Outdoor</span>
+              <span>{t.packages.tabOutdoor}</span>
               <span
                 className={`text-xs px-2 py-0.5 rounded-full font-mono ${
                   activeCategory === 'outdoor' ? 'bg-paper text-ink' : 'bg-paper-3 text-ink-2'
                 }`}
               >
-                3
+                {lang === 'bn' ? '৩' : '3'}
               </span>
             </button>
           </div>
@@ -92,6 +103,14 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
         >
           {filteredPackages.map((pkg) => {
             const isPopular = pkg.popular
+            const title = lang === 'bn' ? pkg.titleBn : pkg.titleEn
+            const badge = lang === 'bn' ? (pkg.badgeBn || pkg.badge) : pkg.badge
+            const priceFormatted = lang === 'bn' ? pkg.priceFormattedBn : pkg.priceFormatted
+            const unit = lang === 'bn' ? pkg.unitBn : pkg.unit
+            const coverage = lang === 'bn' ? pkg.coverageBn : pkg.coverage
+            const team = lang === 'bn' ? pkg.teamBn : pkg.team
+            const features = lang === 'bn' ? pkg.featuresBn : pkg.features
+
             return (
               <div
                 key={pkg.id}
@@ -105,9 +124,9 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                   {/* Title & Badge */}
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <h3 className="font-display text-lg sm:text-xl font-bold text-ink group-hover:text-accent transition-colors leading-tight">
-                      {pkg.titleEn}
+                      {title}
                     </h3>
-                    {pkg.badge && (
+                    {badge && (
                       <span
                         className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border shrink-0 ${
                           isPopular
@@ -115,7 +134,7 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                             : 'bg-paper text-accent border-accent/40'
                         }`}
                       >
-                        {pkg.badge}
+                        {badge}
                       </span>
                     )}
                   </div>
@@ -124,21 +143,21 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                   <div className="p-3.5 rounded-xl bg-paper border border-rule mb-5">
                     <div className="flex items-baseline gap-1.5 mb-2">
                       <span className="font-display text-2xl sm:text-3xl font-bold text-ink">
-                        {pkg.priceFormatted}
+                        {priceFormatted}
                       </span>
                       <span className="text-xs text-accent font-medium">
-                        {pkg.unit}
+                        {unit}
                       </span>
                     </div>
                     <div className="flex flex-col gap-1 text-xs text-muted">
-                      <span>Duration: {pkg.coverage}</span>
-                      <span>Team: {pkg.team}</span>
+                      <span>{lang === 'bn' ? 'সময়কাল: ' : 'Duration: '}{coverage}</span>
+                      <span>{lang === 'bn' ? 'টিম: ' : 'Team: '}{team}</span>
                     </div>
                   </div>
 
                   {/* Features List */}
                   <ul className="space-y-2.5 mb-6">
-                    {pkg.features.map((feat, i) => (
+                    {features.map((feat, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs text-ink-2 leading-relaxed">
                         <IconCheck className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
                         <span>{feat}</span>
@@ -159,7 +178,7 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                     }`}
                   >
                     <IconWhatsApp className="w-4 h-4 shrink-0" />
-                    <span>Book on WhatsApp</span>
+                    <span>{t.packages.bookWa}</span>
                   </button>
 
                   <button
@@ -167,7 +186,7 @@ export default function Packages({ onSelectPackage }: PackagesProps) {
                     onClick={() => handleCustomFormSelect(pkg)}
                     className="w-full py-2.5 min-h-[44px] px-4 rounded-full text-xs font-medium text-muted hover:text-ink hover:bg-paper-3 border border-transparent hover:border-rule transition-colors flex items-center justify-center cursor-pointer"
                   >
-                    Fill Online Form
+                    {t.packages.selectBtn}
                   </button>
                 </div>
               </div>

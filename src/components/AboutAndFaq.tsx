@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import { faqList } from '../data/faqData'
+import { useSite } from '../context/SiteContext'
+import { translations } from '../data/translations'
 import { IconMapPin, IconChevronDown } from './Icons'
 
 export default function AboutAndFaq() {
+  const { lang, logoSrc } = useSite()
+  const t = translations[lang]
   const [openFaqId, setOpenFaqId] = useState<string | null>('faq-1')
 
   const toggleFaq = (id: string) => {
@@ -23,38 +27,46 @@ export default function AboutAndFaq() {
               {/* Calligraphy Logo Artwork */}
               <div className="mb-5">
                 <img
-                  src="/logo/logo-white.webp"
+                  src={logoSrc}
                   alt="দর্পণ (Dorpon)"
                   className="h-9 w-auto object-contain"
                 />
               </div>
 
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-3">
-                A Little About Dorpon
+                {t.aboutFaq.aboutTitle}
               </h2>
 
               <p className="font-bangla text-base sm:text-lg text-accent font-medium leading-relaxed mb-4">
-                আমরা মূলত বিয়ে, গায়ে হলুদ ও ওয়েডিং স্টোরিটেলিং নিয়ে কাজ করি।
+                {t.aboutFaq.aboutSubtitle}
               </p>
 
               <p className="text-sm text-muted leading-relaxed mb-6">
-                Dorpon is a dedicated wedding visual studio based in Rajbari, Bangladesh. We specialize primarily in capturing weddings, emotional family moments, and cultural ceremonies across Rajbari, Faridpur, and Dhaka with timeless color grading and cinematic depth.
+                {t.aboutFaq.aboutDesc}
               </p>
 
               <div className="grid grid-cols-2 gap-3 pt-6 border-t border-rule">
                 <div className="p-3.5 rounded-xl bg-paper border border-rule">
-                  <p className="text-xs font-semibold text-ink mb-1">Wedding Focus</p>
-                  <p className="text-xs text-muted">Bie, Holud, Pre & Post Wedding rituals.</p>
+                  <p className="text-xs font-semibold text-ink mb-1">
+                    {t.aboutFaq.feature1Title}
+                  </p>
+                  <p className="text-xs text-muted">
+                    {t.aboutFaq.feature1Desc}
+                  </p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-paper border border-rule">
-                  <p className="text-xs font-semibold text-ink mb-1">Cinematic Films</p>
-                  <p className="text-xs text-muted">4K documentary films & master color tones.</p>
+                  <p className="text-xs font-semibold text-ink mb-1">
+                    {t.aboutFaq.feature2Title}
+                  </p>
+                  <p className="text-xs text-muted">
+                    {t.aboutFaq.feature2Desc}
+                  </p>
                 </div>
               </div>
 
               <div className="mt-6 flex items-center gap-2 text-xs text-accent font-medium">
-                <IconMapPin className="w-4 h-4 text-accent" />
-                <span>Service-Area Studio in Rajbari, Faridpur & Dhaka</span>
+                <IconMapPin className="w-4 h-4 text-accent shrink-0" />
+                <span>{t.aboutFaq.serviceArea}</span>
               </div>
             </div>
           </div>
@@ -63,16 +75,23 @@ export default function AboutAndFaq() {
           <div className="lg:col-span-7 flex flex-col gap-5 min-w-0 w-full">
             <div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-2">
-                Questions & Answers
+                {t.aboutFaq.faqTitle}
               </h2>
               <p className="text-xs sm:text-sm text-muted leading-relaxed">
-                Answers about booking Dorpon for photography and cinematography in Rajbari, Faridpur, and Dhaka.
+                {lang === 'bn'
+                  ? 'রাজবাড়ী, ফরিদপুর ও ঢাকায় বুকিং এবং কভারেজ সংক্রান্ত সাধারণ জিজ্ঞাসা ও উত্তর।'
+                  : 'Answers about booking Dorpon for photography and cinematography in Rajbari, Faridpur, and Dhaka.'}
               </p>
             </div>
 
             <div className="space-y-3">
               {faqList.map((item, idx) => {
                 const isOpen = openFaqId === item.id
+                const primaryQ = lang === 'bn' ? (item.questionBn || item.questionEn) : item.questionEn
+                const secondaryQ = lang === 'bn' ? item.questionEn : item.questionBn
+                const primaryA = lang === 'bn' ? (item.answerBn || item.answerEn) : item.answerEn
+                const secondaryA = lang === 'bn' ? item.answerEn : item.answerBn
+
                 return (
                   <div
                     key={item.id}
@@ -89,14 +108,16 @@ export default function AboutAndFaq() {
                       aria-expanded={isOpen}
                     >
                       <div className="flex items-center gap-3.5">
-                        <span className="text-xs font-mono text-accent font-bold">0{idx + 1}</span>
+                        <span className="text-xs font-mono text-accent font-bold">
+                          0{idx + 1}
+                        </span>
                         <div>
                           <p className="text-sm sm:text-base font-semibold text-ink">
-                            {item.questionEn}
+                            {primaryQ}
                           </p>
-                          {item.questionBn && (
-                            <p className="font-bangla text-xs text-muted mt-0.5 leading-normal">
-                              {item.questionBn}
+                          {secondaryQ && (
+                            <p className="text-xs text-muted mt-0.5 leading-normal">
+                              {secondaryQ}
                             </p>
                           )}
                         </div>
@@ -112,10 +133,12 @@ export default function AboutAndFaq() {
 
                     {isOpen && (
                       <div className="px-4 pb-5 pt-1 sm:px-5 sm:pb-5 text-xs sm:text-sm text-ink-2 leading-relaxed border-t border-rule">
-                        <p className="mb-2 text-muted">{item.answerEn}</p>
-                        {item.answerBn && (
-                          <p className="font-bangla text-accent text-xs sm:text-sm leading-relaxed">
-                            {item.answerBn}
+                        <p className="mb-2 text-ink leading-relaxed">
+                          {primaryA}
+                        </p>
+                        {secondaryA && (
+                          <p className="text-xs text-muted leading-relaxed pt-1 border-t border-rule/50">
+                            {secondaryA}
                           </p>
                         )}
                       </div>
