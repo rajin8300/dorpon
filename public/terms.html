@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        var saved = "dark";
+        try { saved = localStorage.getItem("dorpon_theme") || "dark"; } catch (e) {}
+        document.documentElement.setAttribute("data-theme", saved);
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Terms and Conditions | দর্পণ – Dorpon (rajinmd.com)</title>
+    <meta name="description" content="Terms and Conditions of service for দর্পণ – Dorpon (rajinmd.com). Read our booking policies, service agreements, and media copyright rules." />
+    <link rel="canonical" href="https://rajinmd.com/terms" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg: #0c0c0e;
+        --card-bg: #141418;
+        --card-border: rgba(255, 255, 255, 0.08);
+        --text: #f3f4f6;
+        --text-muted: #9ca3af;
+        --gold: #d97706;
+        --gold-light: #fbbf24;
+        --accent-grad: linear-gradient(92deg, #f59e0b, #e11d48 52%, #7c3aed);
+        --line: rgba(255, 255, 255, 0.08);
+      }
+      [data-theme="light"] {
+        --bg: #fbf6ee;
+        --card-bg: #ffffff;
+        --card-border: #e7dcc9;
+        --text: #221a14;
+        --text-muted: #6b7280;
+        --gold: #b45309;
+        --gold-light: #d97706;
+        --line: #e7dcc9;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      a { color: var(--gold-light); text-decoration: none; transition: opacity 0.2s; }
+      a:hover { opacity: 0.85; text-decoration: underline; }
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(12, 12, 14, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+        padding: 1rem 1.5rem;
+        z-index: 50;
+      }
+      [data-theme="light"] .header {
+        background: rgba(251, 246, 238, 0.92);
+      }
+      .header-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand-title {
+        font-family: 'Fraunces', serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        background: var(--accent-grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .back-link {
+        font-size: 0.92rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 500;
+        color: var(--text);
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+        background: var(--card-bg);
+        border: 1px solid var(--line);
+      }
+      .back-link:hover { text-decoration: none; border-color: var(--gold); }
+      .container {
+        max-width: 900px;
+        margin: 2.5rem auto 5rem;
+        padding: 0 1.5rem;
+      }
+      .hero-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .hero-section h1 {
+        font-family: 'Fraunces', serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+      }
+      .hero-section .meta-date {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+      }
+      .section-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        padding: 1.8rem 2rem;
+        margin-bottom: 1.8rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .section-card h2 {
+        font-family: 'Fraunces', serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--gold-light);
+        margin-bottom: 0.8rem;
+      }
+      .section-card p {
+        margin-bottom: 0.9rem;
+        color: var(--text);
+      }
+      .section-card p:last-child {
+        margin-bottom: 0;
+      }
+      .section-card ul {
+        margin-left: 1.5rem;
+        margin-bottom: 0.9rem;
+      }
+      .section-card li {
+        margin-bottom: 0.4rem;
+      }
+      .highlight-box {
+        background: rgba(217, 119, 6, 0.08);
+        border-left: 4px solid var(--gold);
+        padding: 1rem 1.2rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1.2rem 0;
+      }
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+      }
+      @media (max-width: 640px) {
+        .hero-section h1 { font-size: 1.9rem; }
+        .section-card { padding: 1.4rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-wrap">
+        <a href="/" class="brand-title">দর্পণ – Dorpon</a>
+        <a href="/" class="back-link">&larr; Back to Home</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="hero-section">
+        <h1>Terms and Conditions (ব্যবহারের শর্তাবলী)</h1>
+        <p class="meta-date">Last Updated: November 2026 | Effective Date: November 11, 2026</p>
+      </div>
+
+      <div class="section-card">
+        <h2>1. Agreement to Terms</h2>
+        <p>
+          By accessing <a href="https://rajinmd.com">rajinmd.com</a>, interacting with our Facebook Page (<em>দর্পণ - Dorpon</em>), using our Messenger automated inquiry assistant, or booking our photography/cinematography services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
+        </p>
+        <p>
+          If you do not agree with any part of these terms, please refrain from using our website or booking our services.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>2. Services Offered</h2>
+        <p>
+          <strong>দর্পণ – Dorpon</strong>, founded by Rajin Ahamed, provides professional visual arts services, including:
+        </p>
+        <ul>
+          <li>Wedding, Gaye Holud, Reception, and Pre/Post-wedding Photography.</li>
+          <li>Cinematic Wedding Highlights, Traditional Video, and Documentaries.</li>
+          <li>Portraits, Commercial, and Studio Photography.</li>
+          <li>High-end Color Grading, Album Design, and Premium Photo Books.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2>3. Booking, Advance Deposit & Payments</h2>
+        <ul>
+          <li><strong>Reservation:</strong> Event dates are reserved on a first-come, first-served basis upon receipt of the agreed non-refundable advance deposit.</li>
+          <li><strong>Final Payment:</strong> The remaining balance of the package fee must be cleared as specified in the booking agreement (either on the day of the shoot or prior to final digital/physical album delivery).</li>
+          <li><strong>Deliverable Timeline:</strong> Digital edited previews, full high-res galleries, and cinematic videos are typically delivered within the timeline agreed upon in your package details.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2>4. Automated Customer Assistance (Messenger Bot)</h2>
+        <p>
+          To ensure round-the-clock responsiveness, our Facebook Messenger uses an automated conversational assistant powered by local AI.
+        </p>
+        <ul>
+          <li>The assistant provides initial consultation, package breakdowns, and collects shoot requirements.</li>
+          <li>Automated answers do not constitute a binding legal contract until confirmed by our human administrative team.</li>
+          <li>Users agree not to send abusive, unlawful, or spam messages to our communication channels.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2>5. Copyright & Media Usage</h2>
+        <ul>
+          <li><strong>Intellectual Property:</strong> <strong>দর্পণ – Dorpon</strong> retains legal copyright to all photographs and video recordings created during the assignment under Bangladesh Copyright Laws.</li>
+          <li><strong>Client License:</strong> Clients receive a personal, perpetual, non-commercial license to share, print, and showcase their delivered photographs and videos.</li>
+          <li><strong>Privacy Request:</strong> If any client requests that their photos not be displayed in our online portfolio or social media, <strong>we fully honor this privacy condition</strong> when communicated during booking.</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h2>6. Rescheduling & Cancellations</h2>
+        <p>
+          If an event date needs to be rescheduled due to family emergencies or unavoidable circumstances, we will make every effort to accommodate the new date subject to our team's calendar availability.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>7. Governing Law</h2>
+        <p>
+          These Terms and Conditions are governed by and construed in accordance with the laws of the People's Republic of Bangladesh.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>8. Contact Information</h2>
+        <p>For any inquiries regarding these terms or your booking, please contact:</p>
+        <ul style="list-style:none; margin-left:0; margin-top:0.6rem;">
+          <li><strong>Brand:</strong> দর্পণ – Dorpon</li>
+          <li><strong>Founder:</strong> Rajin Ahamed</li>
+          <li><strong>Location:</strong> Rajbari, Faridpur & Dhaka, Bangladesh</li>
+          <li><strong>Website:</strong> <a href="https://rajinmd.com">https://rajinmd.com</a></li>
+          <li><strong>Email:</strong> <a href="mailto:contact@rajinmd.com">contact@rajinmd.com</a> / <a href="mailto:rajin8300@gmail.com">rajin8300@gmail.com</a></li>
+          <li><strong>Phone / WhatsApp:</strong> +880 1740-744170</li>
+        </ul>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 দর্পণ – Dorpon. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/">Home</a></p>
+    </footer>
+  </body>
+</html>
